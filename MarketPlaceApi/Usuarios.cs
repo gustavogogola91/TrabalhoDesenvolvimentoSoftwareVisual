@@ -1,28 +1,28 @@
 #region Usuario
 public abstract class Usuario {
-    private int Id {get; set;};
-    private string? Nome {get; set;};
-    private string? Email {get; set;};
-    private string? Senha {get; set;};
+    public int Id {get; set;}
+    public string? Nome {get; set;}
+    public string? Email {get; set;}
+    public string? Senha {get; set;}
 }
 #endregion
 
 #region Cliente
 public class Cliente : Usuario {
-    private int IdCarrinho {get; set;};
-    private int IdComprasHist {get; set;};
+    public int IdCarrinho {get; set;}
+    public int IdComprasHist {get; set;}
 }
 #endregion
 
 #region Vendedor
 public class Vendedor : Usuario {
-    private int IdVenda {get; set;};
-    private int IdVendaHist {get; set;};
+    public int IdVenda {get; set;}
+    public int IdVendaHist {get; set;}
 }
 #endregion
 
 #region Administrador
 public class Administrador : Usuario {
-    private int PinAcesso {get; set;};
+    public int PinAcesso {get; set;}
 }
 #endregion
