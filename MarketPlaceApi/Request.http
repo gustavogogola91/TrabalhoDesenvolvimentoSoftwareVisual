@@ -2,7 +2,7 @@
 GET http://localhost:5262/vendas
 
 ###GET /vendas/{id}
-GET http://localhost:5262/vendas/3
+GET http://localhost:5262/vendas/2
 
 ### POST /vendas
 POST http://localhost:5262/vendas
