@@ -1,13 +1,13 @@
-### GET
+### GET Produto
 GET http://localhost:5262/produtos
 
-### GET por id
+### GET Produto por id
 GET http://localhost:5262/produto/1
 
-### GET Disponíveis
+### GET Produto Disponíveis
 GET http://localhost:5262/produtos/disponiveis
 
-### POST
+### POST Produto
 POST http://localhost:5262/produto
 Content-Type: application/json
 
@@ -19,7 +19,7 @@ Content-Type: application/json
   "Tag": "Eletronico"
 }
 
-### PUT
+### PUT Produto
 PUT http://localhost:5262/produto/1
 Content-Type: application/json
 
@@ -31,5 +31,5 @@ Content-Type: application/json
   "Tag": "Eletronico"
 }
 
-### DELETE
+### DELETE Produto
 DELETE http://localhost:5262/produto/1
