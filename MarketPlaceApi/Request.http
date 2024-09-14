@@ -1,24 +1,32 @@
+###GET /vendas
+GET http://localhost:5262/vendas
+
+###GET /vendas/{id}
+GET http://localhost:5262/vendas/3
+
 ### POST /vendas
 POST http://localhost:5262/vendas
 Content-Type: application/json
 
 {
-  "IdCliente": 1,
-  "IdVendedor": 2,
+  "IdCliente": 101,
+  "IdVendedor": 202,
   "produtosVendidos": [
     {
-      "id": 1,
-      "nome": "Produto X",
-      "descricao": "Este é o Produto X",
-      "quantidade": 10,
-      "valor": 99.99,
-      "idVendedor": 123,
+      "nome": "Notebook",
+      "descricao": "Notebook com 16GB RAM e 512GB SSD",
+      "quantidade": 2,
+      "valor": 3500.00,
+      "idVendedor": 202,
       "tag": "eletronico"
     },
     {
-      "id": 102,
-      "nome": "Produto B",
-      "preco": 20.99
+      "nome": "Mouse Gamer",
+      "descricao": "Mouse com iluminação RGB e sensor de alta precisão",
+      "quantidade": 1,
+      "valor": 150.00,
+      "idVendedor": 202,
+      "tag": "acessorio"
     }
   ]
 }
