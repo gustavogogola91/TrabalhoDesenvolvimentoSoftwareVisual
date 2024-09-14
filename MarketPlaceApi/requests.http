@@ -1,0 +1,35 @@
+### GET Produto
+GET http://localhost:5262/produtos
+
+### GET Produto por id
+GET http://localhost:5262/produto/1
+
+### GET Produto Disponíveis
+GET http://localhost:5262/produtos/disponiveis
+
+### POST Produto
+POST http://localhost:5262/produto
+Content-Type: application/json
+
+{
+  "Nome": "abc",
+  "Descricao": "def",
+  "Quantidade": 10,
+  "Valor": 27.50,
+  "Tag": "Eletronico"
+}
+
+### PUT Produto
+PUT http://localhost:5262/produto/1
+Content-Type: application/json
+
+{
+  "Nome": "xyz",
+  "Descricao": "def",
+  "Quantidade": 2,
+  "Valor": 27.50,
+  "Tag": "Eletronico"
+}
+
+### DELETE Produto
+DELETE http://localhost:5262/produto/1
