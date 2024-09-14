@@ -18,12 +18,15 @@ Content-Type: application/json
 
 
 ### PUT /clientes
-PUT http://localhost:5262/clientes/5
+PUT http://localhost:5262/clientes/1
 Content-Type: application/json
 
 {
-  "descricao": "sdfasfasdfsdfsdfsd",
-  "concluida": false
+    "Nome": "Juninho Bala",
+    "Email": "junior@email.com",
+    "Senha": "juniorBrabinho",
+    "IdCarrinho": 1,
+    "IdComprasHist": 1
 }
 
 ### DELETE /clientes/{id}
