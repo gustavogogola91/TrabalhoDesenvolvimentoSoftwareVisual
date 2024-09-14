@@ -1,0 +1,24 @@
+### POST /vendas
+POST http://localhost:5262/vendas
+Content-Type: application/json
+
+{
+  "IdCliente": 1,
+  "IdVendedor": 2,
+  "produtosVendidos": [
+    {
+      "id": 1,
+      "nome": "Produto X",
+      "descricao": "Este é o Produto X",
+      "quantidade": 10,
+      "valor": 99.99,
+      "idVendedor": 123,
+      "tag": "eletronico"
+    },
+    {
+      "id": 102,
+      "nome": "Produto B",
+      "preco": 20.99
+    }
+  ]
+}
