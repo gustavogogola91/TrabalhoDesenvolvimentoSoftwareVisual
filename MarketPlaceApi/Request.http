@@ -97,3 +97,117 @@ Content-Type: application/json
 
 ### DELETE /administradores/{id}
 DELETE http://localhost:5262/administradores/4
+
+### GET Produto
+GET http://localhost:5262/produtos
+
+### GET Produto por id
+GET http://localhost:5262/produto/1
+
+### GET Produto Disponíveis
+GET http://localhost:5262/produtos/disponiveis
+
+### POST Produto
+POST http://localhost:5262/produto
+Content-Type: application/json
+
+{
+  "Nome": "abc",
+  "Descricao": "def",
+  "Quantidade": 10,
+  "Valor": 27.50,
+  "Tag": "Eletronico"
+}
+
+### PUT Produto
+PUT http://localhost:5262/produto/1
+Content-Type: application/json
+
+{
+  "Nome": "xyz",
+  "Descricao": "def",
+  "Quantidade": 2,
+  "Valor": 27.50,
+  "Tag": "Eletronico"
+}
+
+### DELETE Produto
+DELETE http://localhost:5262/produto/1
+
+### GET /cupom
+GET http://localhost:5262/cupom
+
+### GET /cupom/{id}
+GET http://localhost:5262/cupom/1
+
+### POST /cupom
+POST http://localhost:5262/cupom
+Content-Type: application/json
+
+{
+  "codigo": "5%OFF",
+  "desconto": 0.005,
+  "usado": false,
+  "valormin": 550.0
+}
+
+
+### PUT /cupom
+PUT http://localhost:5262/cupom/2
+Content-Type: application/json
+
+{
+  "codigo": "10%OFF",
+  "desconto": 0.010,
+  "usado": false,
+  "valormin": 550.0
+}
+
+### DELETE /cupom/{id}
+DELETE http://localhost:5262/cupom/1
+
+###GET /vendas
+GET http://localhost:5262/vendas
+
+###GET /vendas/{id}
+GET http://localhost:5262/vendas/1
+
+### POST /vendas
+POST http://localhost:5262/vendas
+Content-Type: application/json
+
+{
+  "IdCliente": 101,
+  "IdVendedor": 202,
+  "produtosVendidos": [
+    {
+      "nome": "Notebook",
+      "descricao": "Notebook com 16GB RAM e 512GB SSD",
+      "quantidade": 2,
+      "valor": 3500.00,
+      "idVendedor": 202,
+      "tag": "eletronico"
+    },
+    {
+      "nome": "Mouse Gamer",
+      "descricao": "Mouse com iluminação RGB e sensor de alta precisão",
+      "quantidade": 1,
+      "valor": 150.00,
+      "idVendedor": 202,
+      "tag": "acessorio"
+    }
+  ]
+}
+
+### PUT /vendas
+PUT http://localhost:5262/vendas/1
+Content-Type: application/json
+
+{
+  "IdCliente": 12301,
+  "IdVendedor": 232423
+}
+
+### DELETE /tarefas/{id}
+DELETE http://localhost:5262/vendas/1
+

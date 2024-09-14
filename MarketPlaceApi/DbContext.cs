@@ -1,18 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 
-public class AppDbContext : DbContext {
-
-    public AppDbContext(
-        DbContextOptions<AppDbContext> options)
-         : base(options)
-    {
-    }
-
-    //Definição Cliente
+class AppDbContext : DbContext {
+    public AppDbContext (DbContextOptions<AppDbContext> options) : base(options) {}
+  
     public DbSet<Cliente> Clientes => Set<Cliente>();
-    //Definição Vendedor
+
     public DbSet<Vendedor> Vendedores => Set<Vendedor>();
-    //Definição Administrador
+
     public DbSet<Administrador> Administradores => Set<Administrador>();
+
+    public DbSet<Venda> Vendas => Set<Venda>();
+
+    public DbSet<Cupom> Cupons => Set<Cupom>();
+    public DbSet<Produto> Produtos => Set<Produto>();
 
 }
