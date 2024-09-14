@@ -50,4 +50,18 @@ app.MapPut("vendas/{id}", async (int id, Venda vendaAlterada, AppDbContext db) =
 });
 
 
+app.MapDelete("vendas/{id}", async (int id, AppDbContext db) =>
+{
+    if(await db.Vendas.FindAsync(id) is Venda venda){
+
+        db.Vendas.Remove(venda);
+        await db.SaveChangesAsync();
+        return Results.NoContent();
+    }
+    return Results.NotFound();
+ 
+});
+
+
+
 app.Run();
