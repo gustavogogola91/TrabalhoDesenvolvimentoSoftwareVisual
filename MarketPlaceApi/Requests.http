@@ -1,0 +1,2 @@
+### GET /tarefas
+GET http://localhost:5262/
