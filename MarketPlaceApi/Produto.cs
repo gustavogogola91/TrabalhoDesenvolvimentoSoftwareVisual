@@ -1,10 +1,10 @@
 public class Produto
 {
-    private int id {get; set;}
-    private String nome { get; set; }
-    private String? descricao { get; set; }
-    private int quantidade {get; set;}
-    private long valor { get; set; }
-    private Vendedor vendedor {get; set;}
-
+    private int Id {get; set;}
+    private String Nome { get; set; }
+    private String? Descricao { get; set; }
+    public int Quantidade {get; set;}
+    private long Valor { get; set; }
+    private int IdVendedor {get; set;}
+    public int IdTag {get; set;}
 }
