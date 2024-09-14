@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //Configuração Entity Framework
 builder.Services.AddDbContext<AppDbContext>(
-    options => options.UseInMemoryDatabase("Cupom")
+    options => options.UseInMemoryDatabase("Cupons")
 );
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -12,23 +12,23 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Planner API");
 
-app.MapGet("/Cupom", async (AppDbContext db) =>
+app.MapGet("/cupom", async (AppDbContext db) =>
     await db.Cupons.ToListAsync());
 
-app.MapGet("/Cupom/{id}", async (int id, AppDbContext db) => 
+app.MapGet("/cupom/{id}", async (int id, AppDbContext db) => 
     await db.Cupons.FindAsync(id)
       is Cupom cupom
         ? Results.Ok(cupom)
           : Results.NotFound());
     
-app.MapPost("/Cupom", async (Cupom cupom, AppDbContext db) => {
+app.MapPost("/cupom", async (Cupom cupom, AppDbContext db) => {
     db.Cupons.Add(cupom);
     await db.SaveChangesAsync();
-    return Results.Created($"/Cupom/{cupom.Id}", cupom);
+    return Results.Created($"/cupom/{cupom.Id}", cupom);
 });
 
 
-app.MapPut("Cupom/{id}", async (int id, Cupom cupomAlterado, AppDbContext db) =>
+app.MapPut("cupom/{id}", async (int id, Cupom cupomAlterado, AppDbContext db) =>
 {
     var cupom = await db.Cupons.FindAsync(id);
     if (cupom is null) return Results.NotFound();
@@ -43,7 +43,7 @@ app.MapPut("Cupom/{id}", async (int id, Cupom cupomAlterado, AppDbContext db) =>
     return Results.NoContent();
 });
 
-app.MapDelete("Cupom/{id}", async (int id, AppDbContext db) =>
+app.MapDelete("cupom/{id}", async (int id, AppDbContext db) =>
 {
     if(await db.Cupons.FindAsync(id) is Cupom cupom){
 
