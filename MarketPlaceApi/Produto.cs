@@ -4,7 +4,7 @@ public class Produto
     private String Nome { get; set; }
     private String? Descricao { get; set; }
     public int Quantidade {get; set;}
-    private long Valor { get; set; }
+    private double Valor { get; set; }
     private int IdVendedor {get; set;}
     public int IdTag {get; set;}
 }
