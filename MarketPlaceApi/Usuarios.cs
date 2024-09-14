@@ -1,3 +1,4 @@
+#region Usuario
 public abstract class Usuario {
     private int Id {get; set;};
     private string? Nome {get; set;};
