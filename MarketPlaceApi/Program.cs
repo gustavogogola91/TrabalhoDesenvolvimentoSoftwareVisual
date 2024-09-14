@@ -36,5 +36,18 @@ app.MapPost("/vendas", async (Venda venda, AppDbContext db) => {
     return Results.Created($"/vendas/{venda.Id}", venda);
 });
 
+app.MapPut("vendas/{id}", async (int id, Venda vendaAlterada, AppDbContext db) =>
+{
+    var venda = await db.Vendas.FindAsync(id);
+    if (venda is null) return Results.NotFound();
+
+    venda.IdCliente = vendaAlterada.IdCliente;
+    venda.IdVendedor = vendaAlterada.IdVendedor;
+
+    await db.SaveChangesAsync();
+
+    return Results.NoContent();
+});
+
 
 app.Run();

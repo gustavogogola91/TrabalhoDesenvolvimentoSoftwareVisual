@@ -2,7 +2,7 @@
 GET http://localhost:5262/vendas
 
 ###GET /vendas/{id}
-GET http://localhost:5262/vendas/2
+GET http://localhost:5262/vendas/1
 
 ### POST /vendas
 POST http://localhost:5262/vendas
@@ -30,3 +30,13 @@ Content-Type: application/json
     }
   ]
 }
+
+### PUT /vendas
+PUT http://localhost:5262/vendas/1
+Content-Type: application/json
+
+{
+  "IdCliente": 12301,
+  "IdVendedor": 232423
+}
+
