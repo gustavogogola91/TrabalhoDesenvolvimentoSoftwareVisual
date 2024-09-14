@@ -11,3 +11,15 @@ Content-Type: application/json
   "Valor": 27.50,
   "Tag": "Eletronico"
 }
+
+### PUT
+PUT http://localhost:5262/produto/1
+Content-Type: application/json
+
+{
+  "Nome": "xyz",
+  "Descricao": "def",
+  "Quantidade": 2,
+  "Valor": 27.50,
+  "Tag": "Eletronico"
+}

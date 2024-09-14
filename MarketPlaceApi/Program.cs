@@ -24,4 +24,22 @@ app.MapPost("/produto", async (Produto produto, AppDbContext db) =>
     return Results.Created($"/tarefas/{produto.Id}", produto);
 });
 
+app.MapPut("/produto/{id}", async (int id, Produto produtoAlterado, AppDbContext db) => {
+
+    var produto = await db.Produtos.FindAsync(id);
+    if(produto is null) return Results.NotFound();
+
+    produto.Nome = produtoAlterado.Nome;
+    produto.Descricao = produtoAlterado.Descricao;
+    produto.Quantidade = produtoAlterado.Quantidade;
+    produto.Valor = produtoAlterado.Valor;
+    produto.IdVendedor = produtoAlterado.IdVendedor;
+    produto.Tag = produtoAlterado.Tag;
+
+    await db.SaveChangesAsync();
+
+    return Results.NoContent();
+
+});
+
 app.Run();
