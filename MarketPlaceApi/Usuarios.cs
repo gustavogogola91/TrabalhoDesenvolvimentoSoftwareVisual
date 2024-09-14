@@ -9,7 +9,7 @@ public abstract class Usuario {
 
 #region Cliente
 public class Cliente : Usuario {
-    public int IdCarrinho {get; set;}
+     public int IdCarrinho {get; set;}
     public int IdComprasHist {get; set;}
 }
 #endregion
