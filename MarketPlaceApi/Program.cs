@@ -105,6 +105,6 @@ app.MapDelete("/produto/{id}", async (int id, AppDbContext db) =>
         return Results.NoContent();
     }
     return Results.NotFound();
-}
+});
 
 app.Run();
