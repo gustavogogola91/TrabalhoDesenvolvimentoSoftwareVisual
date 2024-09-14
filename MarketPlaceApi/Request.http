@@ -17,7 +17,7 @@ Content-Type: application/json
 
 
 ### PUT /cupom
-PUT http://localhost:5262/cupom/1
+PUT http://localhost:5262/cupom/2
 Content-Type: application/json
 
 {

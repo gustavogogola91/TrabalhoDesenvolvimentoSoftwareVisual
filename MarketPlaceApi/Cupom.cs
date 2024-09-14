@@ -1,5 +1,5 @@
 #region Cupom
-public abstract class Cupom {
+public class Cupom {
     public int Id { get; set; }
     public string? Codigo { get; set; }
     public double Desconto { get; set; }
