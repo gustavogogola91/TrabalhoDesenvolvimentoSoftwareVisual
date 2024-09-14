@@ -1,2 +1,30 @@
-### GET /tarefas
-GET http://localhost:5262/
+### GET /clientes
+GET http://localhost:5262/clientes
+
+### GET /clientes/{id}
+GET http://localhost:5262/clientes/1
+
+### POST /clientes
+POST http://localhost:5262/clientes
+Content-Type: application/json
+
+{
+    "Nome": "Junior",
+    "Email": "junior@email.com",
+    "Senha": "juniorBrabinho",
+    "IdCarrinho": 1,
+    "IdComprasHist": 1
+}
+
+
+### PUT /clientes
+PUT http://localhost:5262/clientes/5
+Content-Type: application/json
+
+{
+  "descricao": "sdfasfasdfsdfsdfsd",
+  "concluida": false
+}
+
+### DELETE /clientes/{id}
+DELETE http://localhost:5262/clientes/4
