@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Produtos"));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -15,5 +15,13 @@ app.MapGet("/produtos/disponiveis", async (AppDbContext db) => await db.Produtos
 app.MapGet("/produtos/tag/{tag}", async (string tag, AppDbContext db) => await db.Produtos.Where(p => p.Tag == tag).ToListAsync());
 
 app.MapGet("/produto/{id}", async (int id, AppDbContext db) => await db.Produtos.FindAsync(id) is Produto produto ? Results.Ok(produto) : Results.NotFound());
+
+app.MapPost("/produto", async (Produto produto, AppDbContext db) =>
+{
+    db.Produtos.Add(produto);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/tarefas/{produto.Id}", produto);
+});
 
 app.Run();
