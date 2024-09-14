@@ -26,10 +26,10 @@ app.MapGet("/clientes/{id}", async (int id, AppDbContext db) =>
 #endregion
 
 #region PostCliente
-app.MapPost("/tarefas", async (Cliente cliente, AppDbContext db) => {
+app.MapPost("/clientes", async (Cliente cliente, AppDbContext db) => {
     db.Clientes.Add(cliente);
     await db.SaveChangesAsync();
-    return Results.Created($"/tarefas/{cliente.Id}", cliente);
+    return Results.Created($"/clientes/{cliente.Id}", cliente);
 });
 
 #endregion
