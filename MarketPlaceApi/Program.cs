@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MySqlX.XDevAPI.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,10 +25,11 @@ app.MapPost("/produto", async (Produto produto, AppDbContext db) =>
     return Results.Created($"/tarefas/{produto.Id}", produto);
 });
 
-app.MapPut("/produto/{id}", async (int id, Produto produtoAlterado, AppDbContext db) => {
+app.MapPut("/produto/{id}", async (int id, Produto produtoAlterado, AppDbContext db) =>
+{
 
     var produto = await db.Produtos.FindAsync(id);
-    if(produto is null) return Results.NotFound();
+    if (produto is null) return Results.NotFound();
 
     produto.Nome = produtoAlterado.Nome;
     produto.Descricao = produtoAlterado.Descricao;
@@ -40,6 +42,19 @@ app.MapPut("/produto/{id}", async (int id, Produto produtoAlterado, AppDbContext
 
     return Results.NoContent();
 
+});
+
+app.MapDelete("/produto/{id}", async (int id, AppDbContext db) =>
+{
+
+    if (await db.Produtos.FindAsync(id) is Produto produto)
+    {
+
+        db.Produtos.Remove(produto);
+        await db.SaveChangesAsync();
+        return Results.NoContent();
+    }
+    return Results.NotFound();
 });
 
 app.Run();
