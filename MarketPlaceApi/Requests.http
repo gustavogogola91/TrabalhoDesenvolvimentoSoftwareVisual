@@ -30,3 +30,70 @@ Content-Type: application/json
 
 ### DELETE /clientes/{id}
 DELETE http://localhost:5262/clientes/4
+
+
+### GET /vendedores
+GET http://localhost:5262/vendedores
+
+### GET /vendedores/{id}
+GET http://localhost:5262/vendedores/1
+
+### POST /vendedores
+POST http://localhost:5262/vendedores
+Content-Type: application/json
+
+{
+    "Nome": "Thiago",
+    "Email": "thiago@email.com",
+    "Senha": "thiagoTenebroso",
+    "IdVenda": 1,
+    "IdVendaHist": 1
+}
+
+### PUT /vendedores/{id}
+PUT http://localhost:5262/vendedores/1
+Content-Type: application/json
+
+{
+    "Nome": "Thiago Bento",
+    "Email": "thiago@email.com",
+    "Senha": "thiagoTenebroso",
+    "IdVenda": 1,
+    "IdVendaHist": 1
+}
+
+### DELETE /vendedores/{id}
+DELETE http://localhost:5262/vendedores/4
+
+
+
+### GET /administradores
+GET http://localhost:5262/administradores
+
+### GET /administradores/{id}
+GET http://localhost:5262/administradores/1
+
+### POST /administradores
+POST http://localhost:5262/administradores
+Content-Type: application/json
+
+{
+    "Nome": "Benedito",
+    "Email": "benedito@email.com",
+    "Senha": "beneditoOVelho",
+    "PinAcesso": 1243
+}
+
+### PUT /administradores/{id}
+PUT http://localhost:5262/administradores/1
+Content-Type: application/json
+
+{
+    "Nome": "Benedito Santiago",
+    "Email": "benedito@email.com",
+    "Senha": "beneditoOTecnico",
+    "PinAcesso": 1243
+}
+
+### DELETE /administradores/{id}
+DELETE http://localhost:5262/administradores/4
