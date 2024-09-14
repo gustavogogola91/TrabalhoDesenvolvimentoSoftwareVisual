@@ -187,8 +187,6 @@ app.MapDelete("vendas/{id}", async (int id, AppDbContext db) =>
  
 });
 
-app.MapGet("/", () => "MarketPlace");
-
 app.MapGet("/cupom", async (AppDbContext db) =>
     await db.Cupons.ToListAsync());
 
@@ -292,7 +290,7 @@ app.MapDelete("administradores/{id}", async (int id, AppDbContext db) =>
 #endregion
 
 
-});
+
 
 app.MapGet("/produtos", async (AppDbContext db) => await db.Produtos.ToListAsync());
 
