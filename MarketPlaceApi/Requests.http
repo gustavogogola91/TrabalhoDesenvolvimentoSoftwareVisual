@@ -16,8 +16,7 @@ Content-Type: application/json
     "IdComprasHist": 1
 }
 
-
-### PUT /clientes
+### PUT /clientes/{id}
 PUT http://localhost:5262/clientes/1
 Content-Type: application/json
 

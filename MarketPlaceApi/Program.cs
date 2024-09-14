@@ -11,7 +11,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var app = builder.Build();
 
-app.MapGet("/", () => "X Marketplace!");
+app.MapGet("/", () => "Marketplace!");
 
 #region GetCliente
 
