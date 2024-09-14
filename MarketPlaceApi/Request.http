@@ -1,10 +1,10 @@
 ### GET /cupom
 GET http://localhost:5262/cupom
 
-### GET /cupons/{id}
+### GET /cupom/{id}
 GET http://localhost:5262/cupom/1
 
-### POST /cupons
+### POST /cupom
 POST http://localhost:5262/cupom
 Content-Type: application/json
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 
-### PUT /cupons
+### PUT /cupom
 PUT http://localhost:5262/cupom/1
 Content-Type: application/json
 
@@ -27,5 +27,5 @@ Content-Type: application/json
   "valormin": 550.0
 }
 
-### DELETE /cupons/{id}
+### DELETE /cupom/{id}
 DELETE http://localhost:5262/cupom/1
