@@ -1,6 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using MarketPlaceApi.Data;
-using MarketPlaceApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,12 +31,14 @@ app.MapPut("/enderecos/{id}", async (int id, Endereco enderecoAlterado, AppDbCon
     var endereco = await db.Enderecos.FindAsync(id);
     if (endereco is null) return Results.NotFound();
 
+    endereco.IdCliente = enderecoAlterado.IdCliente;
     endereco.Rua = enderecoAlterado.Rua;
     endereco.Numero = enderecoAlterado.Numero;
     endereco.Bairro = enderecoAlterado.Bairro;
     endereco.Cidade = enderecoAlterado.Cidade;
     endereco.Estado = enderecoAlterado.Estado;
     endereco.CEP = enderecoAlterado.CEP;
+    endereco.Complemento = enderecoAlterado.Complemento;
 
     await db.SaveChangesAsync();
     return Results.NoContent();

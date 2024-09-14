@@ -12,7 +12,7 @@ Content-Type: application/json
 
 {
   "IdCliente": 101,
-  "logradouro": "Rua das Flores",
+  "Rua": "Rua das Flores",
   "numero": 123,
   "bairro": "Centro",
   "cidade": "São Paulo",
@@ -27,7 +27,7 @@ Content-Type: application/json
 
 {
   "IdCliente": 101,
-  "logradouro": "Avenida Paulista",
+  "Rua": "Avenida Paulista",
   "numero": 456,
   "bairro": "Bela Vista",
   "cidade": "São Paulo",
