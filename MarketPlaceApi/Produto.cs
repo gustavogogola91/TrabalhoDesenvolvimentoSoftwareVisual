@@ -6,5 +6,5 @@ public class Produto
     public int Quantidade {get; set;}
     private double Valor { get; set; }
     private int IdVendedor {get; set;}
-    public int IdTag {get; set;}
+    public String Tag {get; set;}
 }
