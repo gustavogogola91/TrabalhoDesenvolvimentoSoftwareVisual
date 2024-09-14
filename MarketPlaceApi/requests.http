@@ -1,0 +1,13 @@
+GET http://localhost:5262/produtos
+
+### Post
+POST http://localhost:5262/produto
+Content-Type: application/json
+
+{
+  "Nome": "abc",
+  "Descricao": "def",
+  "Quantidade": 2,
+  "Valor": 27.50,
+  "Tag": "Eletronico"
+}
