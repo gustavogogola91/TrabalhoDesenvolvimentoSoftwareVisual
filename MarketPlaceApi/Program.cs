@@ -59,17 +59,5 @@ app.MapDelete("Cupom/{id}", async (int id, AppDbContext db) =>
 
 
 
-app.MapGet("/produtos", () => "Produtos");
-app.MapGet("/pessoas", () => "Pessoas");
-app.MapGet("/pessoas/{id}", () => "Pessoa 1");
-
-app.MapPost("/pessoas", () => "POST pessoa");
-app.MapPost("/produtos", () => "POST produto");
-
-app.MapPut("/pessoas/{id}", () => "PUT pessoa");
-app.MapPut("/produtos/{id}", () => "PUT produto");
-
-app.MapDelete("/pessoas/{id}", () => "DELETE pessoa");
-app.MapDelete("/produtos/{id}", () => "DELETE produto");
 
 app.Run();
