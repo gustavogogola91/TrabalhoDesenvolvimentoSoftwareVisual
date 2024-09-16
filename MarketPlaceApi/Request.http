@@ -1,3 +1,216 @@
+### GET /clientes
+GET http://localhost:5262/clientes
+
+### GET /clientes/{id}
+GET http://localhost:5262/clientes/1
+
+### POST /clientes
+POST http://localhost:5262/clientes
+Content-Type: application/json
+
+{
+    "Nome": "Junior",
+    "Email": "junior@email.com",
+    "Senha": "juniorBrabinho",
+    "IdCarrinho": 1,
+    "IdComprasHist": 1
+}
+
+### PUT /clientes/{id}
+PUT http://localhost:5262/clientes/1
+Content-Type: application/json
+
+{
+    "Nome": "Juninho Bala",
+    "Email": "junior@email.com",
+    "Senha": "juniorBrabinho",
+    "IdCarrinho": 1,
+    "IdComprasHist": 1
+}
+
+### DELETE /clientes/{id}
+DELETE http://localhost:5262/clientes/4
+
+
+### GET /vendedores
+GET http://localhost:5262/vendedores
+
+### GET /vendedores/{id}
+GET http://localhost:5262/vendedores/1
+
+### POST /vendedores
+POST http://localhost:5262/vendedores
+Content-Type: application/json
+
+{
+    "Nome": "Thiago",
+    "Email": "thiago@email.com",
+    "Senha": "thiagoTenebroso",
+    "IdVenda": 1,
+    "IdVendaHist": 1
+}
+
+### PUT /vendedores/{id}
+PUT http://localhost:5262/vendedores/1
+Content-Type: application/json
+
+{
+    "Nome": "Thiago Bento",
+    "Email": "thiago@email.com",
+    "Senha": "thiagoTenebroso",
+    "IdVenda": 1,
+    "IdVendaHist": 1
+}
+
+### DELETE /vendedores/{id}
+DELETE http://localhost:5262/vendedores/4
+
+
+
+### GET /administradores
+GET http://localhost:5262/administradores
+
+### GET /administradores/{id}
+GET http://localhost:5262/administradores/1
+
+### POST /administradores
+POST http://localhost:5262/administradores
+Content-Type: application/json
+
+{
+    "Nome": "Benedito",
+    "Email": "benedito@email.com",
+    "Senha": "beneditoOVelho",
+    "PinAcesso": 1243
+}
+
+### PUT /administradores/{id}
+PUT http://localhost:5262/administradores/1
+Content-Type: application/json
+
+{
+    "Nome": "Benedito Santiago",
+    "Email": "benedito@email.com",
+    "Senha": "beneditoOTecnico",
+    "PinAcesso": 1243
+}
+
+### DELETE /administradores/{id}
+DELETE http://localhost:5262/administradores/4
+
+### GET Produto
+GET http://localhost:5262/produtos
+
+### GET Produto por id
+GET http://localhost:5262/produto/1
+
+### GET Produto Disponíveis
+GET http://localhost:5262/produtos/disponiveis
+
+### POST Produto
+POST http://localhost:5262/produto
+Content-Type: application/json
+
+{
+  "Nome": "abc",
+  "Descricao": "def",
+  "Quantidade": 10,
+  "Valor": 27.50,
+  "Tag": "Eletronico"
+}
+
+### PUT Produto
+PUT http://localhost:5262/produto/1
+Content-Type: application/json
+
+{
+  "Nome": "xyz",
+  "Descricao": "def",
+  "Quantidade": 2,
+  "Valor": 27.50,
+  "Tag": "Eletronico"
+}
+
+### DELETE Produto
+DELETE http://localhost:5262/produto/1
+
+### GET /cupom
+GET http://localhost:5262/cupom
+
+### GET /cupom/{id}
+GET http://localhost:5262/cupom/1
+
+### POST /cupom
+POST http://localhost:5262/cupom
+Content-Type: application/json
+
+{
+  "codigo": "5%OFF",
+  "desconto": 0.005,
+  "usado": false,
+  "valormin": 550.0
+}
+
+
+### PUT /cupom
+PUT http://localhost:5262/cupom/2
+Content-Type: application/json
+
+{
+  "codigo": "10%OFF",
+  "desconto": 0.010,
+  "usado": false,
+  "valormin": 550.0
+}
+
+### DELETE /cupom/{id}
+DELETE http://localhost:5262/cupom/1
+
+###GET /vendas
+GET http://localhost:5262/vendas
+
+###GET /vendas/{id}
+GET http://localhost:5262/vendas/1
+
+### POST /vendas
+POST http://localhost:5262/vendas
+Content-Type: application/json
+
+{
+  "IdCliente": 101,
+  "IdVendedor": 202,
+  "produtosVendidos": [
+    {
+      "nome": "Notebook",
+      "descricao": "Notebook com 16GB RAM e 512GB SSD",
+      "quantidade": 2,
+      "valor": 3500.00,
+      "idVendedor": 202,
+      "tag": "eletronico"
+    },
+    {
+      "nome": "Mouse Gamer",
+      "descricao": "Mouse com iluminação RGB e sensor de alta precisão",
+      "quantidade": 1,
+      "valor": 150.00,
+      "idVendedor": 202,
+      "tag": "acessorio"
+    }
+  ]
+}
+
+### PUT /vendas
+PUT http://localhost:5262/vendas/1
+Content-Type: application/json
+
+{
+  "IdCliente": 12301,
+  "IdVendedor": 232423
+}
+
+### DELETE /tarefas/{id}
+DELETE http://localhost:5262/vendas/1
+
 ### ENDEREÇOS
 
 ### GET /enderecos
@@ -27,7 +240,7 @@ Content-Type: application/json
 
 {
   "IdCliente": 101,
-  "Rua": "Avenida Paulista",
+    "Rua": "Avenida Paulista",
   "numero": 456,
   "bairro": "Bela Vista",
   "cidade": "São Paulo",
