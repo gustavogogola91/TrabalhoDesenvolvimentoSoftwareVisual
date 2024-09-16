@@ -12,6 +12,10 @@ class AppDbContext : DbContext {
     public DbSet<Venda> Vendas => Set<Venda>();
 
     public DbSet<Cupom> Cupons => Set<Cupom>();
+  
     public DbSet<Produto> Produtos => Set<Produto>();
+  
+    public DbSet<Endereco> Enderecos => Set<Endereco>();
 
 }
+

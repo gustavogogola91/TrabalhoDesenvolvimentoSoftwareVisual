@@ -211,3 +211,43 @@ Content-Type: application/json
 ### DELETE /tarefas/{id}
 DELETE http://localhost:5262/vendas/1
 
+### ENDEREÇOS
+
+### GET /enderecos
+GET http://localhost:5262/enderecos
+
+### GET /enderecos/{id}
+GET http://localhost:5262/enderecos/1
+
+### POST /enderecos
+POST http://localhost:5262/enderecos
+Content-Type: application/json
+
+{
+  "IdCliente": 101,
+  "Rua": "Rua das Flores",
+  "numero": 123,
+  "bairro": "Centro",
+  "cidade": "São Paulo",
+  "estado": "SP",
+  "cep": "01001-000",
+  "complemento": "Apto 201"
+}
+
+### PUT /enderecos/{id}
+PUT http://localhost:5262/enderecos/1
+Content-Type: application/json
+
+{
+  "IdCliente": 101,
+    "Rua": "Avenida Paulista",
+  "numero": 456,
+  "bairro": "Bela Vista",
+  "cidade": "São Paulo",
+  "estado": "SP",
+  "cep": "01311-000",
+  "complemento": "Sala 101"
+}
+
+### DELETE /enderecos/{id}
+DELETE http://localhost:5262/enderecos/1
