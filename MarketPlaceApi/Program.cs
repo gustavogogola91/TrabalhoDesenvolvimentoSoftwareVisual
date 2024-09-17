@@ -9,6 +9,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDataba
 builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Vendas"));
 builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Cupons"));
 builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Produtos"));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Carrinhos"));
+
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

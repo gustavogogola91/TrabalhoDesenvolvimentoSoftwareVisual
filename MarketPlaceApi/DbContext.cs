@@ -16,6 +16,9 @@ class AppDbContext : DbContext {
     public DbSet<Produto> Produtos => Set<Produto>();
   
     public DbSet<Endereco> Enderecos => Set<Endereco>();
+    
+    public DbSet<Carrinho> Carrinhos => Set<Carrinho>();
+
 
 }
 
