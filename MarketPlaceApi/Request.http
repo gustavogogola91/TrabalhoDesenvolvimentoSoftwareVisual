@@ -251,3 +251,51 @@ Content-Type: application/json
 
 ### DELETE /enderecos/{id}
 DELETE http://localhost:5262/enderecos/1
+
+### CARRINHO
+
+### GET /carrinho
+GET http://localhost:5262/carrinho
+
+### GET /carrinho/{id}
+GET http://localhost:5262/carrinho/1
+
+### POST /carrinho
+POST http://localhost:5262/carrinho
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "itens": [
+    {
+      "produtoId": 5,
+      "quantidade": 2
+    },
+    {
+      "produtoId": 8,
+      "quantidade": 1
+    }
+  ]
+}
+
+
+### PUT /carrinho/{id}
+PUT http://localhost:5262/carrinho/1
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "itens": [
+    {
+      "produtoId": 3,
+      "quantidade": 6
+    },
+    {
+      "produtoId": 10,
+      "quantidade": 3
+    }
+  ]
+}
+
+### DELETE /carrinho/{id}
+DELETE http://localhost:5262/carrinho/1
