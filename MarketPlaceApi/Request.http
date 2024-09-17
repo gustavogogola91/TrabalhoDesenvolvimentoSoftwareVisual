@@ -265,29 +265,36 @@ POST http://localhost:5262/carrinho
 Content-Type: application/json
 
 {
-  "IdCliente": 101,
-  "Rua": "Rua das Flores",
-  "numero": 123,
-  "bairro": "Centro",
-  "cidade": "São Paulo",
-  "estado": "SP",
-  "cep": "01001-000",
-  "complemento": "Apto 201"
+  "usuarioId": 1,
+  "itens": [
+    {
+      "produtoId": 5,
+      "quantidade": 2
+    },
+    {
+      "produtoId": 8,
+      "quantidade": 1
+    }
+  ]
 }
 
+
 ### PUT /carrinho/{id}
-PUT http://localhost:5262/enderecos/1
+PUT http://localhost:5262/carrinho/1
 Content-Type: application/json
 
 {
-  "IdCliente": 101,
-    "Rua": "Avenida Paulista",
-  "numero": 456,
-  "bairro": "Bela Vista",
-  "cidade": "São Paulo",
-  "estado": "SP",
-  "cep": "01311-000",
-  "complemento": "Sala 101"
+  "usuarioId": 1,
+  "itens": [
+    {
+      "produtoId": 3,
+      "quantidade": 6
+    },
+    {
+      "produtoId": 10,
+      "quantidade": 3
+    }
+  ]
 }
 
 ### DELETE /carrinho/{id}
