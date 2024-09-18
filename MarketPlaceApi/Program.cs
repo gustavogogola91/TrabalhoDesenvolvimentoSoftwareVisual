@@ -2,15 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Enderecos"));
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Clientes"));
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Vendedores"));
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Administradores"));
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Vendas"));
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Cupons"));
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Produtos"));
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Carrinhos"));
-
+builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

@@ -258,7 +258,7 @@ DELETE http://localhost:5262/enderecos/1
 GET http://localhost:5262/carrinho
 
 ### GET /carrinho/{id}
-GET http://localhost:5262/carrinho/1
+GET http://localhost:5262/carrinho/3
 
 ### POST /carrinho
 POST http://localhost:5262/carrinho
