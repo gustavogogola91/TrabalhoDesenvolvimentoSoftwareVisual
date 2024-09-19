@@ -102,25 +102,25 @@ DELETE http://localhost:5262/administradores/4
 GET http://localhost:5262/produtos
 
 ### GET Produto por id
-GET http://localhost:5262/produto/1
+GET http://localhost:5262/produtos/22
 
 ### GET Produto Disponíveis
 GET http://localhost:5262/produtos/disponiveis
 
 ### POST Produto
-POST http://localhost:5262/produto
+POST http://localhost:5262/produtos
 Content-Type: application/json
 
 {
   "Nome": "abc",
   "Descricao": "def",
-  "Quantidade": 10,
+  "Quantidade": 0,
   "Valor": 27.50,
   "Tag": "Eletronico"
 }
 
 ### PUT Produto
-PUT http://localhost:5262/produto/1
+PUT http://localhost:5262/produtos/22
 Content-Type: application/json
 
 {
@@ -132,7 +132,7 @@ Content-Type: application/json
 }
 
 ### DELETE Produto
-DELETE http://localhost:5262/produto/1
+DELETE http://localhost:5262/produtos/23
 
 ### GET /cupom
 GET http://localhost:5262/cupom
@@ -251,3 +251,51 @@ Content-Type: application/json
 
 ### DELETE /enderecos/{id}
 DELETE http://localhost:5262/enderecos/1
+
+### CARRINHO
+
+### GET /carrinho
+GET http://localhost:5262/carrinho
+
+### GET /carrinho/{id}
+GET http://localhost:5262/carrinho/3
+
+### POST /carrinho
+POST http://localhost:5262/carrinho
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "itens": [
+    {
+      "produtoId": 5,
+      "quantidade": 2
+    },
+    {
+      "produtoId": 8,
+      "quantidade": 1
+    }
+  ]
+}
+
+
+### PUT /carrinho/{id}
+PUT http://localhost:5262/carrinho/1
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "itens": [
+    {
+      "produtoId": 3,
+      "quantidade": 6
+    },
+    {
+      "produtoId": 10,
+      "quantidade": 3
+    }
+  ]
+}
+
+### DELETE /carrinho/{id}
+DELETE http://localhost:5262/carrinho/1

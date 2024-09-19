@@ -2,19 +2,14 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Enderecos"));
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Clientes"));
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Vendedores"));
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Administradores"));
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Vendas"));
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Cupons"));
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Produtos"));
+builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var app = builder.Build();
 
 app.MapGet("/", () => "Marketplace!");
+app.MapProdutosAPI();
 
 #region Cliente
 #region GetCliente
@@ -332,56 +327,55 @@ app.MapDelete("administradores/{id}", async (int id, AppDbContext db) =>
 #endregion
 #endregion
 
+app.MapGet("/carrinho", async (AppDbContext db) =>
+    await db.Carrinhos
+    .Include(c => c.Itens)     
+    .ToListAsync());
 
 
-
-app.MapGet("/produtos", async (AppDbContext db) => await db.Produtos.ToListAsync());
-
-app.MapGet("/produtos/disponiveis", async (AppDbContext db) => await db.Produtos.Where(p => p.Quantidade >= 1).ToListAsync());
-
-app.MapGet("/produtos/tag/{tag}", async (string tag, AppDbContext db) => await db.Produtos.Where(p => p.Tag == tag).ToListAsync());
-
-app.MapGet("/produto/{id}", async (int id, AppDbContext db) => await db.Produtos.FindAsync(id) is Produto produto ? Results.Ok(produto) : Results.NotFound());
-
-app.MapPost("/produto", async (Produto produto, AppDbContext db) =>
-{
-    db.Produtos.Add(produto);
+app.MapGet("/carrinho/{id}", async (int id, AppDbContext db) => 
+    await db.Carrinhos.FindAsync(id)
+      is Carrinho carrinho
+        ? Results.Ok(carrinho)
+          : Results.NotFound());
+    
+app.MapPost("/carrinho", async (Carrinho carrinho, AppDbContext db) => {
+    db.Carrinhos.Add(carrinho);
     await db.SaveChangesAsync();
-
-    return Results.Created($"/tarefas/{produto.Id}", produto);
+    return Results.Created($"/carrinho/{carrinho.Id}", carrinho);
 });
 
-app.MapPut("/produto/{id}", async (int id, Produto produtoAlterado, AppDbContext db) =>
+app.MapPut("/carrinho/{id}", async (int id, Carrinho carrinhoAlterado, AppDbContext db) =>
 {
+    var carrinho = await db.Carrinhos
+        .Include(c => c.Itens)
+        .FirstOrDefaultAsync(c => c.Id == id);
 
-    var produto = await db.Produtos.FindAsync(id);
-    if (produto is null) return Results.NotFound();
-
-    produto.Nome = produtoAlterado.Nome;
-    produto.Descricao = produtoAlterado.Descricao;
-    produto.Quantidade = produtoAlterado.Quantidade;
-    produto.Valor = produtoAlterado.Valor;
-    produto.IdVendedor = produtoAlterado.IdVendedor;
-    produto.Tag = produtoAlterado.Tag;
+    if (carrinho is null) return Results.NotFound();
+    // Limpar e adicionar itens
+    carrinho.Itens.Clear();
+    if (carrinhoAlterado.Itens != null)
+    {
+        carrinho.Itens.AddRange(carrinhoAlterado.Itens);
+    }
 
     await db.SaveChangesAsync();
 
     return Results.NoContent();
-
 });
 
-app.MapDelete("/produto/{id}", async (int id, AppDbContext db) =>
+app.MapDelete("carrinho/{id}", async (int id, AppDbContext db) =>
 {
+    if(await db.Carrinhos.FindAsync(id) is Carrinho carrinho){
 
-    if (await db.Produtos.FindAsync(id) is Produto produto)
-    {
-
-        db.Produtos.Remove(produto);
+        db.Carrinhos.Remove(carrinho);
+        
 
         await db.SaveChangesAsync();
         return Results.NoContent();
     }
     return Results.NotFound();
+
 });
 
 app.Run();
