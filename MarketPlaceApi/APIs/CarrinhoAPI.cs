@@ -11,7 +11,7 @@ public static class CarrinhoAPI
         {
             await db.Carrinhos
                 .Include(c => c.Itens)     
-                .ToListAsync()
+                .ToListAsync();
         });
 
         group.MapGet("/{id}", async (int id, AppDbContext db) => 
@@ -36,12 +36,9 @@ public static class CarrinhoAPI
                 .FirstOrDefaultAsync(c => c.Id == id);
 
             if (carrinho is null) return Results.NotFound();
-            // Limpar e adicionar itens
-            carrinho.Itens.Clear();
-            if (carrinhoAlterado.Itens != null)
-            {
-                carrinho.Itens.AddRange(carrinhoAlterado.Itens);
-            }
+            
+            carrinho.Itens = carrinhoAlterado.Itens;
+            carrinho.UsuarioId = carrinhoAlterado.UsuarioId;
 
             await db.SaveChangesAsync();
 

@@ -272,7 +272,7 @@ Content-Type: application/json
       "quantidade": 2
     },
     {
-      "produtoId": 8,
+      "produtoId": 3,
       "quantidade": 1
     }
   ]
@@ -280,18 +280,18 @@ Content-Type: application/json
 
 
 ### PUT /carrinho/{id}
-PUT http://localhost:5262/carrinho/1
+PUT http://localhost:5262/carrinho/4
 Content-Type: application/json
 
 {
-  "usuarioId": 1,
+  "usuarioId": 3,
   "itens": [
     {
-      "produtoId": 3,
+      "produtoId": 2,
       "quantidade": 6
     },
     {
-      "produtoId": 10,
+      "produtoId": 1,
       "quantidade": 3
     }
   ]
