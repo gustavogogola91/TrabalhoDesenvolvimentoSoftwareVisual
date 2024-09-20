@@ -5,15 +5,16 @@ public static class CarrinhoAPI
     public static void MapCarrinhosAPI(this WebApplication app)
     {
 
-        var group = app.MapGroup("/produtos");
+        var group = app.MapGroup("/carrinho");
 
-        group.MapGet("/carrinho", async (AppDbContext db) =>
-        await db.Carrinhos
-        .Include(c => c.Itens)     
-        .ToListAsync());
+        group.MapGet("/", async (AppDbContext db) =>
+        {
+            await db.Carrinhos
+                .Include(c => c.Itens)     
+                .ToListAsync()
+        });
 
-
-        group.MapGet("/carrinho/{id}", async (int id, AppDbContext db) => 
+        group.MapGet("/{id}", async (int id, AppDbContext db) => 
         {
             return await db.Carrinhos
                         .Where(c => c.Id == id)
@@ -21,14 +22,14 @@ public static class CarrinhoAPI
                         .ToListAsync();
         });
             
-        group.MapPost("/carrinho", async (Carrinho carrinho, AppDbContext db) => 
+        group.MapPost("/", async (Carrinho carrinho, AppDbContext db) => 
         {
             db.Carrinhos.Add(carrinho);
             await db.SaveChangesAsync();
             return Results.Created($"/carrinho/{carrinho.Id}", carrinho);
         });
 
-        group.MapPut("/carrinho/{id}", async (int id, Carrinho carrinhoAlterado, AppDbContext db) =>
+        group.MapPut("/{id}", async (int id, Carrinho carrinhoAlterado, AppDbContext db) =>
         {
             var carrinho = await db.Carrinhos
                 .Include(c => c.Itens)
@@ -47,7 +48,7 @@ public static class CarrinhoAPI
             return Results.NoContent();
         });
 
-        group.MapDelete("carrinho/{id}", async (int id, AppDbContext db) =>
+        group.MapDelete("/{id}", async (int id, AppDbContext db) =>
         {
             if(await db.Carrinhos.FindAsync(id) is Carrinho carrinho){
 
