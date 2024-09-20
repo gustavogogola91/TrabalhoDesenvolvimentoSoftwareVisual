@@ -9,7 +9,7 @@ public static class CarrinhoAPI
 
         group.MapGet("/", async (AppDbContext db) =>
         {
-            await db.Carrinhos
+            return await db.Carrinhos
                 .Include(c => c.Itens)     
                 .ToListAsync();
         });
