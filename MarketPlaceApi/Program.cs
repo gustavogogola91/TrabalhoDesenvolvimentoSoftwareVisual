@@ -10,54 +10,13 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Marketplace!");
 app.MapProdutosAPI();
+app.MapEnderecosAPI();
 app.MapCuponsAPI();
 app.MapAdministradoresAPI();
 app.MapVendedoresAPI();
 app.MapClientesAPI();
 
 
-app.MapGet("/enderecos", async (AppDbContext db) => await db.Enderecos.ToListAsync());
-
-app.MapGet("/enderecos/{id}", async (int id, AppDbContext db) =>
-    await db.Enderecos.FindAsync(id) is Endereco endereco ? Results.Ok(endereco) : Results.NotFound());
-
-app.MapPost("/enderecos", async (Endereco endereco, AppDbContext db) =>
-{
-    db.Enderecos.Add(endereco);
-    await db.SaveChangesAsync();
-
-    return Results.Created($"/enderecos/{endereco.Id}", endereco);
-});
-
-app.MapPut("/enderecos/{id}", async (int id, Endereco enderecoAlterado, AppDbContext db) =>
-{
-    var endereco = await db.Enderecos.FindAsync(id);
-    if (endereco is null) return Results.NotFound();
-
-    endereco.IdCliente = enderecoAlterado.IdCliente;
-    endereco.Rua = enderecoAlterado.Rua;
-    endereco.Numero = enderecoAlterado.Numero;
-    endereco.Bairro = enderecoAlterado.Bairro;
-    endereco.Cidade = enderecoAlterado.Cidade;
-    endereco.Estado = enderecoAlterado.Estado;
-    endereco.CEP = enderecoAlterado.CEP;
-    endereco.Complemento = enderecoAlterado.Complemento;
-  
-    await db.SaveChangesAsync();
-    return Results.NoContent();
-});
-
-app.MapDelete("/enderecos/{id}", async (int id, AppDbContext db) =>
-{
-    if (await db.Enderecos.FindAsync(id) is Endereco endereco)
-    {
-        db.Enderecos.Remove(endereco);
-      
-        await db.SaveChangesAsync();
-        return Results.NoContent();
-    }
-    return Results.NotFound();
-});
 
 app.MapGet("/vendas", async (AppDbContext db) =>
 {
