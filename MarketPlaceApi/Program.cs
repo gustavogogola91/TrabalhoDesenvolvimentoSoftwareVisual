@@ -10,9 +10,11 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Marketplace!");
 app.MapProdutosAPI();
+app.MapCuponsAPI();
 app.MapAdministradoresAPI();
 app.MapVendedoresAPI();
 app.MapClientesAPI();
+
 
 app.MapGet("/enderecos", async (AppDbContext db) => await db.Enderecos.ToListAsync());
 
@@ -112,52 +114,6 @@ app.MapDelete("vendas/{id}", async (int id, AppDbContext db) =>
     return Results.NotFound();
  
 });
-
-app.MapGet("/cupom", async (AppDbContext db) =>
-    await db.Cupons.ToListAsync());
-
-app.MapGet("/cupom/{id}", async (int id, AppDbContext db) => 
-    await db.Cupons.FindAsync(id)
-      is Cupom cupom
-        ? Results.Ok(cupom)
-          : Results.NotFound());
-    
-app.MapPost("/cupom", async (Cupom cupom, AppDbContext db) => {
-    db.Cupons.Add(cupom);
-    await db.SaveChangesAsync();
-    return Results.Created($"/cupom/{cupom.Id}", cupom);
-});
-
-app.MapPut("cupom/{id}", async (int id, Cupom cupomAlterado, AppDbContext db) =>
-{
-    var cupom = await db.Cupons.FindAsync(id);
-    if (cupom is null) return Results.NotFound();
-
-    cupom.Codigo = cupomAlterado.Codigo;
-    cupom.Desconto = cupomAlterado.Desconto;
-    cupom.Usado = cupomAlterado.Usado;
-    cupom.ValorMin = cupomAlterado.ValorMin;
-  
-    await db.SaveChangesAsync();
-
-    return Results.NoContent();
-
-});
-
-app.MapDelete("cupom/{id}", async (int id, AppDbContext db) =>
-{
-    if(await db.Cupons.FindAsync(id) is Cupom cupom){
-
-        db.Cupons.Remove(cupom);
-        
-
-        await db.SaveChangesAsync();
-        return Results.NoContent();
-    }
-    return Results.NotFound();
-
-});
-
 
 app.MapGet("/carrinho", async (AppDbContext db) =>
     await db.Carrinhos
