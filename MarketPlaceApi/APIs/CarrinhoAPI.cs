@@ -47,6 +47,12 @@ public static class CarrinhoAPI
 
         group.MapDelete("/{id}", async (int id, AppDbContext db) =>
         {
+           var ItensCarrinho = await db.ItemCarrinho.Where(Ic => Ic.CarrinhoId == id).ToListAsync();
+            db.ItemCarrinho.RemoveRange(ItensCarrinho);
+
+            await db.SaveChangesAsync();
+
+
             if(await db.Carrinhos.FindAsync(id) is Carrinho carrinho){
 
                 db.Carrinhos.Remove(carrinho);
