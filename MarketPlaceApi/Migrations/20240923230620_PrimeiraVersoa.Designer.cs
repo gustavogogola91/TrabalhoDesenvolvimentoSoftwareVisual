@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketPlaceApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240923230620_PrimeiraVersoa")]
+    partial class PrimeiraVersoa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,7 +107,7 @@ namespace MarketPlaceApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("CarrinhoId")
+                    b.Property<int?>("CarrinhoId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProdutoId")
@@ -120,28 +123,6 @@ namespace MarketPlaceApi.Migrations
                     b.HasIndex("ProdutoId");
 
                     b.ToTable("ItemCarrinho");
-                });
-
-            modelBuilder.Entity("ItemVenda", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("VendaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VendaId");
-
-                    b.ToTable("ItemVenda");
                 });
 
             modelBuilder.Entity("Produto", b =>
@@ -170,7 +151,12 @@ namespace MarketPlaceApi.Migrations
                     b.Property<double>("Valor")
                         .HasColumnType("double");
 
+                    b.Property<int?>("VendaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("VendaId");
 
                     b.ToTable("Produtos");
                 });
@@ -210,6 +196,9 @@ namespace MarketPlaceApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("IdCliente")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdVendedor")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -268,9 +257,7 @@ namespace MarketPlaceApi.Migrations
                 {
                     b.HasOne("Carrinho", null)
                         .WithMany("Itens")
-                        .HasForeignKey("CarrinhoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CarrinhoId");
 
                     b.HasOne("Produto", "Produto")
                         .WithMany()
@@ -281,12 +268,11 @@ namespace MarketPlaceApi.Migrations
                     b.Navigation("Produto");
                 });
 
-            modelBuilder.Entity("ItemVenda", b =>
+            modelBuilder.Entity("Produto", b =>
                 {
                     b.HasOne("Venda", null)
-                        .WithMany("Itens")
-                        .HasForeignKey("VendaId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("ProdutosVendidos")
+                        .HasForeignKey("VendaId");
                 });
 
             modelBuilder.Entity("Carrinho", b =>
@@ -296,7 +282,7 @@ namespace MarketPlaceApi.Migrations
 
             modelBuilder.Entity("Venda", b =>
                 {
-                    b.Navigation("Itens");
+                    b.Navigation("ProdutosVendidos");
                 });
 #pragma warning restore 612, 618
         }

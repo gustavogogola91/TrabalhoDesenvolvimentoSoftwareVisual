@@ -178,38 +178,30 @@ Content-Type: application/json
 
 {
   "IdCliente": 101,
-  "IdVendedor": 202,
-  "produtosVendidos": [
+  "Itens": [
     {
-      "nome": "Notebook",
-      "descricao": "Notebook com 16GB RAM e 512GB SSD",
-      "quantidade": 2,
-      "valor": 3500.00,
-      "idVendedor": 202,
-      "tag": "eletronico"
+      "ProdutoId": 12,
+      "Quantidade": 1
     },
     {
-      "nome": "Mouse Gamer",
-      "descricao": "Mouse com iluminação RGB e sensor de alta precisão",
-      "quantidade": 1,
-      "valor": 150.00,
-      "idVendedor": 202,
-      "tag": "acessorio"
+      "ProdutoId": 22,
+      "Quantidade": 2
     }
   ]
 }
+
+
 
 ### PUT /vendas
 PUT http://localhost:5262/vendas/1
 Content-Type: application/json
 
 {
-  "IdCliente": 12301,
-  "IdVendedor": 232423
+  "IdCliente": 12301
 }
 
-### DELETE /tarefas/{id}
-DELETE http://localhost:5262/vendas/1
+### DELETE /vendas/{id}
+DELETE http://localhost:5262/vendas/4
 
 ### ENDEREÇOS
 

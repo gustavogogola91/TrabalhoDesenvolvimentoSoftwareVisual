@@ -10,6 +10,14 @@ class AppDbContext : DbContext {
         builder.UseMySQL(com);
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Venda>()
+            .HasMany(v => v.Itens)
+            .WithOne()
+            .OnDelete(DeleteBehavior.Cascade); // Configura exclusão em cascata
+    }   
+
     public DbSet<Cliente> Clientes => Set<Cliente>();
 
     public DbSet<Vendedor> Vendedores => Set<Vendedor>();
