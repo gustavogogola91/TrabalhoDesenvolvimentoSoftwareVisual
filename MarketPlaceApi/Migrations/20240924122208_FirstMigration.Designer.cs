@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketPlaceApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240920163111_VersaoTesteLocal2")]
-    partial class VersaoTesteLocal2
+    [Migration("20240924122208_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,7 +107,7 @@ namespace MarketPlaceApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("CarrinhoId")
+                    b.Property<int>("CarrinhoId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProdutoId")
@@ -257,7 +257,9 @@ namespace MarketPlaceApi.Migrations
                 {
                     b.HasOne("Carrinho", null)
                         .WithMany("Itens")
-                        .HasForeignKey("CarrinhoId");
+                        .HasForeignKey("CarrinhoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Produto", "Produto")
                         .WithMany()

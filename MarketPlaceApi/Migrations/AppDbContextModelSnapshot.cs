@@ -252,7 +252,7 @@ namespace MarketPlaceApi.Migrations
 
             modelBuilder.Entity("ItemCarrinho", b =>
                 {
-                    b.HasOne("Carrinho", "Carrinho")
+                    b.HasOne("Carrinho", null)
                         .WithMany("Itens")
                         .HasForeignKey("CarrinhoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -263,8 +263,6 @@ namespace MarketPlaceApi.Migrations
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Carrinho");
 
                     b.Navigation("Produto");
                 });
