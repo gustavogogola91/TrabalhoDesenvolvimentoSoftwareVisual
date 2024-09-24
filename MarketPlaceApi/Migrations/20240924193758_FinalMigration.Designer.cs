@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketPlaceApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240924122208_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20240924193758_FinalMigration")]
+    partial class FinalMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -125,6 +125,28 @@ namespace MarketPlaceApi.Migrations
                     b.ToTable("ItemCarrinho");
                 });
 
+            modelBuilder.Entity("ItemVenda", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VendaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VendaId");
+
+                    b.ToTable("ItemVenda");
+                });
+
             modelBuilder.Entity("Produto", b =>
                 {
                     b.Property<int>("Id")
@@ -151,12 +173,7 @@ namespace MarketPlaceApi.Migrations
                     b.Property<double>("Valor")
                         .HasColumnType("double");
 
-                    b.Property<int?>("VendaId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("VendaId");
 
                     b.ToTable("Produtos");
                 });
@@ -196,9 +213,6 @@ namespace MarketPlaceApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("IdCliente")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdVendedor")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -270,11 +284,12 @@ namespace MarketPlaceApi.Migrations
                     b.Navigation("Produto");
                 });
 
-            modelBuilder.Entity("Produto", b =>
+            modelBuilder.Entity("ItemVenda", b =>
                 {
                     b.HasOne("Venda", null)
-                        .WithMany("ProdutosVendidos")
-                        .HasForeignKey("VendaId");
+                        .WithMany("Itens")
+                        .HasForeignKey("VendaId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Carrinho", b =>
@@ -284,7 +299,7 @@ namespace MarketPlaceApi.Migrations
 
             modelBuilder.Entity("Venda", b =>
                 {
-                    b.Navigation("ProdutosVendidos");
+                    b.Navigation("Itens");
                 });
 #pragma warning restore 612, 618
         }

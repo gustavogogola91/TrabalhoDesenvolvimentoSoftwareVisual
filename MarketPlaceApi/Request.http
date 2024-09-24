@@ -201,7 +201,7 @@ Content-Type: application/json
 }
 
 ### DELETE /vendas/{id}
-DELETE http://localhost:5262/vendas/4
+DELETE http://localhost:5262/vendas/1
 
 ### ENDEREÇOS
 

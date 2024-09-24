@@ -3,7 +3,6 @@ POST http://localhost:5262/produtos
 Content-Type: application/json
 
  {
-    "id": "12",
       "nome": "Notebook",
       "descricao": "Notebook com 16GB RAM e 512GB SSD",
       "quantidade": 2,
@@ -14,6 +13,7 @@ Content-Type: application/json
 ### POST Produto
 POST http://localhost:5262/produtos
 Content-Type: application/json
+
     {
       "nome": "Mouse Gamer",
       "descricao": "Mouse com iluminação RGB e sensor de alta precisão",

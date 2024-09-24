@@ -6,7 +6,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace MarketPlaceApi.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class FinalMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,6 +53,25 @@ namespace MarketPlaceApi.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Produtos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Nome = table.Column<string>(type: "longtext", nullable: false),
+                    Descricao = table.Column<string>(type: "longtext", nullable: true),
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    Valor = table.Column<double>(type: "double", nullable: false),
+                    IdVendedor = table.Column<int>(type: "int", nullable: false),
+                    Tag = table.Column<string>(type: "longtext", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Produtos", x => x.Id);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Usuario",
                 columns: table => new
                 {
@@ -80,8 +99,7 @@ namespace MarketPlaceApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    IdCliente = table.Column<int>(type: "int", nullable: false),
-                    IdVendedor = table.Column<int>(type: "int", nullable: false)
+                    IdCliente = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -110,27 +128,24 @@ namespace MarketPlaceApi.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Produtos",
+                name: "ItemVenda",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(type: "longtext", nullable: false),
-                    Descricao = table.Column<string>(type: "longtext", nullable: true),
+                    ProdutoId = table.Column<int>(type: "int", nullable: false),
                     Quantidade = table.Column<int>(type: "int", nullable: false),
-                    Valor = table.Column<double>(type: "double", nullable: false),
-                    IdVendedor = table.Column<int>(type: "int", nullable: false),
-                    Tag = table.Column<string>(type: "longtext", nullable: false),
                     VendaId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produtos", x => x.Id);
+                    table.PrimaryKey("PK_ItemVenda", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Produtos_Vendas_VendaId",
+                        name: "FK_ItemVenda_Vendas_VendaId",
                         column: x => x.VendaId,
                         principalTable: "Vendas",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -178,8 +193,8 @@ namespace MarketPlaceApi.Migrations
                 column: "ProdutoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Produtos_VendaId",
-                table: "Produtos",
+                name: "IX_ItemVenda_VendaId",
+                table: "ItemVenda",
                 column: "VendaId");
         }
 
@@ -196,16 +211,19 @@ namespace MarketPlaceApi.Migrations
                 name: "ItemCarrinho");
 
             migrationBuilder.DropTable(
+                name: "ItemVenda");
+
+            migrationBuilder.DropTable(
                 name: "Carrinhos");
 
             migrationBuilder.DropTable(
                 name: "Produtos");
 
             migrationBuilder.DropTable(
-                name: "Usuario");
+                name: "Vendas");
 
             migrationBuilder.DropTable(
-                name: "Vendas");
+                name: "Usuario");
         }
     }
 }
