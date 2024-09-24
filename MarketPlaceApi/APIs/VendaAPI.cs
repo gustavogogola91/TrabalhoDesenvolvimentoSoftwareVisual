@@ -9,9 +9,9 @@ public static class VendaAPI
         group.MapGet("/", async (AppDbContext db) =>
         {
             var vendas = await db.Vendas
-                .Include(v => v.ProdutosVendidos)
+                .Include(v => v.Itens)
                 .ToListAsync();
-
+            //await db.Produtos.ToListAsync();
             return Results.Ok(vendas);
         });
 
@@ -43,7 +43,6 @@ public static class VendaAPI
             if (venda is null) return Results.NotFound();
 
             venda.IdCliente = vendaAlterada.IdCliente;
-            venda.IdVendedor = vendaAlterada.IdVendedor;
 
             await db.SaveChangesAsync();
 

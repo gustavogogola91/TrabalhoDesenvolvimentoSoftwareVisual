@@ -208,7 +208,7 @@ Content-Type: application/json
   "IdVendedor": 232423
 }
 
-### DELETE /tarefas/{id}
+### DELETE /vendas/{id}
 DELETE http://localhost:5262/vendas/1
 
 ### ENDEREÇOS

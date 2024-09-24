@@ -1,0 +1,41 @@
+### POST Produto
+POST http://localhost:5262/produtos
+Content-Type: application/json
+
+ {
+    "id": "12",
+      "nome": "Notebook",
+      "descricao": "Notebook com 16GB RAM e 512GB SSD",
+      "quantidade": 2,
+      "valor": 3500.00,
+      "tag": "eletronico"
+}
+
+### POST Produto
+POST http://localhost:5262/produtos
+Content-Type: application/json
+    {
+      "nome": "Mouse Gamer",
+      "descricao": "Mouse com iluminação RGB e sensor de alta precisão",
+      "quantidade": 1,
+      "valor": 150.00,
+      "tag": "acessorio"
+    }
+
+### POST /vendas
+POST http://localhost:5262/vendas
+Content-Type: application/json
+
+{
+  "IdCliente": 101,
+  "Itens": [
+    {
+      "produtoid": 1,
+      "quantidade": 2
+    },
+    {
+      "produtoid": 2,
+      "quantidade": 9
+    }
+  ]
+}
