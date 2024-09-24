@@ -18,7 +18,7 @@ public static class VendaAPI
         group.MapGet("/{id}", async (int id, AppDbContext db) =>
         {
             var venda = await db.Vendas
-                .Include(v => v.ProdutosVendidos)
+                .Include(v => v.Itens)
                 .FirstOrDefaultAsync(v => v.Id == id);
 
             if (venda == null)
@@ -54,8 +54,9 @@ public static class VendaAPI
         {
             if (await db.Vendas.FindAsync(id) is Venda venda)
             {
+                
 
-                db.Vendas.Remove(venda);
+                    db.Vendas.Remove(venda);
 
                 await db.SaveChangesAsync();
                 return Results.NoContent();

@@ -2,8 +2,7 @@
 public class Venda{
     public int Id {get; set;}
     public int IdCliente {get; set;}
-    public List<int> ProdutoIds { get; set; } = new List<int>(); 
-    public List<Produto> ProdutosVendidos { get; set; } = new List<Produto>(); 
+    
     public List<ItemVenda> Itens { get; set; } = new List<ItemVenda>();
 }
 

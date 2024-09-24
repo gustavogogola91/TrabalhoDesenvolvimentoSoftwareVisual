@@ -30,12 +30,30 @@ Content-Type: application/json
   "IdCliente": 101,
   "Itens": [
     {
-      "produtoid": 1,
-      "quantidade": 2
+      "ProdutoId": 122,
+      "Quantidade": 12
     },
     {
-      "produtoid": 2,
-      "quantidade": 9
+      "ProdutoId": 223,
+      "Quantidade": 21
+    }
+  ]
+}
+
+### POST /vendas
+POST http://localhost:5262/vendas
+Content-Type: application/json
+
+{
+  "IdCliente": 1111,
+  "Itens": [
+    {
+      "ProdutoId": 12,
+      "Quantidade": 1
+    },
+    {
+      "ProdutoId": 22,
+      "Quantidade": 2
     }
   ]
 }

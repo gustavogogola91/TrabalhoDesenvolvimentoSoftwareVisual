@@ -5,10 +5,18 @@ class AppDbContext : DbContext {
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
-        var com = "server=localhost;port=3306;database=marketplace;user=root;password=admin";
+        var com = "server=localhost;port=3306;database=marketplace;user=root;password=root";
 
         builder.UseMySQL(com);
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Venda>()
+            .HasMany(v => v.Itens)
+            .WithOne()
+            .OnDelete(DeleteBehavior.Cascade); // Configura exclusão em cascata
+    }   
 
     public DbSet<Cliente> Clientes => Set<Cliente>();
 
