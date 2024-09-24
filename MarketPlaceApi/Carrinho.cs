@@ -15,6 +15,9 @@ public class ItemCarrinho
     
     
     public int ProdutoId { get; set; }
+
+    public int CarrinhoId {get; set;}
+    
     public Produto Produto { get; set; }
 
     public int Quantidade { get; set; }
