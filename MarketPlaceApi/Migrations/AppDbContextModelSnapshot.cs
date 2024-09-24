@@ -104,7 +104,7 @@ namespace MarketPlaceApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("CarrinhoId")
+                    b.Property<int>("CarrinhoId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProdutoId")
@@ -268,7 +268,9 @@ namespace MarketPlaceApi.Migrations
                 {
                     b.HasOne("Carrinho", null)
                         .WithMany("Itens")
-                        .HasForeignKey("CarrinhoId");
+                        .HasForeignKey("CarrinhoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Produto", "Produto")
                         .WithMany()

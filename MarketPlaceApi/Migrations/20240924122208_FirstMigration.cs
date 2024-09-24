@@ -6,7 +6,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace MarketPlaceApi.Migrations
 {
     /// <inheritdoc />
-    public partial class VersaoInicial : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -141,8 +141,8 @@ namespace MarketPlaceApi.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     ProdutoId = table.Column<int>(type: "int", nullable: false),
-                    Quantidade = table.Column<int>(type: "int", nullable: false),
-                    CarrinhoId = table.Column<int>(type: "int", nullable: true)
+                    CarrinhoId = table.Column<int>(type: "int", nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -151,7 +151,8 @@ namespace MarketPlaceApi.Migrations
                         name: "FK_ItemCarrinho_Carrinhos_CarrinhoId",
                         column: x => x.CarrinhoId,
                         principalTable: "Carrinhos",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ItemCarrinho_Produtos_ProdutoId",
                         column: x => x.ProdutoId,

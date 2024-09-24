@@ -34,6 +34,9 @@ class AppDbContext : DbContext {
     
     public DbSet<Carrinho> Carrinhos => Set<Carrinho>();
 
+    public DbSet<ItemCarrinho> ItemCarrinho => Set<ItemCarrinho>();
+
+
 
 }
 
