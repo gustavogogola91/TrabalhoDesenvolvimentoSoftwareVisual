@@ -21,7 +21,7 @@ function Login() {
                 </div>
                 
                 <div class="w-1/3 h-4/6 p-4 flex flex-col items-center justify-center bg-very-light-purple border-2 border-purple rounded-r-3xl border-l-0"> {/*register-box*/}
-                    <h2 class="mb-5 text-xl">SignUp</h2> 
+                    <h2 class="mb-5 text-xl">SignUp</h2>
                     <form class="signup-form w-full">
                         <label for="signup-username" class="text-lg mb-1 text-[#523254]">Username:</label>
                         <input type="text" id="signup-username" name="signup-username" class="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2]" />
@@ -34,7 +34,7 @@ function Login() {
 
                         <label for="confirm-password" class="text-lg mb-1 text-[#523254]">Confirm Password:</label>
                         <input type="password" id="confirm-password" name="confirm-password" class="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2]" />                        
-                        
+
                         <button type="submit" class="w-full p-2 rounded-full bg-purple text-white font-bold cursor-pointer">Create Account</button>
                     </form>
                 </div>
@@ -44,3 +44,26 @@ function Login() {
 }
 
 export default Login
+
+
+
+// // localStorage
+// localStorage.setItem("nome", "Valor do dado");
+
+// // sessionStorage
+// sessionStorage.setItem("nome", "Valor do dado");
+// // localStorage
+// const valor = localStorage.getItem("nome");
+
+// // sessionStorage
+// const valor = sessionStorage.getItem("nome");
+// // localStorage
+// localStorage.removeItem("nome");
+
+// // sessionStorage
+// sessionStorage.removeItem("nome");
+// // localStorage
+// localStorage.clear();
+
+// // sessionStorage
+// sessionStorage.clear();
