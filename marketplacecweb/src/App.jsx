@@ -1,15 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import "./index.css";
-
-import NavApp from "./components/Nav";
+import Layout from "./components/Layout";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<NavApp />} />
-        <Route path="/produtos" element={<NavApp />} />
-        <Route path="/usuario" element={<NavApp />} />
+        <Route path="/" element={ <Layout>  </Layout> } />
+        <Route path="/produtos" element={<Layout>  </Layout>} />
+        <Route path="/usuario" element={<Layout>  </Layout>} />
       </Routes>
     </>
   );
