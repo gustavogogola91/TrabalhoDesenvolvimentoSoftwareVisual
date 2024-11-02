@@ -8,10 +8,12 @@ import EditarProduto from "./pages/Produto/EditarProduto";
 import ExcluirProduto from "./pages/Produto/ExcluirProduto";
 import GerenciarProduto from "./pages/Produto/GerenciarProduto";
 
+
 function App() {
   return (
     <>
       <Routes>
+
         <Route path="/" element={<Layout></Layout>} />
         <Route
           path="/produtos"
@@ -27,6 +29,7 @@ function App() {
         <Route path="/editarProduto" element={<Layout><EditarProduto/></Layout>}/>      
         <Route path="/excluirProduto" element={<Layout><ExcluirProduto/></Layout>}/>      
         </Routes>
+
     </>
   );
 }
