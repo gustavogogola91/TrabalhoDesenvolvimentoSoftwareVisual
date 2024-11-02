@@ -13,6 +13,9 @@ function NavApp() {
         <li>
           <NavLink to="/usuario">Usuario</NavLink>
         </li>
+        <li>
+          <NavLink to="/cupom">Cupom</NavLink>
+        </li>
       </ul>
     </nav>
   );
