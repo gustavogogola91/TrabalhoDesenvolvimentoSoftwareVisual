@@ -1,13 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 import "./index.css";
 
+import NavApp from "./components/Nav";
+
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Nav />} />
-        <Route path="/produtos" element={<Nav />} />
-        <Route path="/usuario" element={<Nav />} />
+        <Route path="/" element={<NavApp />} />
+        <Route path="/produtos" element={<NavApp />} />
+        <Route path="/usuario" element={<NavApp />} />
       </Routes>
     </>
   );
