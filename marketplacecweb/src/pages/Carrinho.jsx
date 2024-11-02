@@ -1,41 +1,79 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 
-const Cart = () => {
-  // Exemplo de itens no carrinho
-  const cartItems = [
-    { title: 'Produto 1', quantity: 2, price: 29.99 },
-    { title: 'Produto 2', quantity: 1, price: 49.99 },
-    { title: 'Produto 3', quantity: 3, price: 19.99 },
-  ];
+function Carrinho() {
+    const [itens, setItens] = useState([]);
 
-  // Calcula o preço total
-  const totalPrice = cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
+    function listarItens() {
+        axios.get("http://localhost:5262/carrinho/")
+            .then((resposta) => {
+                console.log(resposta.data);
+                setItens(resposta.data);
+            });
+    }
 
-  return (
-    <div className="bg-purple-700 text-white rounded-lg shadow-lg p-6 w-full max-w-md mx-auto">
-      <h2 className="text-2xl font-semibold mb-4">Carrinho de Compras</h2>
-      
-      <div>
-        {cartItems.map((item, index) => (
-          <div
-            key={index}
-            className="bg-purple-600 rounded-lg p-4 mb-4 shadow-sm flex justify-between items-center"
-          >
-            <div>
-              <h3 className="text-sm font-medium">{item.title}</h3>
-              <p className="text-xs">Quantidade: {item.quantity}</p>
+    useEffect(listarItens, []);
+
+    const produtos = itens.length > 0 ? itens[0].itens : []; 
+
+    function calcularTotal(produtos) 
+    {
+        let total = 0;
+        for (let i = 0; i < produtos.length; i++)
+            {
+                const produto = produtos[i];
+                total = total + (produto.produto.valor * produto.quantidade);
+
+                console.log(produto.quantidade)
+                console.log(total);
+            }
+
+            console.log(total);
+        return total;
+    }
+
+    return (
+        <div className="flex items-center justify-center h-screen">
+            <div className="bg-light-purple text-white rounded-lg shadow-lg p-6 w-full max-w-md">
+                <h2 className="text-2xl font-semibold mb-4">Carrinho de Compras</h2>
+                {Tabela(produtos)}
+                <div className="flex justify-between items-center mt-6 pt-4 border-t border-purple-500">
+                    <span className="text-lg font-semibold">Total:</span>
+                    <span className="text-lg font-semibold">${calcularTotal(produtos)}</span>
+                </div>
             </div>
-            <span className="font-semibold">${(item.quantity * item.price).toFixed(2)}</span>
-          </div>
-        ))}
-      </div>
+        </div>
+    );
+}
 
-      <div className="flex justify-between items-center mt-6 pt-4 border-t border-purple-500">
-        <span className="text-lg font-semibold">Total:</span>
-        <span className="text-lg font-semibold">${totalPrice.toFixed(2)}</span>
-      </div>
-    </div>
-  );
-};
+function Tabela(produtos) {
+    return (
+        <div>
+            {Linhas(produtos)}
+        </div>
+    );
+}
 
-export default Cart;
+function Linha(index, produto) {
+    return (
+        <div key={index} className="bg-purple-600 rounded-lg p-4 mb-4 shadow-custom-light flex justify-between items-center">
+            <div>
+                <h3 className="text-sm font-medium">{produto.produto.nome}</h3>
+                <p className="text-xs">Quantidade: {produto.quantidade}</p>
+            </div>
+            <span className="font-semibold">${(produto.quantidade * produto.produto.valor).toFixed(2)}</span>
+        </div>
+    );
+}
+
+function Linhas(produtos) {
+    const linhas = [];
+    for (let i = 0; i < produtos.length; i++) {
+        const produto = produtos[i];
+        linhas[i] = Linha(i, produto);
+    }
+    return linhas;
+}
+
+
+export default Carrinho;

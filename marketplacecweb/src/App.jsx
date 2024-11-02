@@ -1,5 +1,6 @@
 import Carrinho from './pages/Carrinho';
 import { Routes, Route } from 'react-router-dom'
+import './index.css';
 
 function App() {
   return (

@@ -272,11 +272,11 @@ Content-Type: application/json
 
 
 ### PUT /carrinho/{id}
-PUT http://localhost:5262/carrinho/7
+PUT http://localhost:5262/carrinho/1
 Content-Type: application/json
 
 {
-  "usuarioId": 3,
+  "usuarioId": 1,
   "itens": [
     {
       "produtoId": 2,
