@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 public static class CarrinhoAPI
@@ -65,6 +66,28 @@ public static class CarrinhoAPI
             return Results.NotFound();
 
         });
+
+        group.MapDelete("/produto/{idCarrinho}/{idProduto}", async (int idCarrinho, int idProduto, AppDbContext db) =>
+       {
+            var ItensCarrinho = await db.ItemCarrinho
+                                        .Where(Ic => Ic.CarrinhoId == idCarrinho && Ic.ProdutoId == idProduto)
+                                        .SingleOrDefaultAsync();
+
+
+            if (ItensCarrinho != null)
+            {
+                db.ItemCarrinho.Remove(ItensCarrinho);
+                await db.SaveChangesAsync();
+                return Results.NoContent();
+            }
+
+            return Results.NotFound(new 
+            { 
+                mensagem = "Item não encontrado.", 
+                erroCode = 404 
+            });
+        });
+
 
     }
 }

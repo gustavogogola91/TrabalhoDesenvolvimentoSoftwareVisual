@@ -272,7 +272,7 @@ Content-Type: application/json
 
 
 ### PUT /carrinho/{id}
-PUT http://localhost:5262/carrinho/1
+PUT http://localhost:5262/carrinho/12
 Content-Type: application/json
 
 {
@@ -290,4 +290,8 @@ Content-Type: application/json
 }
 
 ### DELETE /carrinho/{id}
-DELETE http://localhost:5262/carrinho/9
+DELETE http://localhost:5262/carrinho/11
+
+
+### DELETE /carrinho/produto/idCarrinho/idProduto
+DELETE http://localhost:5262/carrinho/produto/11/5
