@@ -74,7 +74,7 @@ function CadastrarProduto() {
         type="number"
         id="valor"
         name="valor"
-        className="rounded-xl text-center"
+        className="rounded-xl text-center no-spinner"
         value={produto.valor}
         onChange={(e) => onChangeProduto(e.target.name, Number(e.target.value))}
       />
