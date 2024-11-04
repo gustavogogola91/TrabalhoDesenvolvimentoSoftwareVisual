@@ -18,11 +18,13 @@ class AppDbContext : DbContext {
             .OnDelete(DeleteBehavior.Cascade); // Configura exclusão em cascata
     }   
 
-    public DbSet<Cliente> Clientes => Set<Cliente>();
+    public DbSet<Usuario> Usuarios => Set<Usuario>();
+    
+    // public DbSet<Cliente> Clientes => Set<Cliente>();
 
-    public DbSet<Vendedor> Vendedores => Set<Vendedor>();
+    // public DbSet<Vendedor> Vendedores => Set<Vendedor>();
 
-    public DbSet<Administrador> Administradores => Set<Administrador>();
+    // public DbSet<Administrador> Administradores => Set<Administrador>();
 
     public DbSet<Venda> Vendas => Set<Venda>();
 
