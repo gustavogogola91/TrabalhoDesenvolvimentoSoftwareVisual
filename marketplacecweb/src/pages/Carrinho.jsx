@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
 function Carrinho() {
+
     const [itens, setItens] = useState([]);
 
     function listarItens() {
@@ -76,6 +77,52 @@ function removerProduto(produto, idCarrinho) {
     });
 }
 
+function aumentarQuantidade(produto, idCarrinho)
+{
+    let novaQuantidade = produto.quantidade;
+
+    if(novaQuantidade > 0)
+        {
+            novaQuantidade = produto.quantidade + 1;
+
+            axios.put(`http://localhost:5262/carrinho/${idCarrinho}`, novaQuantidade , {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => {
+                console.log("Quantidade atualizada");
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error("Erro ao atualizar a quantidade:", error);
+            });
+        }
+}
+
+function diminuirQuantidade(produto, idCarrinho)
+{
+    let novaQuantidade = produto.quantidade;
+
+    if(novaQuantidade > 0)
+        {
+            novaQuantidade = produto.quantidade - 1;
+
+            axios.put(`http://localhost:5262/carrinho/${idCarrinho}`, novaQuantidade , {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => {
+                console.log("Quantidade atualizada");
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error("Erro ao atualizar a quantidade:", error);
+            });
+        }
+}
+
 function Tabela(produtos, idCarrinho) {
     return (
         <div>
@@ -90,6 +137,18 @@ function Linha(index, produto, idCarrinho) {
             <div>
                 <h3 className="text-sm font-medium">{produto.produto.nome}</h3>
                 <p className="text-xs">Quantidade: {produto.quantidade}</p>
+                <button 
+                    className="ml-4 px-2 py-1 bg-very-light-purple text-white rounded hover:bg-white hover:text-black"
+                    onClick={() => aumentarQuantidade(produto, idCarrinho)}
+                >
+                    +
+                </button>
+                <button 
+                    className="ml-2 px-2 py-1 bg-very-light-purple text-white rounded hover:bg-white hover:text-black"
+                    onClick={() => diminuirQuantidade(produto, idCarrinho)}
+                >
+                    -
+                </button>
             </div>
             <span className="font-semibold">${(produto.quantidade * produto.produto.valor).toFixed(2)}</span>
             <button 

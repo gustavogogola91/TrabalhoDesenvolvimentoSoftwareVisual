@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+
 
 public static class CarrinhoAPI
 {
@@ -31,16 +33,18 @@ public static class CarrinhoAPI
             return Results.Created($"/carrinho/{carrinho.Id}", carrinho);
         });
 
-        group.MapPut("/{id}", async (int id, Carrinho carrinhoAlterado, AppDbContext db) =>
+        group.MapPut("/{id}", async (int id, [FromBody] int novaQuantidade, AppDbContext db) =>
         {
             var carrinho = await db.Carrinhos
                 .Include(c => c.Itens)
                 .FirstOrDefaultAsync(c => c.Id == id);
 
+            var Itens = carrinho.Itens.FirstOrDefault();
+
             if (carrinho is null) return Results.NotFound();
-            
-            carrinho.Itens = carrinhoAlterado.Itens;
-            carrinho.UsuarioId = carrinhoAlterado.UsuarioId;
+            if(Itens is null) return Results.NotFound();
+
+            Itens.Quantidade = novaQuantidade;
 
             await db.SaveChangesAsync();
 
@@ -73,9 +77,9 @@ public static class CarrinhoAPI
                                         .Where(Ic => Ic.CarrinhoId == idCarrinho && Ic.ProdutoId == idProduto)
                                         .SingleOrDefaultAsync();
 
-
             if (ItensCarrinho != null)
             {
+                Console.WriteLine("itens do carrinho: " + ItensCarrinho);
                 db.ItemCarrinho.Remove(ItensCarrinho);
                 await db.SaveChangesAsync();
                 return Results.NoContent();
