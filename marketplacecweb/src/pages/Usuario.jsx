@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import History from '../components/History';
 
 function SidePanel() {
     let valor = localStorage.getItem("page")
@@ -37,6 +38,7 @@ function Usuario() {
             <SidePanel />
             <div className="w-3/4">
                 <h2>Olá, Usuário</h2>
+                <History />
             </div>
         </div>
     )

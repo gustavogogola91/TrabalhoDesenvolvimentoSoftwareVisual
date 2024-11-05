@@ -15,6 +15,21 @@ public static class VendaAPI
             return Results.Ok(vendas);
         });
 
+        group.MapGet("/cliente/{id}", async (int id, AppDbContext db) =>
+        {
+            var vendas = await db.Vendas
+            .Where(v => v.IdCliente == id) // Filtra as vendas pelo id do cliente
+            .Include(v => v.Itens) // Inclui os itens da venda
+            .ToListAsync();
+
+            if (vendas == null || vendas.Count == 0)
+            {
+                return Results.NotFound();
+            }
+
+            return Results.Ok(vendas);
+        });
+
         group.MapGet("/{id}", async (int id, AppDbContext db) =>
         {
             var venda = await db.Vendas
