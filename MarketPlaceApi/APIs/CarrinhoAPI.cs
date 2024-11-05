@@ -33,18 +33,15 @@ public static class CarrinhoAPI
             return Results.Created($"/carrinho/{carrinho.Id}", carrinho);
         });
 
-        group.MapPut("/{id}", async (int id, [FromBody] int novaQuantidade, AppDbContext db) =>
+        group.MapPut("/{idCarrinho}/{idProduto}", async (int idCarrinho, [FromBody] int novaQuantidade, AppDbContext db, int idProduto) =>
         {
-            var carrinho = await db.Carrinhos
-                .Include(c => c.Itens)
-                .FirstOrDefaultAsync(c => c.Id == id);
+            var ItemCarrinho = await db.ItemCarrinho
+                                    .Where(Ic => Ic.CarrinhoId == idCarrinho && Ic.ProdutoId == idProduto)
+                                    .SingleOrDefaultAsync();
 
-            var Itens = carrinho.Itens.FirstOrDefault();
+            if(ItemCarrinho is null) return Results.NotFound();
 
-            if (carrinho is null) return Results.NotFound();
-            if(Itens is null) return Results.NotFound();
-
-            Itens.Quantidade = novaQuantidade;
+            ItemCarrinho.Quantidade = novaQuantidade;
 
             await db.SaveChangesAsync();
 

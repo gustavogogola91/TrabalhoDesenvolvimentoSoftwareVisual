@@ -79,18 +79,19 @@ function removerProduto(produto, idCarrinho) {
 
 function aumentarQuantidade(produto, idCarrinho)
 {
+    const idProduto = produto.produto.id;
     let novaQuantidade = produto.quantidade;
 
     if(novaQuantidade > 0)
         {
             novaQuantidade = produto.quantidade + 1;
 
-            axios.put(`http://localhost:5262/carrinho/${idCarrinho}`, novaQuantidade , {
+            axios.put(`http://localhost:5262/carrinho/${idCarrinho}/${idProduto}`, novaQuantidade , {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
-            .then((response) => {
+            .then(() => {
                 console.log("Quantidade atualizada");
                 window.location.reload();
             })
@@ -102,13 +103,14 @@ function aumentarQuantidade(produto, idCarrinho)
 
 function diminuirQuantidade(produto, idCarrinho)
 {
+    const idProduto = produto.produto.id;
     let novaQuantidade = produto.quantidade;
 
     if(novaQuantidade > 0)
         {
             novaQuantidade = produto.quantidade - 1;
 
-            axios.put(`http://localhost:5262/carrinho/${idCarrinho}`, novaQuantidade , {
+            axios.put(`http://localhost:5262/carrinho/${idCarrinho}/${idProduto}`, novaQuantidade , {
                 headers: {
                     'Content-Type': 'application/json'
                 }

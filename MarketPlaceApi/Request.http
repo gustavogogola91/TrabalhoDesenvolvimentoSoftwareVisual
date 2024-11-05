@@ -275,6 +275,9 @@ Content-Type: application/json
 PUT http://localhost:5262/carrinho/12
 Content-Type: application/json
 
+### PUT /carrinho/{id}
+PUT http://localhost:5262/carrinho/12
+Content-Type: application/json
 2
 
 ### DELETE /carrinho/{id}
