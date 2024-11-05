@@ -24,7 +24,7 @@ function App() {
             </Layout>
           }
         />
-        <Route path="/usuario" element={<Layout></Layout>} />
+        <Route path="/usuario" element={<Layout> <Usuario/> </Layout>} />
         <Route path="/gerenciarProduto" element={<Layout><GerenciarProduto/></Layout>}/>      
         <Route path="/cadastrarProduto" element={<Layout><CadastrarProduto/></Layout>}/>      
         <Route path="/editarProduto" element={<Layout><EditarProduto/></Layout>}/>      

@@ -6,31 +6,30 @@ const IDCLIENTE = 1;
 // PROBLEMA EM RENDER
 
 function ListarProdutos(ids) {
-    const[produtos, setProdutos] = useState([])
-    let string = ""
-
-    function listarProdutos() {
+    
+        let produtosDict = {}
         axios.get(`http://localhost:5262/vendas/cliente/${IDCLIENTE}`)
             .then(
                 (resposta) => {
                     console.log(resposta.data)
-                    setProdutos(resposta.data)
                 }
             )
+
+    return {
+        produtosString: "amognus",
+        valor: "pao",
     }
-
-    useEffect(listarProdutos, [])
-
-    return string
 }
 
 function Linha(index, venda) {
-    let produtos = venda.itens.map(item => item.id)
+    let produtosids = venda.itens.map(item => item.id)
+    const produtos = ListarProdutos(produtosids)
 
     return(
         <tr key={index}>
             <td>{venda.id}</td>
-            <td>{ListarProdutos(produtos)}</td>
+            <td>{ produtos.produtosNome }</td>
+            <td>{ produtos.valor }</td>
         </tr>
     )
 }
