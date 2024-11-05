@@ -3,10 +3,7 @@ import "./index.css";
 
 import Layout from "./components/Layout";
 import Produtos from "./pages/Produto/Produtos";
-import CadastrarProduto from "./pages/Produto/CadastrarProduto";
-import EditarProduto from "./pages/Produto/EditarProduto";
-import ExcluirProduto from "./pages/Produto/ExcluirProduto";
-import GerenciarProduto from "./pages/Produto/GerenciarProduto";
+import Carrinho from "./pages/Carrinho"
 
 function App() {
   return (
