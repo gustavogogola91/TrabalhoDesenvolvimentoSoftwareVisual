@@ -3,9 +3,11 @@ import React, { useState, useEffect } from 'react';
 
 function Carrinho() {
 
+    //Disparam pras APIs de Carrinho e Cupom com método GET 
     const [itens, setItens] = useState([]);
 
-    function listarItens() {
+    function listarItens() 
+    {
         axios.get("http://localhost:5262/carrinho/")
             .then((resposta) => {
                 console.log(resposta.data);
@@ -18,9 +20,64 @@ function Carrinho() {
     const produtos = itens.length > 0 ? itens[0].itens : []; 
     const idCarrinho = itens.length > 0 ? itens[0].id : null;
 
-    function calcularTotal(produtos) 
+    const [cupons, setCupom] = useState([]);
+
+    function buscarCupons() 
+    {
+        axios.get("http://localhost:5262/cupons/")
+            .then((resposta) => {
+                console.log(resposta.data);
+                setCupom(resposta.data);
+            });
+     }
+
+    useEffect(buscarCupons, []);
+
+    
+
+    function aplicarCupom(cupomDigitado)
+    {
+
+        if(cupons.lengh < 1)
+        {
+            console.log("Lista de cupons vazia");
+            return;
+        }
+        else
+        {
+            for(let i = 0; i < cupons.length; i++)
+                {
+                    var cupom = cupons[i];
+                    if(cupomDigitado == cupom)
+                    {
+                        calcularTotal(produtos, cupomDigitado);
+                    }
+                }
+        }
+
+
+    }
+
+    function calcularTotal(produtos, cupom) 
     {
         let total = 0;
+        if(cupom === undefined)
+            {
+                for (let i = 0; i < produtos.length; i++)
+                    {
+                        const produto = produtos[i];
+                        total = total + (produto.produto.valor * produto.quantidade);
+        
+                        console.log(produto.quantidade)
+                        console.log(total);
+                    }
+        
+                    console.log(total);
+                return total;
+            }
+
+            const desconto = cupom.desconto;
+
         for (let i = 0; i < produtos.length; i++)
             {
                 const produto = produtos[i];
@@ -31,6 +88,8 @@ function Carrinho() {
             }
 
             console.log(total);
+            
+            total = (total * desconto);
         return total;
     }
 
@@ -40,6 +99,21 @@ function Carrinho() {
                 <h2 className="text-2xl font-semibold mb-4">Carrinho de Compras</h2>
                 {Tabela(produtos, idCarrinho)}
                 <div className="flex justify-between items-center mt-6 pt-4 border-t border-purple-500">
+                    <span className ="text-lg font-semibold">
+                        <label>Cupom: </label>
+                        <input className="text-black rounded-lg text-base focus:outline-none" 
+                                id="cupom" 
+                                name = "cupom" 
+                                placeholder='CUPOM2024'
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') 
+                                    {
+                                      aplicarCupom(e.target.value);
+                                    }
+                                  }}
+                                  >
+                        </input>
+                    </span>
                     <span className="text-lg font-semibold">Total:</span>
                     <span className="text-lg font-semibold">${calcularTotal(produtos)}</span>
                 </div>
