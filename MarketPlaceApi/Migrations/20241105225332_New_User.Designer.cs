@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketPlaceApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241104003454_Att_User")]
-    partial class AttUser
+    [Migration("20241105225332_New_User")]
+    partial class NewUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

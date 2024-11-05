@@ -5,7 +5,7 @@ class AppDbContext : DbContext {
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
-        var com = "server=localhost;port=3306;database=marketplace;user=root;password=root";
+        var com = "server=localhost;port=3306;database=marketplace;user=root;password=2311";
 
         builder.UseMySQL(com);
     }
