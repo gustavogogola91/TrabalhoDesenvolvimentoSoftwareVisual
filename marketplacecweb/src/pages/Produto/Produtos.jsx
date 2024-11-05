@@ -28,13 +28,6 @@ function Produtos() {
               <th className="w-48 text-center">Quantidade disponível</th>
               <th className="w-48 text-center">Preço</th>
               <th className="w-48 text-center">Tag</th>
-              <th className="w-48 text-center">
-                <NavLink to="/gerenciarProduto">
-                  <button className="border border-black rounded-xl p-2 ">
-                    Gerenciar produtos
-                  </button>
-                </NavLink>
-              </th>
             </tr>
           </thead>
           <tbody>{Linhas(produtos)}</tbody>

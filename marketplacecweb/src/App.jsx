@@ -8,28 +8,15 @@ import EditarProduto from "./pages/Produto/EditarProduto";
 import ExcluirProduto from "./pages/Produto/ExcluirProduto";
 import GerenciarProduto from "./pages/Produto/GerenciarProduto";
 
-
 function App() {
   return (
     <>
       <Routes>
-
         <Route path="/" element={<Layout></Layout>} />
-        <Route
-          path="/produtos"
-          element={
-            <Layout>
-              <Produtos />
-            </Layout>
-          }
-        />
+        <Route path="/produtos" element={<Layout><Produtos /></Layout>}/>
         <Route path="/usuario" element={<Layout></Layout>} />
-        <Route path="/gerenciarProduto" element={<Layout><GerenciarProduto/></Layout>}/>      
-        <Route path="/cadastrarProduto" element={<Layout><CadastrarProduto/></Layout>}/>      
-        <Route path="/editarProduto" element={<Layout><EditarProduto/></Layout>}/>      
-        <Route path="/excluirProduto" element={<Layout><ExcluirProduto/></Layout>}/>      
-        </Routes>
-
+        <Route path="/carrinho" element={<Layout><Carrinho/></Layout>} />
+      </Routes>
     </>
   );
 }
