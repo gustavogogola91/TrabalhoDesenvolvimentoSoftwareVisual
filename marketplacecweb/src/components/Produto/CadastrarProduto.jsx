@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -95,14 +94,12 @@ function CadastrarProduto() {
           className="border border-black rounded-xl p-2">
           Salvar
         </button>
-        <NavLink to="/gerenciarProdutos">
           <button
             type="button"
             onClick={cancelar}
             className="border border-black rounded-xl p-2">
             Cancelar
           </button>
-        </NavLink>
       </div>
     </form>
   );

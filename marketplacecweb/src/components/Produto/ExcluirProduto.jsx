@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import axios from "axios"
 
 function ExcluirProduto() {
@@ -88,11 +87,9 @@ function ExcluirProduto() {
               className="border border-black rounded-xl p-2">
               Excluir
             </button>
-            <NavLink to="/gerenciarProdutos">
               <button type="button" className="border border-black rounded-xl p-2">
                 Cancelar
               </button>
-            </NavLink>
           </div>
         </form>
       );

@@ -6,12 +6,54 @@ const listProdutos = [];
 
 function Produtos() {
   const [produtos, setProdutos] = useState([]);
+  const [produto, setProduto] = useState({});
+
+  function onChangeProduto(campo, valor) {
+    setProduto((prevProduto) => ({
+      ...prevProduto,
+      [campo]: valor,
+    }));
+  }
 
   function listarProdutos() {
     axios.get("http://localhost:5262/produtos").then((resposta) => {
-      console.log(resposta.data);
       setProdutos(resposta.data);
     });
+  }
+
+  async function buscarProduto(id) {
+    try {
+      axios
+        .get("http://localhost:5262/produtos/" + id)
+        .then((resposta) => setProduto(resposta.data));
+    } catch (error) {
+      alert("Erro ao buscar o produto. Tente novamente.");
+    }
+  }
+
+  async function salvarProdutoAlterado() {
+    try {
+      await axios.put("http://localhost:5262/produtos/" + produto.id, produto);
+      alert("Produto salvo com sucesso!");
+      setProduto({});
+    } catch (error) {
+      alert("Erro ao salvar o produto. Tente novamente.");
+      console.error(error);
+    }
+  }
+
+  async function salvarProduto() {
+    try {
+      await axios.post("http://localhost:5262/produtos", produto);
+      alert("Produto salvo com sucesso!");
+    } catch (error) {
+      alert("Erro ao salvar o produto. Tente novamente.");
+      console.error(error);
+    }
+  }
+
+  function cancelar() {
+    setProduto(null);
   }
 
   useEffect(listarProdutos, []);
