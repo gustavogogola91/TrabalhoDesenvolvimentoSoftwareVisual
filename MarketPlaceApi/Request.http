@@ -275,22 +275,17 @@ Content-Type: application/json
 
 
 ### PUT /carrinho/{id}
-PUT http://localhost:5262/carrinho/7
+PUT http://localhost:5262/carrinho/12
 Content-Type: application/json
 
-{
-  "usuarioId": 3,
-  "itens": [
-    {
-      "produtoId": 2,
-      "quantidade": 6
-    },
-    {
-      "produtoId": 1,
-      "quantidade": 3
-    }
-  ]
-}
+### PUT /carrinho/{id}
+PUT http://localhost:5262/carrinho/12
+Content-Type: application/json
+2
 
 ### DELETE /carrinho/{id}
-DELETE http://localhost:5262/carrinho/9
+DELETE http://localhost:5262/carrinho/11
+
+
+### DELETE /carrinho/produto/idCarrinho/idProduto
+DELETE http://localhost:5262/carrinho/produto/11/5
