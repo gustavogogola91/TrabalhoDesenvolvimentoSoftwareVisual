@@ -48,6 +48,21 @@ public static class CarrinhoAPI
             return Results.NoContent();
         });
 
+        group.MapPut("/{idCarrinho}", async (int idCarrinho, Carrinho carrinhoAlterado, AppDbContext db) =>
+        {
+            var carrinho = await db.Carrinhos
+                .Include(c => c.Itens)
+                .FirstOrDefaultAsync(c => c.Id == idCarrinho);
+                
+            if (carrinho is null) return Results.NotFound();
+            
+            carrinho.Itens = carrinhoAlterado.Itens;
+            await db.SaveChangesAsync();
+            
+            return Results.Ok(carrinho);
+        });
+
+
         group.MapDelete("/{id}", async (int id, AppDbContext db) =>
         {
            var ItensCarrinho = await db.ItemCarrinho.Where(Ic => Ic.CarrinhoId == id).ToListAsync();
@@ -55,17 +70,11 @@ public static class CarrinhoAPI
 
             await db.SaveChangesAsync();
 
-
-            if(await db.Carrinhos.FindAsync(id) is Carrinho carrinho){
-
-                db.Carrinhos.Remove(carrinho);
-                
-
-                await db.SaveChangesAsync();
+            if(await db.Carrinhos.FindAsync(id) is Carrinho carrinho)
+            {
                 return Results.NoContent();
             }
             return Results.NotFound();
-
         });
 
         group.MapDelete("/produto/{idCarrinho}/{idProduto}", async (int idCarrinho, int idProduto, AppDbContext db) =>

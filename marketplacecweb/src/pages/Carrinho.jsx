@@ -34,7 +34,6 @@ function Carrinho() {
     useEffect(buscarCupons, []);
 
     
-
     function aplicarCupom(cupomDigitado)
     {
 
@@ -48,20 +47,35 @@ function Carrinho() {
             for(let i = 0; i < cupons.length; i++)
                 {
                     var cupom = cupons[i];
-                    if(cupomDigitado == cupom)
+                    if(cupomDigitado == cupom.codigo)
                     {
-                        calcularTotal(produtos, cupomDigitado);
+                        const desconto = cupom.desconto;
+                        localStorage.removeItem('desconto');
+                        localStorage.setItem('desconto', JSON.stringify(desconto));
+
+                        let flagCupomUsado = true;
+                        localStorage.removeItem('flagCupomUsado');
+                        localStorage.setItem('flagCupomUsado', JSON.stringify(flagCupomUsado));
+
+                        window.location.reload();
+                        return;
+                    }
+                    else
+                    {
+                        console.log("Cupom inválido!");
+                        return;
                     }
                 }
         }
-
-
     }
 
-    function calcularTotal(produtos, cupom) 
+    function calcularTotal(produtos) 
     {
         let total = 0;
-        if(cupom === undefined)
+        let flagCupomUsadoLS = localStorage.getItem('flagCupomUsado');
+        let flagCupomUsado = JSON.parse(flagCupomUsadoLS);
+
+        if(!flagCupomUsado)
             {
                 for (let i = 0; i < produtos.length; i++)
                     {
@@ -75,22 +89,30 @@ function Carrinho() {
                     console.log(total);
                 return total;
             }
-
-            const desconto = cupom.desconto;
-
-        for (let i = 0; i < produtos.length; i++)
+        else
             {
-                const produto = produtos[i];
-                total = total + (produto.produto.valor * produto.quantidade);
+                const descontoLocalStorage = localStorage.getItem('desconto');
+                if(descontoLocalStorage)
+                {
+                    const desconto = JSON.parse(descontoLocalStorage);
 
-                console.log(produto.quantidade)
-                console.log(total);
+                    for (let i = 0; i < produtos.length; i++)
+                        {
+                            const produto = produtos[i];
+                            total = total + (produto.produto.valor * produto.quantidade);
+
+                            console.log(produto.quantidade)
+                            console.log(total);
+                        }
+
+                        console.log(total);
+                        
+                        total = (total - (total * desconto ));
+                        console.log(total);
+                    return total;
+                }
+                
             }
-
-            console.log(total);
-            
-            total = (total * desconto);
-        return total;
     }
 
     return (
@@ -117,6 +139,11 @@ function Carrinho() {
                     <span className="text-lg font-semibold">Total:</span>
                     <span className="text-lg font-semibold">${calcularTotal(produtos)}</span>
                 </div>
+                <button className="mt-4 w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600"
+                onClick={() => finalizarCompra(idCarrinho)}>
+                    Finalizar compra
+                </button>
+
             </div>
         </div>
     );
@@ -197,6 +224,35 @@ function diminuirQuantidade(produto, idCarrinho)
                 console.error("Erro ao atualizar a quantidade:", error);
             });
         }
+}
+
+function finalizarCompra(idCarrinho)
+{
+    axios.delete(`http://localhost:5262/carrinho/${idCarrinho}`)
+    .then((response) => {
+
+        console.log("Carrinho limpo:", response.data);
+
+        let flagCupomUsado = false;
+        localStorage.removeItem('flagCupomUsado');
+        localStorage.setItem('flagCupomUsado', JSON.stringify(flagCupomUsado));
+
+        window.location.reload();
+    })
+    .catch((error) => {
+        if (error.response) {
+            
+            console.error("Erro ao limpar carrinho:", error.response.data);
+
+        } else if (error.request) {
+
+            console.error("Erro na request:", error.request);
+
+        } else {
+
+            console.error("Erro:", error.message);
+        }
+    });  
 }
 
 function Tabela(produtos, idCarrinho) {
