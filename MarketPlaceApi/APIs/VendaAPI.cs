@@ -44,7 +44,7 @@ public static class VendaAPI
                     item.Id,
                     item.Quantidade,
                     item.ProdutoId,
-                    Produtos = produtos.Select(produto => new{
+                    Produtos = produtos.Select(produto => new{ // talvez filtrar aqui produtoid == id
                         produto.Nome,
                         produto.Descricao,
                         produto.Valor,

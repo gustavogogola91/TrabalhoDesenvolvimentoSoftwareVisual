@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 
 const IDCLIENTE = 1;
 
-// PROBLEMA EM RENDER
-
 function ListarProdutos(ids) {
     
         let produtosDict = {}
@@ -22,14 +20,22 @@ function ListarProdutos(ids) {
 }
 
 function Linha(index, venda) {
-    let produtosids = venda.itens.map(item => item.id)
-    const produtos = ListarProdutos(produtosids)
+
+    let string = ""
+
+    venda.itens.forEach(item => {
+        item.produtos.forEach(produto => {
+            string += produto.nome + ", "
+        })
+    })
 
     return(
         <tr key={index}>
             <td>{venda.id}</td>
-            <td>{ produtos.produtosNome }</td>
-            <td>{ produtos.valor }</td>
+            <td>{
+            string
+            }</td>
+            <td>{ venda.idCliente }</td>
         </tr>
     )
 }
@@ -73,7 +79,15 @@ function History(){
         axios.get(`http://localhost:5262/vendas/cliente/${IDCLIENTE}`)
             .then(
                 (resposta) => {
-                    console.log(resposta.data)
+                    //ACESSAR NOMES
+                    // resposta.data.forEach(venda => {
+                    //     venda.itens.forEach(item => {
+                    //         item.produtos.forEach(produto => {
+                    //             console.log(produto.nome);
+                    //             ;
+                    //         });
+                    //     });
+                    // });
                     setVendas(resposta.data)
                 }
             )

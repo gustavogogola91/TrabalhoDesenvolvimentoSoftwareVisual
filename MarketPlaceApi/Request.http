@@ -112,8 +112,8 @@ POST http://localhost:5262/produtos
 Content-Type: application/json
 
 {
-  "Nome": "compuator",
-  "Descricao": "caomptuador gamer",
+  "Nome": "celular",
+  "Descricao": "cekular gamer",
   "Quantidade": 2,
   "Valor": 2000,
   "Tag": "Eletronico"
