@@ -36,9 +36,9 @@ function Usuario() {
     return (
         <div className="flex flex-row">
             <SidePanel />
-            <div className="w-3/4">
+            <div className="w-3/4 pl-6 pr-10 py-10">
                 <h2>Olá, Usuário</h2>
-                <History />
+                <History className=""/>
             </div>
         </div>
     )

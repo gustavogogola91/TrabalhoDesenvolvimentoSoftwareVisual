@@ -70,7 +70,7 @@ public static class VendaAPI
                     item.Id,
                     item.Quantidade,
                     item.ProdutoId,
-                    Produtos = 
+                    Produto = 
                     produtos.Where(produto => produto.Id == item.ProdutoId)
                     .Select(produto => new{ // talvez filtrar aqui produtoid == id
                         produto.Nome,
