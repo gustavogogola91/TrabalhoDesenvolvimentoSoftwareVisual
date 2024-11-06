@@ -5,6 +5,10 @@ function Carrinho() {
 
     //Disparam pras APIs de Carrinho e Cupom com método GET 
     const [itens, setItens] = useState([]);
+    const [cupons, setCupom] = useState([]);
+
+    useEffect(listarItens, []);
+    useEffect(buscarCupons, []);
 
     function listarItens() 
     {
@@ -15,13 +19,6 @@ function Carrinho() {
             });
     }
 
-    useEffect(listarItens, []);
-
-    const produtos = itens.length > 0 ? itens[0].itens : []; 
-    const idCarrinho = itens.length > 0 ? itens[0].id : null;
-
-    const [cupons, setCupom] = useState([]);
-
     function buscarCupons() 
     {
         axios.get("http://localhost:5262/cupons/")
@@ -31,9 +28,9 @@ function Carrinho() {
             });
      }
 
-    useEffect(buscarCupons, []);
-
-    
+    const produtos = itens.length > 0 ? itens[0].itens : []; 
+    const idCarrinho = itens.length > 0 ? itens[0].id : null;
+ 
     function aplicarCupom(cupomDigitado)
     {
 
@@ -216,7 +213,7 @@ function diminuirQuantidade(produto, idCarrinho)
                     'Content-Type': 'application/json'
                 }
             })
-            .then((response) => {
+            .then(() => {
                 console.log("Quantidade atualizada");
                 window.location.reload();
             })
