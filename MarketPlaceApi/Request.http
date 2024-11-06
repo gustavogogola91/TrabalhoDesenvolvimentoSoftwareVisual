@@ -112,10 +112,10 @@ POST http://localhost:5262/produtos
 Content-Type: application/json
 
 {
-  "Nome": "abc",
-  "Descricao": "def",
-  "Quantidade": 0,
-  "Valor": 27.50,
+  "Nome": "celular",
+  "Descricao": "cekular gamer",
+  "Quantidade": 2,
+  "Valor": 2000,
   "Tag": "Eletronico"
 }
 
@@ -132,7 +132,7 @@ Content-Type: application/json
 }
 
 ### DELETE Produto
-DELETE http://localhost:5262/produtos/23
+DELETE http://localhost:5262/produtos/2
 
 ### GET /cupom
 GET http://localhost:5262/cupons
@@ -169,6 +169,9 @@ DELETE http://localhost:5262/cupons/1
 ###GET /vendas
 GET http://localhost:5262/vendas
 
+###GET /vendas/cliente/{idCliente}
+GET http://localhost:5262/vendas/cliente/1
+
 ###GET /vendas/{id}
 GET http://localhost:5262/vendas/1
 
@@ -177,15 +180,15 @@ POST http://localhost:5262/vendas
 Content-Type: application/json
 
 {
-  "IdCliente": 101,
+  "IdCliente": 1,
   "Itens": [
     {
-      "ProdutoId": 12,
-      "Quantidade": 1
+      "ProdutoId": 1,
+      "Quantidade": 19
     },
     {
-      "ProdutoId": 22,
-      "Quantidade": 2
+      "ProdutoId": 2,
+      "Quantidade": 22
     }
   ]
 }
@@ -201,7 +204,7 @@ Content-Type: application/json
 }
 
 ### DELETE /vendas/{id}
-DELETE http://localhost:5262/vendas/1
+DELETE http://localhost:5262/vendas/2
 
 ### ENDEREÇOS
 

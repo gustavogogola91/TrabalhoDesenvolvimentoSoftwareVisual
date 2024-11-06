@@ -15,6 +15,47 @@ public static class VendaAPI
             return Results.Ok(vendas);
         });
 
+        group.MapGet("/cliente/{id}", async (int id, AppDbContext db) =>
+        {
+            var vendas = await db.Vendas
+            .Where(v => v.IdCliente == id) // Filtra as vendas pelo id do cliente
+            .Include(v => v.Itens) // Inclui os itens da venda
+            .ToListAsync();
+
+            var produtoIds = vendas.SelectMany(v => v.Itens).Select(i => i.ProdutoId).Distinct().ToList();
+
+            // Busca os produtos com base nos IDs obtidos
+            var produtos = await db.Produtos
+                .Where(p => produtoIds.Contains(p.Id))
+                .ToListAsync();
+
+            if (vendas == null || vendas.Count == 0)
+            {
+                return Results.NotFound();
+            }
+
+            // Estrutura a resposta incluindo as vendas e produtos
+            var resultado = vendas.Select(venda => new
+            {
+                venda.Id,
+                venda.IdCliente,
+                Itens = venda.Itens.Select(item => new
+                {
+                    item.Id,
+                    item.Quantidade,
+                    item.ProdutoId,
+                    Produtos = produtos.Select(produto => new{ // talvez filtrar aqui produtoid == id
+                        produto.Nome,
+                        produto.Descricao,
+                        produto.Valor,
+                    })
+                    
+                }).ToList()
+            });
+
+            return Results.Ok(resultado);
+        });
+
         group.MapGet("/{id}", async (int id, AppDbContext db) =>
         {
             var venda = await db.Vendas
