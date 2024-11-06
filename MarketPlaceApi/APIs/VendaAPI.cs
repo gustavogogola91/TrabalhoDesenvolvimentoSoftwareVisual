@@ -23,12 +23,24 @@ public static class VendaAPI
             .ToListAsync();
 
             var produtoIds = vendas.SelectMany(v => v.Itens).Select(i => i.ProdutoId).Distinct().ToList();
+            var enderecosIds = vendas.Select(v => v.IdEndereco).Distinct().ToList();
+            var cuponsIds = vendas.Select(v => v.IdCupom).Distinct().ToList();
 
             // Busca os produtos com base nos IDs obtidos
             var produtos = await db.Produtos
                 .Where(p => produtoIds.Contains(p.Id))
                 .ToListAsync();
 
+            var enderecos = await db.Enderecos
+                .Where(e => enderecosIds.Contains(e.Id))
+                .ToListAsync();
+
+            var cupons = await db.Cupons
+                .Where(c => cuponsIds.Contains(c.Id))
+                .ToListAsync();
+
+                //tratar se nao tiver cupom a compra
+            
             if (vendas == null || vendas.Count == 0)
             {
                 return Results.NotFound();
@@ -39,12 +51,28 @@ public static class VendaAPI
             {
                 venda.Id,
                 venda.IdCliente,
+                Enderecos = enderecos.Where(endereco => endereco.Id == venda.IdEndereco)
+                .Select(endereco => new
+                {
+                    endereco.Rua,
+                    endereco.Numero,
+                    endereco.Cidade,
+                }),
+                Cupons = cupons.Where(cupom => cupom.Id == venda.IdCupom)
+                .Select(cupom => new
+                {
+                    cupom.Id,
+                    cupom.Codigo,
+                    cupom.Desconto,
+                }),
                 Itens = venda.Itens.Select(item => new
                 {
                     item.Id,
                     item.Quantidade,
                     item.ProdutoId,
-                    Produtos = produtos.Select(produto => new{ // talvez filtrar aqui produtoid == id
+                    Produtos = 
+                    produtos.Where(produto => produto.Id == item.ProdutoId)
+                    .Select(produto => new{ // talvez filtrar aqui produtoid == id
                         produto.Nome,
                         produto.Descricao,
                         produto.Valor,
