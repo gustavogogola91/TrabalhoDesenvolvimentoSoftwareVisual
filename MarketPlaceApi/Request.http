@@ -112,10 +112,10 @@ POST http://localhost:5262/produtos
 Content-Type: application/json
 
 {
-  "Nome": "celular",
-  "Descricao": "celuarl gamer",
-  "Quantidade": 1,
-  "Valor": 1000,
+  "Nome": "compuator",
+  "Descricao": "caomptuador gamer",
+  "Quantidade": 2,
+  "Valor": 2000,
   "Tag": "Eletronico"
 }
 
@@ -183,11 +183,11 @@ Content-Type: application/json
   "IdCliente": 1,
   "Itens": [
     {
-      "ProdutoId": 3,
+      "ProdutoId": 1,
       "Quantidade": 19
     },
     {
-      "ProdutoId": 4,
+      "ProdutoId": 2,
       "Quantidade": 22
     }
   ]

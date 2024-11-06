@@ -8,7 +8,7 @@ import CadastrarProduto from "./pages/Produto/CadastrarProduto";
 import EditarProduto from "./pages/Produto/EditarProduto";
 import ExcluirProduto from "./pages/Produto/ExcluirProduto";
 import GerenciarProduto from "./pages/Produto/GerenciarProduto";
-import Usuario from "./pages/Usuario";
+import Usuario from "./pages/Usuario-Dashboard/Usuario";
 
 
 function App() {

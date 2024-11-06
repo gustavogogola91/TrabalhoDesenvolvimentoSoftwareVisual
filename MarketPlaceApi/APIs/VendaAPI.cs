@@ -22,12 +22,38 @@ public static class VendaAPI
             .Include(v => v.Itens) // Inclui os itens da venda
             .ToListAsync();
 
+            var produtoIds = vendas.SelectMany(v => v.Itens).Select(i => i.ProdutoId).Distinct().ToList();
+
+            // Busca os produtos com base nos IDs obtidos
+            var produtos = await db.Produtos
+                .Where(p => produtoIds.Contains(p.Id))
+                .ToListAsync();
+
             if (vendas == null || vendas.Count == 0)
             {
                 return Results.NotFound();
             }
 
-            return Results.Ok(vendas);
+            // Estrutura a resposta incluindo as vendas e produtos
+            var resultado = vendas.Select(venda => new
+            {
+                venda.Id,
+                venda.IdCliente,
+                Itens = venda.Itens.Select(item => new
+                {
+                    item.Id,
+                    item.Quantidade,
+                    item.ProdutoId,
+                    Produtos = produtos.Select(produto => new{
+                        produto.Nome,
+                        produto.Descricao,
+                        produto.Valor,
+                    })
+                    
+                }).ToList()
+            });
+
+            return Results.Ok(resultado);
         });
 
         group.MapGet("/{id}", async (int id, AppDbContext db) =>

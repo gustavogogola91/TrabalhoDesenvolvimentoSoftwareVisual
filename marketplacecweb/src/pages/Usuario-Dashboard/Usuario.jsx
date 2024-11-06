@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import History from '../components/History';
+import History from "./History.jsx"
 
 function SidePanel() {
     let valor = localStorage.getItem("page")
