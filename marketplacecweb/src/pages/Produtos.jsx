@@ -197,7 +197,7 @@ function Produto() {
             <button
               className="border border-black rounded-xl p-2 "
               id={index}
-              onClick={adicionarCarrinho}
+            //   onClick={adicionarCarrinho}
               disabled={!possuiDisponibilidade(produto)}>
               {possuiDisponibilidade(produto)
                 ? "Adicionar ao carrinho"
@@ -216,11 +216,11 @@ function Produto() {
       }
     }
     
-    function adicionarCarrinho(data) {
-      console.log(data.target.id);
-      const i = data.target.id;
-      console.log(listProdutos[i]);
-    }
+    // function adicionarCarrinho(data) {
+    //   console.log(data.target.id);
+    //   const i = data.target.id;
+    //   console.log(listProdutos[i]);
+    // }
 
       return (
         <>
