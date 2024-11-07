@@ -104,7 +104,7 @@ function Produtos() {
 }
 export default Produtos;
 
-function Formulario({ produto, onChangeProduto, cancelar, salvarProduto, setProduto}) {
+function Formulario() {
     setProduto({});
 
   return (
