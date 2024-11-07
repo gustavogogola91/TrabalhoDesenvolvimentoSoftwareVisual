@@ -1,19 +1,17 @@
 ### GET /clientes
-GET http://localhost:5262/clientes
+GET http://localhost:5262/login
 
 ### GET /clientes/{id}
 GET http://localhost:5262/clientes/1
 
-### POST /clientes
-POST http://localhost:5262/clientes
+### POST /usuarios
+POST http://localhost:5262/usuarios
 Content-Type: application/json
 
 {
     "Nome": "Junior",
     "Email": "junior@email.com",
-    "Senha": "juniorBrabinho",
-    "IdCarrinho": 1,
-    "IdComprasHist": 1
+    "Senha": "juniorBrabinho"
 }
 
 ### PUT /clientes/{id}
