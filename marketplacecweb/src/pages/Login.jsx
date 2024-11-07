@@ -1,5 +1,8 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import axios from 'axios';
 import logo from '../imgs/logo.png';
+
+var port = 5262; // Porta para comunicação da API
 
 function Login() {
     return(
@@ -32,9 +35,17 @@ function FormLogin() {
         });
     };
 
-    const handleLoginSubmit = (e) => {
+    const handleLoginSubmit = async (e) => {
         e.preventDefault();
-        console.log("Login Data:", loginData); // Aqui você pode enviar os dados do login para um backend ou autenticar.
+        try {
+            console.log("Login Data:", loginData);
+            const response = await axios.post('http://localhost:' + port + '/usuarios/login', loginData)
+                // função para aguardar processamento em backend
+            console.log('Login Success')
+        }
+        catch (error) {
+            console.log('Erro ao conectar com o servidor');
+        }
     };
 
     return (

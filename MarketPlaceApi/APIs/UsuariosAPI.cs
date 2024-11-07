@@ -54,6 +54,24 @@ public static class UsuariosAPI
             }
             return Results.NotFound();
         });
+
+        group.MapPost("/login", async (Dictionary<string, string> loginData, AppDbContext db) =>
+        {
+            string email = loginData["username"];
+            string senha = loginData["password"];
+
+            // Procura um usuário com o email e senha fornecidos
+            var usuario = await db.Usuarios
+                .Where(u => u.Email == email && u.Senha == senha)
+                .FirstOrDefaultAsync();
+
+            if (usuario is not null) {
+                return Results.Ok(new { message = "Login bem-sucedido", usuario });
+            }
+            else {
+                return Results.Unauthorized();
+            }
+        });
     }
     #endregion
 
