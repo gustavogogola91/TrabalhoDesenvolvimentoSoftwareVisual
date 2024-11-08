@@ -57,8 +57,14 @@ public static class UsuariosAPI
 
         group.MapPost("/login", async (Dictionary<string, string> loginData, AppDbContext db) =>
         {
-            string email = loginData["username"];
+            string email = loginData["email"];
             string senha = loginData["password"];
+
+            var emailCadastrado = await db.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
+            
+            if (emailCadastrado is null) {
+                return Results.Ok(new { message = "Email não cadastrado", email});
+            }
 
             // Procura um usuário com o email e senha fornecidos
             var usuario = await db.Usuarios
@@ -66,13 +72,30 @@ public static class UsuariosAPI
                 .FirstOrDefaultAsync();
 
             if (usuario is not null) {
-                return Results.Ok(new { message = "Login bem-sucedido", usuario });
+                return Results.Ok(new { message = "Login bem-sucedido", usuario});
             }
             else {
-                return Results.Unauthorized();
+                return Results.Ok(new { message = "Senha incorreta", usuario});
             }
         });
+
+        group.MapPost("/register", async (Dictionary<string, string> registerData, AppDbContext db) =>
+        {
+            string username = registerData["signupUsername"];
+            string email = registerData["signupEmail"];
+            string senha1 = registerData["signupPassword"];
+            string senha2 = registerData["confirmPassword"];
+
+            var emailCadastrado = await db.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
+            
+            if (emailCadastrado is not null) {
+                return Results.Ok(new { message = "Email já utilizado, caso tenha esquecido a senha: " + emailCadastrado.Senha, email});
+            }
+
+            return Results.Ok( new {message = "Ok"});
+        });
     }
+} 
     #endregion
 
     // #region Cliente
@@ -239,4 +262,3 @@ public static class UsuariosAPI
     // }
 
     // #endregion
-}

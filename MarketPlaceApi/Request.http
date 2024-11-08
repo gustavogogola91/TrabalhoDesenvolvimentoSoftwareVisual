@@ -2,7 +2,7 @@
 GET http://localhost:5262/login
 
 ### GET /clientes/{id}
-GET http://localhost:5262/clientes/1
+GET http://localhost:5262/usuarios
 
 ### POST /usuarios
 POST http://localhost:5262/usuarios

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import logo from '../imgs/logo.png';
 
-var port = 5262; // Porta para comunicação da API
+var port = 5262; /*Porta para comunicação da API*/
 
 function Login() {
     return(
@@ -23,7 +23,7 @@ function Login() {
 
 function FormLogin() {
     const [loginData, setLoginData] = useState({
-        username: '',
+        email: '',
         password: ''
     });
 
@@ -40,8 +40,17 @@ function FormLogin() {
         try {
             console.log("Login Data:", loginData);
             const response = await axios.post('http://localhost:' + port + '/usuarios/login', loginData)
-                // função para aguardar processamento em backend
-            console.log('Login Success')
+
+
+            if (response.data.usuario) {
+                console.log(response.data.message)
+                console.log("Bem vindo novamente " + response.data.usuario.nome)
+                // window.location.href = '/' /*redirecionamento de página*/
+                return
+            }
+
+            console.log(response.data.message) /*mensagem do erro (sem cadastro ou senha invalida)*/
+
         }
         catch (error) {
             console.log('Erro ao conectar com o servidor');
@@ -52,8 +61,8 @@ function FormLogin() {
         <>  
             <h2 className="mb-5 text-xl p-3">SignIn</h2>  
             <form className="login-form w-full" onSubmit={handleLoginSubmit}>
-                <label className="text-lg mb-1" htmlFor="username">Username:</label>
-                <input type="email" id="username" name="username" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={loginData.username} onChange={handleChange}/>
+                <label className="text-lg mb-1" htmlFor="email">Email:</label>
+                <input type="email" id="email" name="email" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={loginData.email} onChange={handleChange}/>
                 
                 <label className="text-lg mb-1" htmlFor="password">Password:</label>
                 <input type="password" id="password" name="password" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={loginData.password} onChange={handleChange}/>
@@ -69,7 +78,7 @@ function FormLogin() {
 function FormRegister() {
     const [registerData, setRegisterData] = useState({
         signupUsername: '',
-        email: '',
+        signEmail: '',
         signupPassword: '',
         confirmPassword: ''
     });
@@ -82,9 +91,27 @@ function FormRegister() {
         });
     };
 
-    const handleRegisterSubmit = (e) => {
+    const handleRegisterSubmit = async (e) => {
         e.preventDefault();
-        console.log("Register Data:", registerData); // Aqui você pode enviar os dados de registro para um backend.
+        
+        try {
+            console.log("Register Data:", registerData);
+            const response = await axios.post('http://localhost:' + port + '/usuarios/register', registerData)
+
+
+            if (response.data.message == "Ok") {
+                console.log("Enviar dados para criar") // continuar cadastro
+                const new_response = await axios.get('http:localhost:' +port + '/usuarios/register')
+                // window.location.href = '/' /*redirecionamento de página*/
+                return
+            }
+
+            console.log(response.data.message)
+
+        }
+        catch (error) {
+            console.log('Erro ao conectar com o servidor');
+        }
     };
 
     return (
@@ -94,8 +121,8 @@ function FormRegister() {
                 <label htmlFor="signup-username" className="text-lg mb-1 text-black">Username:</label>
                 <input type="text" id="signup-username" name="signupUsername" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={registerData.signupUsername} onChange={handleChange}/>
 
-                <label htmlFor="email" className="text-lg mb-1 text-black">Email:</label>
-                <input type="email" id="email" name="email" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={registerData.email} onChange={handleChange}/>
+                <label htmlFor="signupEmail" className="text-lg mb-1 text-black">Email:</label>
+                <input type="email" id="signupEmail" name="signupEmail" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={registerData.email} onChange={handleChange}/>
 
                 <label htmlFor="confirm-password" className="text-lg mb-1 text-black">Password:</label>
                 <input type="password" id="signup-password" name="signupPassword"className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={registerData.signupPassword} onChange={handleChange}/>
