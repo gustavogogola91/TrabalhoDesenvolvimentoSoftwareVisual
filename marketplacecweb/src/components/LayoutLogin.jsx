@@ -1,11 +1,9 @@
-import Header from "./Header";
 import Footer from "./Footer";
 
-function Layout(props) {
+function LayoutLogin(props) {
     
     return(
         <>
-        <Header/>
         <main className="content">{props.children}</main>
         <Footer/>
         </>
@@ -14,4 +12,4 @@ function Layout(props) {
 
 }
 
-export default Layout;
+export default LayoutLogin;
