@@ -127,7 +127,6 @@ function Produto() {
   }
 
   const conteudoPrincipal = () => {
-    console.log(carrinho);
     if (produto == null) {
       return <div>{Lista(produtos)}</div>;
     } else {
