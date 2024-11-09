@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import "./index.css";
 
 import Layout from "./components/Layout";
-
+import Usuario from "./pages/Usuario-Dashboard/Usuario";
 import Produtos from "./pages/Produtos";
 // import Carrinho from "./pages/Carrinho"
 
