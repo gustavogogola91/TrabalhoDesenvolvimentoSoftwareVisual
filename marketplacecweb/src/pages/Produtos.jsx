@@ -101,7 +101,7 @@ function Produto() {
   function Lista(produtos) {
     return (
       <>
-        <table className="m-auto table-auto bg-cream rounded-xl">
+        <table className="m-auto table-auto bg-white rounded-xl">
           <thead>
             <tr>
               <th className="w-16  h-16 p-2 text-center">ID</th>
@@ -128,7 +128,7 @@ function Produto() {
 
   const conteudoPrincipal = () => {
     if (produto == null) {
-      return <div>{Lista(produtos)}</div>;
+      return <div className="bg-very-light-cream">{Lista(produtos)}</div>;
     } else {
       return Formulario();
     }
