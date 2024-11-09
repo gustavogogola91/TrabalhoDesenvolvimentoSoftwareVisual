@@ -273,15 +273,13 @@ function Produto() {
   }
 
   function adicionarCarrinho(data) {
-    const id = data.target.id;
-    produtos.map((prod) => {
-      if (prod.id == id) {
-        carrinho.itens.push(prod);
-      }
-    });
-    console.log(carrinho)
+    const item = {
+      produtoId: data.target.id,
+      carrinhoid: carrinho.id,
+      quantidade: 1,
+    };
 
-    axios.put("http://localhost:5262/carrinho/" + carrinho.id, carrinho);
+    axios.post("http://localhost:5262/carrinho/adicionarItem/", item);
   }
 
   return (
