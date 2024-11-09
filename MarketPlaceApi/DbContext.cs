@@ -7,7 +7,7 @@ class AppDbContext : DbContext {
     {
         var com = "server=localhost;port=3306;database=marketplace;user=root;password=admin";
 
-        builder.UseMySQL(com);
+        builder.UseMySQL(com).EnableSensitiveDataLogging();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
