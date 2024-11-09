@@ -13,8 +13,8 @@ public static class CarrinhoAPI
         group.MapGet("/", async (AppDbContext db) =>
         {
             return await db.Carrinhos
-                .Include(c => c.Itens)   
-                .ThenInclude(i => i.Produto)  
+                .Include(c => c.Itens)
+                .ThenInclude(i => i.Produto)
 
                 .ToListAsync();
         });
@@ -41,14 +41,21 @@ public static class CarrinhoAPI
             await db.SaveChangesAsync();
             return Results.Created($"/carrinho/{carrinho.Id}", carrinho);
         });
-      
+
+        group.MapPost("/adicionarItem/", async (ItemCarrinho itemCarrinho, AppDbContext db) =>
+        {
+            db.ItemCarrinho.Add(itemCarrinho);
+            await db.SaveChangesAsync();
+            return Results.Created();
+        });
+
         group.MapPut("/{idCarrinho}/{idProduto}", async (int idCarrinho, [FromBody] int novaQuantidade, AppDbContext db, int idProduto) =>
         {
             var ItemCarrinho = await db.ItemCarrinho
                                     .Where(Ic => Ic.CarrinhoId == idCarrinho && Ic.ProdutoId == idProduto)
                                     .SingleOrDefaultAsync();
 
-            if(ItemCarrinho is null) return Results.NotFound();
+            if (ItemCarrinho is null) return Results.NotFound();
 
             ItemCarrinho.Quantidade = novaQuantidade;
 
@@ -62,12 +69,12 @@ public static class CarrinhoAPI
             var carrinho = await db.Carrinhos
                 .Include(c => c.Itens)
                 .FirstOrDefaultAsync(c => c.Id == idCarrinho);
-                
+
             if (carrinho is null) return Results.NotFound();
 
             carrinho.Itens = carrinhoAlterado.Itens;
             await db.SaveChangesAsync();
-            
+
             return Results.Ok(carrinho);
         });
 
@@ -79,7 +86,7 @@ public static class CarrinhoAPI
 
             await db.SaveChangesAsync();
 
-            if(await db.Carrinhos.FindAsync(id) is Carrinho carrinho)
+            if (await db.Carrinhos.FindAsync(id) is Carrinho carrinho)
             {
                 return Results.NoContent();
             }
@@ -88,24 +95,24 @@ public static class CarrinhoAPI
 
         group.MapDelete("/produto/{idCarrinho}/{idProduto}", async (int idCarrinho, int idProduto, AppDbContext db) =>
        {
-            var ItensCarrinho = await db.ItemCarrinho
-                                        .Where(Ic => Ic.CarrinhoId == idCarrinho && Ic.ProdutoId == idProduto)
-                                        .SingleOrDefaultAsync();
+           var ItensCarrinho = await db.ItemCarrinho
+                                       .Where(Ic => Ic.CarrinhoId == idCarrinho && Ic.ProdutoId == idProduto)
+                                       .SingleOrDefaultAsync();
 
-            if (ItensCarrinho != null)
-            {
-                Console.WriteLine("itens do carrinho: " + ItensCarrinho);
-                db.ItemCarrinho.Remove(ItensCarrinho);
-                await db.SaveChangesAsync();
-                return Results.NoContent();
-            }
+           if (ItensCarrinho != null)
+           {
+               Console.WriteLine("itens do carrinho: " + ItensCarrinho);
+               db.ItemCarrinho.Remove(ItensCarrinho);
+               await db.SaveChangesAsync();
+               return Results.NoContent();
+           }
 
-            return Results.NotFound(new 
-            { 
-                mensagem = "Item não encontrado.", 
-                erroCode = 404 
-            });
-        });
+           return Results.NotFound(new
+           {
+               mensagem = "Item não encontrado.",
+               erroCode = 404
+           });
+       });
 
 
     }
