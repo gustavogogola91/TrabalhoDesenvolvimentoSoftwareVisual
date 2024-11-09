@@ -60,11 +60,11 @@ function Dashboard() {
 
     return(
         <div className="flex flex-row gap-3 justify-around items-center">
-            <div className="w-[350px] h-[250px] bg-very-light-purple p-4 rounded-[3px]">
+            <div className="w-[350px] h-[250px] bg-gray p-4 rounded-[3px]">
                 <p className="text-light-purple font-bold text-[20px] ">Total de compras feitas:</p>
                 <div> {TotalBuysComponent(vendas)} </div>
             </div>
-            <div className=" h-[250px] bg-very-light-purple p-4 rounded-[3px]">
+            <div className=" h-[250px] bg-gray p-4 rounded-[3px]">
                 <p className="text-light-purple font-bold text-[20px] ">Total Gasto na loja: </p>
                 <div> {TotalSpendComponent(vendas)} </div>
             </div>

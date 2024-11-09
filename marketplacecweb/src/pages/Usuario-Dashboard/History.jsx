@@ -21,9 +21,9 @@ function ListarProdutos(ids) {
 
 function Linha(index, venda) {
     return (
-        <tr key={index} className="text-[20px] text-center border-4 border-light-purple ">
-            <td className=" rounded-[3px] bg-white text-light-purple font-bold">{venda.id}</td>
-            <td className=" bg-white flex flex-row text-center justify-center gap-[10px] h-[100px] w-[900px] overflow-x-auto px-[5px] items-center">
+        <tr key={index} className="bg-white border-b text-[20px] text-center ">
+            <td className="py-4 px-6 text-light-purple font-bold">{venda.id}</td>
+            <td className="py-4 px-6 flex flex-row text-center justify-center gap-[10px] w-[900px] overflow-x-auto items-center">
                 {venda.itens.map((item, itemIndex) =>
                     item.produto
                         .map((produto, produtoIndex) => (
@@ -35,7 +35,7 @@ function Linha(index, venda) {
                         ))
                 )}
             </td>
-            <td className=" rounded-r-[3px] bg-white">R${ venda.precoTotal }</td>
+            <td className="py-4 px-6 rounded-r-[3px] bg-white">R${ venda.precoTotal }</td>
         </tr>
     );
 }
@@ -54,18 +54,20 @@ function Linhas(vendas) {
 function Tabelacompras(vendas){
 
     return(
-        <table className="min-w-full bg-gray">
-            <thead className="text-light-purple text-[20px] ">
-                <tr>
-                    <th className="px-5 py-3">ID da Venda</th>
-                    <th className="px-5 py-3">Produtos</th>
-                    <th className="px-5 py-3">Total</th>
-                </tr>
-            </thead>
-            <tbody className="space-y-32">
-                { Linhas(vendas) }
-            </tbody>
-        </table>
+        <div className="overflow-x-auto relative shadow-md rounded-lg">
+            <table className="w-full text-left">
+                <thead className="text-white uppercase text-center bg-light-purple text-[20px] ">
+                    <tr>
+                        <th className="px-3 py-6">ID da Venda</th>
+                        <th className="px-3 py-6">Produtos</th>
+                        <th className="px-3 py-6">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    { Linhas(vendas) }
+                </tbody>
+            </table>
+        </div>
         
     )
 
@@ -91,7 +93,7 @@ function History(){
 
     return(
         <div className="">
-            <h1>Histórico de compras</h1>
+            <h1 className="text-purple text-[23px] text-center pb-3">Histórico de compras</h1>
             { Tabelacompras(vendas) }
         </div>
     )

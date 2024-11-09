@@ -17,14 +17,14 @@ function Usuario() {
         };
     
         return (
-            <div className="bg-purple h-[400px] w-1/8 flex flex-col items-center gap-2 text-center p-5 m-5 rounded-[3px]">
+            <div className="shadow-md bg-purple h-full w-1/8 flex flex-col items-center gap-2 text-center p-5 m-5 rounded-[3px]">
                 <h1 className="text-white p-2 font-bold text-[20px]">Marketplace</h1>
-                <img src={userLogo} alt="Foto usuario" className='w-[100px] bg-light-purple rounded-full p-2'/>
-                <button className={`text-left font-bold p-5 m-5 rounded-[3px] transition duration-300 ease-in ${selectedButton === 'dashboard' ? 'bg-very-light-purple text-light-purple' : 'bg-purple text-white'}`} 
+                <img src={userLogo} alt="Foto usuario" className='shadow-md w-[100px] bg-light-purple rounded-full p-2'/>
+                <button className={`shadow-md text-left font-bold p-5 m-5 rounded-[3px] transition duration-300 ease-in ${selectedButton === 'dashboard' ? 'bg-very-light-purple text-light-purple' : 'bg-purple text-white'}`} 
                     onClick={() => handleButtonClick('dashboard')}>
                     Dashboard
                 </button>
-                <button className={`text-left font-bold p-5 m-5 rounded-[3px] transition duration-300 ease-in ${selectedButton === 'history' ? 'bg-very-light-purple text-light-purple' : 'bg-purple text-white'}`} 
+                <button className={`shadow-md text-left font-bold p-5 m-5 rounded-[3px] transition duration-300 ease-in ${selectedButton === 'history' ? 'bg-very-light-purple text-light-purple' : 'bg-purple text-white'}`} 
                     onClick={() => handleButtonClick('history')}>
                     Histórico de compras
                 </button>
@@ -47,10 +47,10 @@ function Usuario() {
     }
 
     return (
-        <div className="flex flex-row justify-around">
+        <div className="bg-very-light-cream min-h-screen flex flex-row justify-around">
             <SidePanel setCurrentComponent={setCurrentComponent} />
             <div className="w-3/4 pl-6 pr-10 py-5">
-                <h2 className="text-purple text-[30px] font-bold pb-10">Olá, Usuário</h2>
+                <h2 className="text-purple text-[30px] font-bold pb-10">Olá, Usuário!</h2>
                 { getCurrentComponent() }
             </div>
         </div>
