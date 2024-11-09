@@ -110,11 +110,11 @@ function Produto() {
     if (produto == null) {
       return <div>{Lista(produtos)}</div>;
     } else {
-      return <Formulario produto={produto} />;
+      return Formulario();
     }
   };
 
-  function Formulario({ produto }) {
+  function Formulario() {
     return (
       <form className="m-auto h-auto flex flex-col gap-4 w-96 bg-cream p-4 rounded-xl mb-24 text-center">
         <label htmlFor="nome">Nome</label>
