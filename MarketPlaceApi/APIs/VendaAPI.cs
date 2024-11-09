@@ -1,3 +1,4 @@
+using System.Net.NetworkInformation;
 using Microsoft.EntityFrameworkCore;
 
 public static class VendaAPI
@@ -8,11 +9,87 @@ public static class VendaAPI
 
         group.MapGet("/", async (AppDbContext db) =>
         {
-            var vendas = await db.Vendas
-                .Include(v => v.Itens)
+            var vendas = await db.Vendas 
+            .Include(v => v.Itens)
+            .ToListAsync();
+
+            var produtoIds = vendas.SelectMany(v => v.Itens).Select(i => i.ProdutoId).Distinct().ToList();
+            var enderecosIds = vendas.Select(v => v.IdEndereco);
+            var cupomId = vendas.Select(v => v.IdCupom);
+
+            double precoTotal = 0;
+
+            // Busca os produtos com base nos IDs obtidos
+            var produtos = await db.Produtos
+                .Where(p => produtoIds.Contains(p.Id))
                 .ToListAsync();
-            //await db.Produtos.ToListAsync();
-            return Results.Ok(vendas);
+
+
+            var endereco = await db.Enderecos
+                .Where(e => enderecosIds.Contains(e.Id))
+                .SingleOrDefaultAsync();
+
+            var cupom = await db.Cupons
+                .Where(c => cupomId.Contains(c.Id))
+                .SingleOrDefaultAsync();
+
+            //tratar se nao tiver cupom a compra
+
+            if (vendas == null || vendas.Count == 0)
+            {
+                return Results.NotFound();
+            }
+
+            foreach (var item in produtos)
+            {
+                precoTotal += item.Valor * item.Quantidade;
+            }
+
+            if (cupom != null)
+            {
+                var numeroDesconto = cupom.Desconto * 10;
+                precoTotal = precoTotal - (precoTotal * numeroDesconto);
+            }
+
+
+
+            // Estrutura a resposta incluindo as vendas e produtos
+            var resultado = vendas.Select(venda => new
+            {
+                venda.Id,
+                venda.IdCliente,
+                Endereco = new
+                {
+                    endereco?.Rua,
+                    endereco?.Numero,
+                    endereco?.Cidade,
+                },
+                Cupom = new
+                {
+                    cupom?.Id,
+                    cupom?.Codigo,
+                    cupom?.Desconto,
+                },
+                Itens = venda.Itens.Select(item => new
+                {
+                    item.Id,
+                    item.Quantidade,
+                    item.ProdutoId,
+                    Produto =
+                    produtos.Where(produto => produto.Id == item.ProdutoId)
+                    .Select(produto => new
+                    {
+                        produto.Nome,
+                        produto.Descricao,
+                        produto.Valor,
+                    })
+
+                }),
+                precoTotal
+            });
+
+
+            return Results.Ok(resultado);
         });
 
         group.MapGet("/cliente/{id}", async (int id, AppDbContext db) =>
@@ -23,24 +100,24 @@ public static class VendaAPI
             .ToListAsync();
 
             var produtoIds = vendas.SelectMany(v => v.Itens).Select(i => i.ProdutoId).Distinct().ToList();
-            var enderecosIds = vendas.Select(v => v.IdEndereco).Distinct().ToList();
-            var cuponsIds = vendas.Select(v => v.IdCupom).Distinct().ToList();
+            var enderecosIds = vendas.Select(v => v.IdEndereco);
+            var cupomId = vendas.Select(v => v.IdCupom);
 
             // Busca os produtos com base nos IDs obtidos
             var produtos = await db.Produtos
                 .Where(p => produtoIds.Contains(p.Id))
                 .ToListAsync();
 
-            var enderecos = await db.Enderecos
+            var endereco = await db.Enderecos
                 .Where(e => enderecosIds.Contains(e.Id))
-                .ToListAsync();
+                .SingleOrDefaultAsync();
 
-            var cupons = await db.Cupons
-                .Where(c => cuponsIds.Contains(c.Id))
-                .ToListAsync();
+            var cupom = await db.Cupons
+                .Where(c => cupomId.Contains(c.Id))
+                .SingleOrDefaultAsync();
 
-                //tratar se nao tiver cupom a compra
-            
+            //tratar se nao tiver cupom a compra
+
             if (vendas == null || vendas.Count == 0)
             {
                 return Results.NotFound();
@@ -51,34 +128,34 @@ public static class VendaAPI
             {
                 venda.Id,
                 venda.IdCliente,
-                Enderecos = enderecos.Where(endereco => endereco.Id == venda.IdEndereco)
-                .Select(endereco => new
+                venda.precoTotal,
+                Endereco = new
                 {
-                    endereco.Rua,
-                    endereco.Numero,
-                    endereco.Cidade,
-                }),
-                Cupons = cupons.Where(cupom => cupom.Id == venda.IdCupom)
-                .Select(cupom => new
+                    endereco?.Rua,
+                    endereco?.Numero,
+                    endereco?.Cidade,
+                },
+                Cupon = new
                 {
-                    cupom.Id,
-                    cupom.Codigo,
-                    cupom.Desconto,
-                }),
+                    cupom?.Id,
+                    cupom?.Codigo,
+                    cupom?.Desconto,
+                },
                 Itens = venda.Itens.Select(item => new
                 {
                     item.Id,
                     item.Quantidade,
                     item.ProdutoId,
-                    Produto = 
+                    Produto =
                     produtos.Where(produto => produto.Id == item.ProdutoId)
-                    .Select(produto => new{ // talvez filtrar aqui produtoid == id
+                    .Select(produto => new
+                    {
                         produto.Nome,
                         produto.Descricao,
                         produto.Valor,
                     })
-                    
-                }).ToList()
+
+                })
             });
 
             return Results.Ok(resultado);
@@ -102,7 +179,7 @@ public static class VendaAPI
         {
             db.Vendas.Add(venda);
             await db.SaveChangesAsync();
-            
+
             return Results.Created($"/vendas/{venda.Id}", venda);
         });
 
@@ -123,9 +200,9 @@ public static class VendaAPI
         {
             if (await db.Vendas.FindAsync(id) is Venda venda)
             {
-                
 
-                    db.Vendas.Remove(venda);
+
+                db.Vendas.Remove(venda);
 
                 await db.SaveChangesAsync();
                 return Results.NoContent();

@@ -21,19 +21,21 @@ function ListarProdutos(ids) {
 
 function Linha(index, venda) {
     return (
-        <tr key={index} className="text-[20px] text-center">
-            <td className="rounded-l-3xl bg-white">{venda.id}</td>
-            <td className=" bg-white flex flex-row gap-6 justify-center items-center max-w-[900px] overflow-x-auto h-[100px]">
+        <tr key={index} className="text-[20px] text-center  border-4 border-light-purple ">
+            <td className=" rounded-[3px] bg-white text-light-purple font-bold">{venda.id}</td>
+            <td className=" bg-white flex flex-row text-center justify-center gap-[10px] h-[100px] overflow-x-auto w-[900px] px-[5px] items-center">
                 {venda.itens.map((item, itemIndex) =>
                     item.produto
                         .map((produto, produtoIndex) => (
-                            <span key={`${itemIndex}-${produtoIndex}`}>
-                                {produto.nome} <strong className="text-light-purple text-[25px]">x{item.quantidade}</strong>
+                            <span className="">
+                            <span key={`${itemIndex}-${produtoIndex}`} className="">
+                                {produto.nome} <strong className=" text-center text-light-purple text-[25px]">x{item.quantidade}</strong>
+                            </span>
                             </span>
                         ))
                 )}
             </td>
-            <td className=" rounded-r-3xl bg-white">{venda.idCliente}</td>
+            <td className=" rounded-r-[3px] bg-white">R${ venda.precoTotal }</td>
         </tr>
     );
 }
@@ -52,20 +54,19 @@ function Linhas(vendas) {
 function Tabelacompras(vendas){
 
     return(
-        <div className="rounded-3xl  bg-gray p-[10px]">
-        <table className="min-w-full ">
-            <thead className="text-light-purple text-[20px]">
+        <table className="min-w-full bg-gray">
+            <thead className="text-light-purple text-[20px] ">
                 <tr>
-                    <th>ID da Venda</th>
-                    <th>Produtos</th>
-                    <th>Total</th>
+                    <th className="px-5 py-3">ID da Venda</th>
+                    <th className="px-5 py-3">Produtos</th>
+                    <th className="px-5 py-3">Total</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className="space-y-32">
                 { Linhas(vendas) }
             </tbody>
         </table>
-        </div>
+        
     )
 
 }
@@ -89,7 +90,7 @@ function History(){
     useEffect(listarVendas, [])
 
     return(
-        <div>
+        <div className="">
             <h1>Histórico de compras</h1>
             { Tabelacompras(vendas) }
         </div>

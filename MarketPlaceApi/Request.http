@@ -357,7 +357,7 @@ Content-Type: application/json
 {
   "IdCliente": 1,
   "IdEndereco": 1,
-  "IdCupom": 1,
+  "IdCupom": 0,
   "Itens": [
     {
       "ProdutoId": 1,
@@ -366,90 +366,6 @@ Content-Type: application/json
     {
       "ProdutoId": 2,
       "Quantidade": 1
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 2,
-      "Quantidade": 1
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 2,
-      "Quantidade": 1
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 2,
-      "Quantidade": 1
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 2,
-      "Quantidade": 1
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 2,
-      "Quantidade": 1
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
     },
     {
       "ProdutoId": 1,
