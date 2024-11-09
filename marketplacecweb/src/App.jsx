@@ -5,7 +5,6 @@ import Layout from "./components/Layout";
 
 import Produtos from "./pages/Produto/Produtos";
 
-import Carrinho from "./pages/Carrinho"
 import CadastrarProduto from "./pages/Produto/CadastrarProduto";
 import EditarProduto from "./pages/Produto/EditarProduto";
 import ExcluirProduto from "./pages/Produto/ExcluirProduto";
@@ -21,7 +20,6 @@ function App() {
 
         <Route path="/produtos" element={<Layout><Produtos /></Layout>}/>
         <Route path="/usuario" element={<Layout> <Usuario/> </Layout>} />
-        <Route path="/carrinho" element={<Layout><Carrinho/></Layout>} />
       </Routes>
     </>
   );
