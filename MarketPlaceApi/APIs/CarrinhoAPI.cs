@@ -21,6 +21,14 @@ public static class CarrinhoAPI
                         .Include(c => c.Itens)
                         .ToListAsync();
         });
+
+        group.MapGet("/user/{id}", async (int id, AppDbContext db) => 
+        {
+            return await db.Carrinhos
+                        .Where(c => c.UsuarioId == id)
+                        .Include(c => c.Itens)
+                        .FirstOrDefaultAsync();
+        });
             
         group.MapPost("/", async (Carrinho carrinho, AppDbContext db) => 
         {
