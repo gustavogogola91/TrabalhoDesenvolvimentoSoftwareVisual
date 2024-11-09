@@ -21,9 +21,9 @@ function ListarProdutos(ids) {
 
 function Linha(index, venda) {
     return (
-        <tr key={index} className="text-[20px] text-center  border-4 border-light-purple ">
+        <tr key={index} className="text-[20px] text-center border-4 border-light-purple ">
             <td className=" rounded-[3px] bg-white text-light-purple font-bold">{venda.id}</td>
-            <td className=" bg-white flex flex-row text-center justify-center gap-[10px] h-[100px] overflow-x-auto w-[900px] px-[5px] items-center">
+            <td className=" bg-white flex flex-row text-center justify-center gap-[10px] h-[100px] w-[900px] overflow-x-auto px-[5px] items-center">
                 {venda.itens.map((item, itemIndex) =>
                     item.produto
                         .map((produto, produtoIndex) => (
