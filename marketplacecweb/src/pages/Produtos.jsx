@@ -100,9 +100,9 @@ function Produto() {
 
   function Lista(produtos) {
     return (
-      <>
-        <table className="m-auto table-auto bg-white rounded-xl">
-          <thead>
+      <div className="mx-32 overflow-x-auto flex flex-row justify-center relative shadow-md rounded-md">
+        <table className="table-auto w-full bg-white">
+          <thead className="text-white bg-purple">
             <tr>
               <th className="w-16  h-16 p-2 text-center">ID</th>
               <th className="w-48 text-center">Nome</th>
@@ -113,7 +113,7 @@ function Produto() {
               <th className="w-48 text-center">Ações</th>
               <th className="w-48 text-center">
                 <button
-                  className="border border-black rounded-xl p-2 "
+                  className="border border-black rounded-md p-2 "
                   onClick={adicionarProduto}>
                   Adicionar
                 </button>
@@ -122,13 +122,13 @@ function Produto() {
           </thead>
           <tbody>{Linhas(produtos)}</tbody>
         </table>
-      </>
+      </div>
     );
   }
 
   const conteudoPrincipal = () => {
     if (produto == null) {
-      return <div className="bg-very-light-cream">{Lista(produtos)}</div>;
+      return <div className="bg-very-light-cream min-h-screen pt-[30px]">{Lista(produtos)}</div>;
     } else {
       return Formulario();
     }
@@ -219,12 +219,12 @@ function Produto() {
 
   function Linha(produto) {
     return (
-      <tr key={produto.id}>
-        <td className="h-16 text-center">{produto.id}</td>
-        <td className="h-16 text-center">{produto.nome}</td>
-        <td className="h-16 text-center">{produto.descricao}</td>
-        <td className="h-16 text-center">{produto.quantidade}</td>
-        <td className="h-16 text-center">
+      <tr key={produto.id} className="border-b ">
+        <td className="h-16 text-purple px-3 py-6 text-center">{produto.id}</td>
+        <td className="h-16 px-3 py-6 text-center">{produto.nome}</td>
+        <td className="h-16 px-3 py-6 text-center">{produto.descricao}</td>
+        <td className="h-16 px-3 py-6 text-center">{produto.quantidade}</td>
+        <td className="h-16 px-3 py-6 text-center">
           R${" "}
           {(Math.round(produto.valor * 100) / 100).toFixed(2).replace(".", ",")}
         </td>
@@ -283,7 +283,7 @@ function Produto() {
 
   return (
     <>
-      <h1 className="text-center w-full bg-purple">Cadastro de produtos</h1>
+      <h1 className="text-center w-full text-[25px] font-bold text-white py-2 bg-purple">Cadastro de produtos</h1>
       {conteudoPrincipal()}
     </>
   );
