@@ -113,7 +113,7 @@ function Produto() {
               <th className="w-48 text-center">Ações</th>
               <th className="w-48 text-center">
                 <button
-                  className="border border-black rounded-md p-2 "
+                  className="rounded-[3px] p-3 bg-light-purple text-white font-bold shadow-md hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out"
                   onClick={adicionarProduto}>
                   Adicionar
                 </button>
@@ -136,53 +136,53 @@ function Produto() {
 
   function Formulario() {
     return (
-      <form className="m-auto h-auto flex flex-col gap-4 w-96 bg-cream p-4 rounded-xl mb-24 text-center">
-        <label htmlFor="nome">Nome</label>
+      <form className="m-auto mt-10 h-auto flex flex-col gap-1 w-96 bg-light-purple py-6 px-10 rounded-[3px] mb-24 text-center">
+        <label htmlFor="nome" className="text-[20px] font-bold text-very-light-cream">Nome</label>
         <input
           type="text"
           id="nome"
           name="nome"
-          className="rounded-xl text-center"
+          className="rounded-[3px] text-center mb-6 p-1"
           value={produto.nome}
           onChange={(e) => onChangeProduto(e.target.name, e.target.value)}
         />
-        <label htmlFor="descricao">Descrição</label>
+        <label htmlFor="descricao" className="text-[20px] font-bold text-very-light-cream">Descrição</label>
         <input
           type="text"
           id="descricao"
           name="descricao"
-          className="rounded-xl text-center"
+          className="rounded-[3px] text-center mb-6 p-1"
           value={produto.descricao}
           onChange={(e) => onChangeProduto(e.target.name, e.target.value)}
         />
-        <label htmlFor="quantidade">Quantidade</label>
+        <label htmlFor="quantidade" className="text-[20px] font-bold text-very-light-cream">Quantidade</label>
         <input
           type="number"
           id="quantidade"
           name="quantidade"
-          className="rounded-xl text-center no-spinner"
+          className="rounded-[3px] text-center no-spinner mb-6 p-1"
           value={produto.quantidade}
           onChange={(e) =>
             onChangeProduto(e.target.name, Number(e.target.value))
           }
         />
-        <label htmlFor="valor">Valor</label>
+        <label htmlFor="valor" className="text-[20px] font-bold text-very-light-cream">Valor</label>
         <input
           type="number"
           id="valor"
           name="valor"
-          className="rounded-xl text-center no-spinner"
+          className="rounded-[3px] text-center no-spinner mb-6 p-1"
           value={produto.valor}
           onChange={(e) =>
             onChangeProduto(e.target.name, Number(e.target.value))
           }
         />
-        <label htmlFor="tag">Tag</label>
+        <label htmlFor="tag" className="text-[20px] font-bold text-very-light-cream">Tag</label>
         <input
           type="text"
           id="tag"
           name="tag"
-          className="rounded-xl text-center"
+          className="rounded-[3px] text-center p-1"
           value={produto.tag}
           onChange={(e) => onChangeProduto(e.target.name, e.target.value)}
         />
@@ -193,13 +193,13 @@ function Produto() {
             onClick={() => {
               salvarProduto(produto);
             }}
-            className="border border-black rounded-xl p-2">
+            className="rounded-[3px] py-2 px-5 bg-purple text-white font-bold shadow-md hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out">
             Salvar
           </button>
           <button
             type="button"
             onClick={cancelar}
-            className="border border-black rounded-xl p-2">
+            className="rounded-[3px] py-2 px-5 bg-purple text-white font-bold shadow-md hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out">
             Cancelar
           </button>
         </div>
@@ -219,19 +219,19 @@ function Produto() {
 
   function Linha(produto) {
     return (
-      <tr key={produto.id} className="border-b ">
-        <td className="h-16 text-purple px-3 py-6 text-center">{produto.id}</td>
+      <tr key={produto.id} className="border-b">
+        <td className="h-16 text-purple px-3 py-6 text-center text-[20px] font-bold">{produto.id}</td>
         <td className="h-16 px-3 py-6 text-center">{produto.nome}</td>
         <td className="h-16 px-3 py-6 text-center">{produto.descricao}</td>
-        <td className="h-16 px-3 py-6 text-center">{produto.quantidade}</td>
+        <td className="h-16 px-3 py-6 text-center text-[20px] font-bold">{produto.quantidade}</td>
         <td className="h-16 px-3 py-6 text-center">
           R${" "}
           {(Math.round(produto.valor * 100) / 100).toFixed(2).replace(".", ",")}
         </td>
         <td className="h-16 text-center">{produto.tag}</td>
-        <td className="flex justify-around">
+        <td className="flex flex-row justify-center gap-7">
           <button
-            className="border border-black rounded-xl p-2 "
+            className="rounded-[3px] p-2 bg-light-purple text-white font-bold shadow-md hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out"
             id={produto.id}
             onClick={() => {
               editarProduto(produto);
@@ -240,7 +240,7 @@ function Produto() {
           </button>
 
           <button
-            className="border border-black rounded-xl p-2 "
+            className="rounded-[3px] p-2 bg-light-purple text-white font-bold shadow-md hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out"
             id={produto.id}
             onClick={() => {
               excluirProduto(produto);
@@ -250,7 +250,7 @@ function Produto() {
         </td>
         <td>
           <button
-            className="border border-black rounded-xl p-2 m-auto mb-10"
+            className="rounded-[3px] p-2 bg-light-purple text-white font-bold shadow-md hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out"
             id={produto.id}
             onClick={adicionarCarrinho}
             disabled={!possuiDisponibilidade(produto)}>
