@@ -4,13 +4,10 @@ import "./index.css";
 import Layout from "./components/Layout";
 import Produtos from "./pages/Produtos";
 
-
-
 function App() {
   return (
     <>
       <Routes>
-
         <Route path="/" element={<Layout></Layout>} />
         <Route
           path="/produtos"
@@ -20,9 +17,16 @@ function App() {
             </Layout>
           }
         />
-        <Route path="/usuario" element={<Layout></Layout>} />    
-        </Routes>
-
+        <Route path="/usuario" element={<Layout></Layout>} />
+        <Route
+          path="/carrinho"
+          element={
+            <Layout>
+              <Carrinho />
+            </Layout>
+          }
+        />
+      </Routes>
     </>
   );
 }
