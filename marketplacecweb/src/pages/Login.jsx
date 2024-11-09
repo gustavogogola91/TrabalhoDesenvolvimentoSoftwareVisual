@@ -23,7 +23,7 @@ function Login() {
 
 function FormLogin() {
     const [loginData, setLoginData] = useState({
-        email: '',
+        emailL: '',
         password: ''
     });
 
@@ -61,13 +61,13 @@ function FormLogin() {
         <>  
             <h2 className="mb-5 text-xl p-3">SignIn</h2>  
             <form className="login-form w-full" onSubmit={handleLoginSubmit}>
-                <label className="text-lg mb-1" htmlFor="email">Email:</label>
-                <input type="email" id="email" name="email" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={loginData.email} onChange={handleChange}/>
+                <label className="text-lg mb-1" htmlFor="emailL">EmailL:</label>
+                <input type="emailL" id="emailL" name="emailL" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={loginData.emailL} onChange={handleChange}/>
                 
                 <label className="text-lg mb-1" htmlFor="password">Password:</label>
                 <input type="password" id="password" name="password" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={loginData.password} onChange={handleChange}/>
 
-                <a href="#" className="self-end text-xs text-[#D7CDE2] mb-5">Forgot Password?</a>
+                <a href="/home" className="self-end text-xs text-[#D7CDE2] mb-5">Forgot Password?</a>
 
                 <button className="w-full p-2 rounded-full bg-purple text-white font-bold cursor-pointer">Login</button>
             </form>
@@ -77,9 +77,9 @@ function FormLogin() {
 
 function FormRegister() {
     const [registerData, setRegisterData] = useState({
-        signupUsername: '',
-        signEmail: '',
-        signupPassword: '',
+        nome: '',
+        email: '',
+        senha: '',
         confirmPassword: ''
     });
 
@@ -94,14 +94,18 @@ function FormRegister() {
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
         
+        const {confirmPassword, ...dataToSend } = registerData;
+
         try {
             console.log("Register Data:", registerData);
             const response = await axios.post('http://localhost:' + port + '/usuarios/register', registerData)
+            console.log("Saiu da verificação")
 
-
-            if (response.data.message == "Ok") {
+            if (response.data.message === "Ok") {
                 console.log("Enviar dados para criar") // continuar cadastro
-                const new_response = await axios.get('http:localhost:' +port + '/usuarios/register')
+                console.log(dataToSend)
+                await axios.post('http://localhost:' + port + '/usuarios/', dataToSend)
+                //console.log(new_response.data.message)
                 // window.location.href = '/' /*redirecionamento de página*/
                 return
             }
@@ -118,19 +122,19 @@ function FormRegister() {
         <>  
             <h2 className="mb-5 text-xl">SignUp</h2>
             <form className="signup-form w-full" onSubmit={handleRegisterSubmit}>
-                <label htmlFor="signup-username" className="text-lg mb-1 text-black">Username:</label>
-                <input type="text" id="signup-username" name="signupUsername" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={registerData.signupUsername} onChange={handleChange}/>
+                <label htmlFor="nome" className="text-lg mb-1 text-black">Username:</label>
+                <input type="text" id="nome" name="nome" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={registerData.nome} onChange={handleChange}/>
 
-                <label htmlFor="signupEmail" className="text-lg mb-1 text-black">Email:</label>
-                <input type="email" id="signupEmail" name="signupEmail" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={registerData.email} onChange={handleChange}/>
+                <label htmlFor="email" className="text-lg mb-1 text-black">Email:</label>
+                <input type="email" id="email" name="email" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={registerData.email} onChange={handleChange}/>
 
                 <label htmlFor="confirm-password" className="text-lg mb-1 text-black">Password:</label>
-                <input type="password" id="signup-password" name="signupPassword"className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={registerData.signupPassword} onChange={handleChange}/>
+                <input type="password" id="signup-password" name="senha"className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={registerData.senha} onChange={handleChange}/>
 
                 <label htmlFor="confirm-password" className="text-lg mb-1 text-black">Confirm Password:</label>
                 <input type="password" id="confirm-password" name="confirmPassword"className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={registerData.confirmPassword} onChange={handleChange}/>                        
 
-                <button type="submit" className="w-full p-2 rounded-full bg-purple text-white font-bold cursor-pointer">Create Account</button>
+                <button className="w-full p-2 rounded-full bg-purple text-white font-bold cursor-pointer">Create Account</button>
             </form>
         </>
     );

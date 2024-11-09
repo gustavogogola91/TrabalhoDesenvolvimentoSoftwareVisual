@@ -81,9 +81,9 @@ public static class UsuariosAPI
 
         group.MapPost("/register", async (Dictionary<string, string> registerData, AppDbContext db) =>
         {
-            string username = registerData["signupUsername"];
-            string email = registerData["signupEmail"];
-            string senha1 = registerData["signupPassword"];
+            string username = registerData["nome"];
+            string email = registerData["email"];
+            string senha1 = registerData["senha"];
             string senha2 = registerData["confirmPassword"];
 
             var emailCadastrado = await db.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
