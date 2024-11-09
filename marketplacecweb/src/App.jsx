@@ -3,7 +3,7 @@ import "./index.css";
 
 import Layout from "./components/Layout";
 import Produtos from "./pages/Produtos";
-import Carrinho from "./pages/Carrinho"
+// import Carrinho from "./pages/Carrinho"
 
 function App() {
   return (
@@ -19,14 +19,14 @@ function App() {
             }
           />
         <Route path="/usuario" element={<Layout></Layout>} />
-        <Route 
+        {/* <Route 
           path="/carrinho" 
           element={
             <Layout>
               <Carrinho />
             </Layout>
             } 
-          />
+          /> */}
       </Routes>
     </>
   );

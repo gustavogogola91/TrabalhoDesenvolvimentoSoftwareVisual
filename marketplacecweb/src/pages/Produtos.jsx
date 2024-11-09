@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 function Produto() {
   const [produto, setProduto] = useState(null);
   const [produtos, setProdutos] = useState([]);
+  const [carrinho, setCarrinho] = useState({});
 
   async function salvarProduto(produto) {
     try {
@@ -35,7 +36,6 @@ function Produto() {
   }
 
   function excluirProduto(produto) {
-    console.log(produto.id);
     try {
       axios
         .delete("http://localhost:5262/produtos/" + produto.id)
@@ -74,8 +74,28 @@ function Produto() {
     }));
   }
 
+  function buscarCarrinho(userId) {
+    axios
+      .get("http://localhost:5262/carrinho/user/" + userId)
+      .then((resposta) => {
+        if (resposta.data != null) {
+          setCarrinho(resposta.data);
+        } else {
+          const novoCarrinho = {
+            usuarioId: userId,
+            itens: [],
+          };
+
+          setCarrinho(novoCarrinho);
+
+          axios.post("http://localhost:5262/carrinho/", novoCarrinho);
+        }
+      });
+  }
+
   useEffect(() => {
     listarProdutos();
+    buscarCarrinho(4);
   }, []);
 
   function Lista(produtos) {
@@ -223,7 +243,7 @@ function Produto() {
             className="border border-black rounded-xl p-2 "
             id={produto.id}
             onClick={() => {
-              excluirProduto(produto)
+              excluirProduto(produto);
             }}>
             Excluir
           </button>
@@ -232,7 +252,7 @@ function Produto() {
           <button
             className="border border-black rounded-xl p-2 m-auto mb-10"
             id={produto.id}
-            //   onClick={adicionarCarrinho}
+            onClick={adicionarCarrinho}
             disabled={!possuiDisponibilidade(produto)}>
             {possuiDisponibilidade(produto)
               ? "Adicionar ao carrinho"
@@ -251,11 +271,15 @@ function Produto() {
     }
   }
 
-  // function adicionarCarrinho(data) {
-  //   console.log(data.target.id);
-  //   const i = data.target.id;
-  //   console.log(listProdutos[i]);
-  // }
+  function adicionarCarrinho(data) {
+    const item = {
+      produtoId: data.target.id,
+      carrinhoid: carrinho.id,
+      quantidade: 1,
+    };
+
+    axios.post("http://localhost:5262/carrinho/adicionarItem/", item);
+  }
 
   return (
     <>
