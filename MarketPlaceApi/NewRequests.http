@@ -18,75 +18,15 @@ Content-Type: application/json
       "Quantidade": 2
     },
     {
-      "ProdutoId": 2,
-      "Quantidade": 1
-    },
-    {
       "ProdutoId": 1,
       "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 2,
-      "Quantidade": 1
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 2,
-      "Quantidade": 1
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 2,
-      "Quantidade": 1
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 2,
-      "Quantidade": 1
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 1,
-      "Quantidade": 2
-    },
-    {
-      "ProdutoId": 2,
-      "Quantidade": 1
     },
     {
       "ProdutoId": 1,
       "Quantidade": 2
     }
   ],
-    "precoTotal": 23843
+    "precoTotal": 3345
 }
 
 ### Post produto 1

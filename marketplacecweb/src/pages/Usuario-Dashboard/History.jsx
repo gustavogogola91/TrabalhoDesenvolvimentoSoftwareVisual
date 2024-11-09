@@ -20,6 +20,11 @@ function ListarProdutos(ids) {
 }
 
 function Linha(index, venda) {
+    const formatoMoeda = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    }).format(venda.precoTotal);
+
     return (
         <tr key={index} className="bg-white border-b text-[20px] text-center ">
             <td className="py-4 px-6 text-light-purple font-bold">{venda.id}</td>
@@ -35,7 +40,7 @@ function Linha(index, venda) {
                         ))
                 )}
             </td>
-            <td className="py-4 px-6 rounded-r-[3px] bg-white">R${ venda.precoTotal }</td>
+            <td className="py-4 px-6 rounded-r-[3px] bg-white">{ formatoMoeda }</td>
         </tr>
     );
 }
