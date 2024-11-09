@@ -5,7 +5,7 @@ class AppDbContext : DbContext {
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
-        var com = "server=localhost;port=3306;database=marketplace;user=root;password=2311";
+        var com = "server=localhost;port=3306;database=marketplace;user=root;password=root";
 
         builder.UseMySQL(com);
     }
@@ -20,12 +20,6 @@ class AppDbContext : DbContext {
 
     public DbSet<Usuario> Usuarios => Set<Usuario>();
     
-    // public DbSet<Cliente> Clientes => Set<Cliente>();
-
-    // public DbSet<Vendedor> Vendedores => Set<Vendedor>();
-
-    // public DbSet<Administrador> Administradores => Set<Administrador>();
-
     public DbSet<Venda> Vendas => Set<Venda>();
 
     public DbSet<Cupom> Cupons => Set<Cupom>();
