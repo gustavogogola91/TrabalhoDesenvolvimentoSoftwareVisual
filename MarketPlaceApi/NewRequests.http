@@ -1,0 +1,113 @@
+###GET /vendas
+GET http://localhost:5262/vendas
+
+###GET /vendas/cliente/{idCliente}
+GET http://localhost:5262/vendas/cliente/1
+
+### post vendas
+POST http://localhost:5262/vendas
+Content-Type: application/json
+
+{
+  "IdCliente": 1,
+  "IdEndereco": 1,
+  "IdCupom": 0,
+  "Itens": [
+    {
+      "ProdutoId": 1,
+      "Quantidade": 2
+    },
+    {
+      "ProdutoId": 2,
+      "Quantidade": 1
+    },
+    {
+      "ProdutoId": 1,
+      "Quantidade": 2
+    },
+    {
+      "ProdutoId": 1,
+      "Quantidade": 2
+    },
+    {
+      "ProdutoId": 2,
+      "Quantidade": 1
+    },
+    {
+      "ProdutoId": 1,
+      "Quantidade": 2
+    },
+    {
+      "ProdutoId": 1,
+      "Quantidade": 2
+    },
+    {
+      "ProdutoId": 2,
+      "Quantidade": 1
+    },
+    {
+      "ProdutoId": 1,
+      "Quantidade": 2
+    },
+    {
+      "ProdutoId": 1,
+      "Quantidade": 2
+    },
+    {
+      "ProdutoId": 2,
+      "Quantidade": 1
+    },
+    {
+      "ProdutoId": 1,
+      "Quantidade": 2
+    },
+    {
+      "ProdutoId": 1,
+      "Quantidade": 2
+    },
+    {
+      "ProdutoId": 2,
+      "Quantidade": 1
+    },
+    {
+      "ProdutoId": 1,
+      "Quantidade": 2
+    },
+    {
+      "ProdutoId": 1,
+      "Quantidade": 2
+    },
+    {
+      "ProdutoId": 2,
+      "Quantidade": 1
+    },
+    {
+      "ProdutoId": 1,
+      "Quantidade": 2
+    }
+  ],
+    "precoTotal": 23843
+}
+
+### Post produto 1
+POST http://localhost:5262/produtos
+Content-Type: application/json
+
+{
+  "Nome": "Celular",
+  "Descricao": "CELULAR IPHONE",
+  "Quantidade": 5,
+  "Valor": 3700,
+  "Tag": "Eletronico"
+}
+### Post produto 2
+POST http://localhost:5262/produtos
+Content-Type: application/json
+
+{
+  "Nome": "Computador",
+  "Descricao": "Computador gamer",
+  "Quantidade": 3,
+  "Valor": 4700,
+  "Tag": "Eletronico"
+}
