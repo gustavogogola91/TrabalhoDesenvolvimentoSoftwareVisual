@@ -278,7 +278,13 @@ function Produto() {
       quantidade: 1,
     };
 
-    axios.post("http://localhost:5262/carrinho/adicionarItem/", item);
+    try {
+      axios.post("http://localhost:5262/carrinho/adicionarItem/", item);
+      alert("Produto adicionado ao carrinho");
+    } catch (error) {
+      alert("Produto adicionado ao carrinho");
+      console.error(error);
+    }
   }
 
   return (
