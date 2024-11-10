@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketPlaceApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241106003534_VersaoAlterada09042024")]
+    partial class VersaoAlterada09042024
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -211,15 +214,6 @@ namespace MarketPlaceApi.Migrations
 
                     b.Property<int>("IdCliente")
                         .HasColumnType("int");
-
-                    b.Property<int>("IdCupom")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdEndereco")
-                        .HasColumnType("int");
-
-                    b.Property<double>("precoTotal")
-                        .HasColumnType("double");
 
                     b.HasKey("Id");
 
