@@ -6,7 +6,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace MarketPlaceApi.Migrations
 {
     /// <inheritdoc />
-    public partial class FinalMigration : Migration
+    public partial class NewUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,7 +72,7 @@ namespace MarketPlaceApi.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Usuario",
+                name: "Usuarios",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -80,16 +80,11 @@ namespace MarketPlaceApi.Migrations
                     Nome = table.Column<string>(type: "longtext", nullable: true),
                     Email = table.Column<string>(type: "longtext", nullable: true),
                     Senha = table.Column<string>(type: "longtext", nullable: true),
-                    Discriminator = table.Column<string>(type: "longtext", nullable: false),
-                    PinAcesso = table.Column<int>(type: "int", nullable: true),
-                    IdCarrinho = table.Column<int>(type: "int", nullable: true),
-                    IdComprasHist = table.Column<int>(type: "int", nullable: true),
-                    IdVenda = table.Column<int>(type: "int", nullable: true),
-                    IdVendaHist = table.Column<int>(type: "int", nullable: true)
+                    IdCarrinho = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuario", x => x.Id);
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -119,9 +114,9 @@ namespace MarketPlaceApi.Migrations
                 {
                     table.PrimaryKey("PK_Carrinhos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Carrinhos_Usuario_UsuarioId",
+                        name: "FK_Carrinhos_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
-                        principalTable: "Usuario",
+                        principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -223,7 +218,7 @@ namespace MarketPlaceApi.Migrations
                 name: "Vendas");
 
             migrationBuilder.DropTable(
-                name: "Usuario");
+                name: "Usuarios");
         }
     }
 }
