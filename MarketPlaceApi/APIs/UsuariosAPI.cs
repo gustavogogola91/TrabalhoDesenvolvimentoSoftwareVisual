@@ -57,7 +57,7 @@ public static class UsuariosAPI
 
         group.MapPost("/login", async (Dictionary<string, string> loginData, AppDbContext db) =>
         {
-            string email = loginData["email"];
+            string email = loginData["emailL"];
             string senha = loginData["password"];
 
             var emailCadastrado = await db.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
