@@ -6,7 +6,7 @@ function Layout(props) {
     return(
         <>
         <Header/>
-        <main className="content">{props.children}</main>
+        <main className="min-h-screen">{props.children}</main>
         <Footer/>
         </>
 

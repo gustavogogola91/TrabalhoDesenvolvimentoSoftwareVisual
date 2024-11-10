@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import userImg from "../imgs/icon-user.png"
 
-function NavApp() {
+function Nav() {
   return (
     <nav>
       <ul className="flex flex-row gap-5">
@@ -21,4 +21,4 @@ function NavApp() {
     </nav>
   );
 }
-export default NavApp;
+export default Nav;

@@ -110,10 +110,10 @@ POST http://localhost:5262/produtos
 Content-Type: application/json
 
 {
-  "Nome": "abc",
-  "Descricao": "def",
-  "Quantidade": 0,
-  "Valor": 27.50,
+  "Nome": "celular",
+  "Descricao": "cekular gamer",
+  "Quantidade": 2,
+  "Valor": 2000,
   "Tag": "Eletronico"
 }
 
@@ -130,7 +130,7 @@ Content-Type: application/json
 }
 
 ### DELETE Produto
-DELETE http://localhost:5262/produtos/23
+DELETE http://localhost:5262/produtos/1
 
 ### GET /cupom
 GET http://localhost:5262/cupons
@@ -167,6 +167,9 @@ DELETE http://localhost:5262/cupons/1
 ###GET /vendas
 GET http://localhost:5262/vendas
 
+###GET /vendas/cliente/{idCliente}
+GET http://localhost:5262/vendas/cliente/1
+
 ###GET /vendas/{id}
 GET http://localhost:5262/vendas/1
 
@@ -175,16 +178,24 @@ POST http://localhost:5262/vendas
 Content-Type: application/json
 
 {
-  "IdCliente": 101,
+  "IdCliente": 1,
   "Itens": [
     {
-      "ProdutoId": 12,
-      "Quantidade": 1
+      "ProdutoId": 1,
+      "Quantidade": 19
     },
     {
-      "ProdutoId": 22,
-      "Quantidade": 2
-    }
+      "ProdutoId": 2,
+      "Quantidade": 22
+    },
+    {
+      "ProdutoId": 4,
+      "Quantidade": 22
+    },
+    {
+      "ProdutoId": 1,
+      "Quantidade": 22
+    },
   ]
 }
 
@@ -199,7 +210,7 @@ Content-Type: application/json
 }
 
 ### DELETE /vendas/{id}
-DELETE http://localhost:5262/vendas/1
+DELETE http://localhost:5262/vendas/2
 
 ### ENDEREÇOS
 
@@ -270,22 +281,128 @@ Content-Type: application/json
 
 
 ### PUT /carrinho/{id}
-PUT http://localhost:5262/carrinho/7
+PUT http://localhost:5262/carrinho/12
+Content-Type: application/json
+
+### PUT /carrinho/{id}
+PUT http://localhost:5262/carrinho/12
+Content-Type: application/json
+2
+
+### DELETE /carrinho/{id}
+DELETE http://localhost:5262/carrinho/11
+
+
+### DELETE /carrinho/produto/idCarrinho/idProduto
+DELETE http://localhost:5262/carrinho/produto/11/5
+
+
+
+### Resquests INIT MARKETPLACE
+### Post produto 1
+POST http://localhost:5262/produtos
 Content-Type: application/json
 
 {
-  "usuarioId": 3,
-  "itens": [
+  "Nome": "Celular",
+  "Descricao": "CELULAR IPHONE",
+  "Quantidade": 5,
+  "Valor": 3700,
+  "Tag": "Eletronico"
+}
+### Post produto 2
+POST http://localhost:5262/produtos
+Content-Type: application/json
+
+{
+  "Nome": "Computador",
+  "Descricao": "Computador gamer",
+  "Quantidade": 3,
+  "Valor": 4700,
+  "Tag": "Eletronico"
+}
+
+### Post cliente
+
+POST http://localhost:5262/clientes
+Content-Type: application/json
+
+{
+    "Nome": "Junior",
+    "Email": "junior@email.com",
+    "Senha": "juniorBrabinho",
+    "IdCarrinho": 1,
+    "IdComprasHist": 1
+}
+
+### Post cupom
+
+POST http://localhost:5262/cupons
+Content-Type: application/json
+
+{
+  "codigo": "5%OFF",
+  "desconto": 0.005,
+  "usado": false,
+  "valormin": 550.0
+}
+
+### Post venda
+
+POST http://localhost:5262/vendas
+Content-Type: application/json
+
+{
+  "IdCliente": 1,
+  "IdEndereco": 1,
+  "IdCupom": 0,
+  "Itens": [
     {
-      "produtoId": 2,
-      "quantidade": 6
+      "ProdutoId": 1,
+      "Quantidade": 2
     },
     {
-      "produtoId": 1,
-      "quantidade": 3
+      "ProdutoId": 2,
+      "Quantidade": 1
+    },
+    {
+      "ProdutoId": 1,
+      "Quantidade": 2
+    }
+
+  ]
+}
+
+### Post carrinho
+POST http://localhost:5262/carrinho
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "itens": [
+    {
+      "produtoId": 5,
+      "quantidade": 2
+    },
+    {
+      "produtoId": 3,
+      "quantidade": 1
     }
   ]
 }
 
-### DELETE /carrinho/{id}
-DELETE http://localhost:5262/carrinho/9
+### post enderco
+
+POST http://localhost:5262/enderecos
+Content-Type: application/json
+
+{
+  "IdCliente": 101,
+  "Rua": "Rua das Flores",
+  "numero": 123,
+  "bairro": "Centro",
+  "cidade": "São Paulo",
+  "estado": "SP",
+  "cep": "01001-000",
+  "complemento": "Apto 201"
+}
