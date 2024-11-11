@@ -35,7 +35,7 @@ public static class VendaAPI
 
             //tratar se nao tiver cupom a compra
 
-            if (vendas == null || vendas.Count == 0)
+            if (vendas == null)
             {
                 return Results.NotFound();
             }
@@ -118,10 +118,6 @@ public static class VendaAPI
 
             //tratar se nao tiver cupom a compra
 
-            if (vendas == null || vendas.Count == 0)
-            {
-                return Results.NotFound();
-            }
 
             // Estrutura a resposta incluindo as vendas e produtos
             var resultado = vendas.Select(venda => new
@@ -167,10 +163,7 @@ public static class VendaAPI
                 .Include(v => v.Itens)
                 .FirstOrDefaultAsync(v => v.Id == id);
 
-            if (venda == null)
-            {
-                return Results.NotFound();
-            }
+            if (venda is null) return Results.NotFound();
 
             return Results.Ok(venda);
         });
@@ -200,8 +193,6 @@ public static class VendaAPI
         {
             if (await db.Vendas.FindAsync(id) is Venda venda)
             {
-
-
                 db.Vendas.Remove(venda);
 
                 await db.SaveChangesAsync();

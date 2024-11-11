@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 const IDCLIENTE = 1;
 
+//TIRAR AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 function ListarProdutos(ids) {
     
         let produtosDict = {}
@@ -45,14 +46,30 @@ function Linha(index, venda) {
     );
 }
 
+function LinhaZeroCompras() {
+    
+
+    return(
+        <tr className="bg-white border-b text-[20px] text-center ">
+            <td className="py-4 px-6 text-light-purple font-bold"></td>
+            <td className="py-4 px-6 flex flex-row text-center justify-center gap-[10px] overflow-x-auto items-center"> Você não tem compras ainda! </td>
+            <td className="py-4 px-6 rounded-r-[3px] bg-white"></td>
+        </tr>
+    )
+}
+
 function Linhas(vendas) {
     const linhas = []
-    for (let i = 0; i < vendas.length; i++) {
-        const venda = vendas[i];
-        linhas[i] = Linha(i, venda)
+    if (vendas.length != 0) {
+        for (let i = 0; i < vendas.length; i++) {
+            const venda = vendas[i];
+            linhas[i] = Linha(i, venda)
+        }
+        return linhas
+    }else{
+        return LinhaZeroCompras()
     }
 
-    return linhas
     
 }
 
