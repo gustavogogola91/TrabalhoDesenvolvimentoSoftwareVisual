@@ -96,6 +96,11 @@ function FormRegister() {
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
         
+        if(registerData.confirmPassword !== registerData.senha) {
+            console.log("Senhas não conferem");
+            return
+        }
+
         const {confirmPassword, ...dataToSend } = registerData;
 
         try {
