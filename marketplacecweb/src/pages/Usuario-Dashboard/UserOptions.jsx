@@ -39,6 +39,9 @@ function UserOptions() {
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
+        console.log(userData);
+        const response = await axios.put("http://localhost:" + port + "/usuarios/" + userId, userData)
+        
         // create put to change user data
     };
 

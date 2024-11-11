@@ -39,7 +39,7 @@ public static class UsuariosAPI
 
             await db.SaveChangesAsync();
 
-            return Results.NoContent();
+            return Results.Ok("Dados alterados com sucesso");
         });
 
         group.MapDelete("/{id}", async (int id, AppDbContext db) =>
