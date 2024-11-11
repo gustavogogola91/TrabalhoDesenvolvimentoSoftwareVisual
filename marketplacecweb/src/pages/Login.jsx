@@ -96,6 +96,11 @@ function FormRegister() {
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
         
+        if(registerData.nome == null || registerData.email == null || registerData.password == null || registerData.confirmPassword == null) {
+            console.log("Preencha todos os campos")
+            return
+        }
+
         if(registerData.confirmPassword !== registerData.senha) {
             console.log("Senhas não conferem");
             return
