@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import userImg from "../imgs/icon-user.png"
+import carrinhoImg from "../imgs/icon-carrinho.png";
 
 function Nav() {
   return (
@@ -17,6 +18,10 @@ function Nav() {
         </li>
         <li className="flex flex-row items-center bg-purple px-3 py-2 rounded-3xl hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out">
           <NavLink to="/usuario"><img src={ userImg } alt="" className="w-[35px]"/></NavLink>
+        </li>
+
+        <li className="flex flex-row items-center bg-purple px-3 py-2 rounded-3xl hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out">
+          <NavLink to="/carrinho"><img src={ carrinhoImg } alt="" className="w-[35px]"/></NavLink>
         </li>
       </ul>
     </nav>
