@@ -253,7 +253,15 @@ function Produto() {
           <button
             className="rounded-[3px] p-2 bg-light-purple text-white font-bold shadow-md hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out"
             id={produto.id}
-            onClick={adicionarCarrinho}
+            onClick={ () => {
+              if(localStorage.getItem("usuarioId") != null){
+                adicionarCarrinho()
+              }else{
+                window.location.href = '/login'
+              }
+
+            }
+            }
             disabled={!possuiDisponibilidade(produto)}>
             {possuiDisponibilidade(produto)
               ? "Adicionar ao carrinho"

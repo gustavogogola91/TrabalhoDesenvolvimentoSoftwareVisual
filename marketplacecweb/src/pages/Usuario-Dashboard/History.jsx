@@ -1,24 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const IDCLIENTE = 1;
-
-//TIRAR AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-function ListarProdutos(ids) {
-    
-        let produtosDict = {}
-        axios.get(`http://localhost:5262/vendas/cliente/${IDCLIENTE}`)
-            .then(
-                (resposta) => {
-                    console.log(resposta.data)
-                }
-            )
-
-    return {
-        produtosString: "amognus",
-        valor: "pao",
-    }
-}
+const IDCLIENTE = localStorage.getItem("usuarioId");
 
 function Linha(index, venda) {
     const formatoMoeda = new Intl.NumberFormat('pt-BR', {
