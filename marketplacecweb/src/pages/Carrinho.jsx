@@ -7,7 +7,7 @@ function Carrinho() {
     const [itens, setItens] = useState([]);
     const [cupons, setCupom] = useState([]);
 
-    let userIdJSON = localStorage.getItem('userId');
+    let userIdJSON = localStorage.getItem('usuarioId');
     const userId = JSON.parse(userIdJSON);
 
     console.log("User Id: " + userId);
