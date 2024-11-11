@@ -7,12 +7,18 @@ function Carrinho() {
     const [itens, setItens] = useState([]);
     const [cupons, setCupom] = useState([]);
 
+    let userIdJSON = localStorage.getItem('userId');
+    const userId = JSON.parse(userIdJSON);
+
+    console.log("User Id: " + userId);
+    console.log("JSON: " + userIdJSON);
+
     useEffect(listarItens, []);
     useEffect(buscarCupons, []);
 
     function listarItens() 
     {
-        axios.get("http://localhost:5262/carrinho/")
+        axios.get(`http://localhost:5262/carrinho/user/${userId}`)
             .then((resposta) => {
                 console.log(resposta.data);
                 setItens(resposta.data);
