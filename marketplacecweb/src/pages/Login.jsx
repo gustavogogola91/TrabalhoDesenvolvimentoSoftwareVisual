@@ -45,8 +45,9 @@ function FormLogin() {
             if (response.data.usuario) {
                 console.log(response.data.message)
                 console.log("Bem vindo novamente " + response.data.usuario.nome)
-                localStorage.setItem("usuarioLogado", response.data.usuario.id);
-                // window.location.href = '/' /*redirecionamento de página*/
+                localStorage.setItem("usuarioId", response.data.usuario.id);
+                console.log(localStorage.getItem("usuarioId"))
+                window.location.href = '/produtos'
                 return
             }
 
