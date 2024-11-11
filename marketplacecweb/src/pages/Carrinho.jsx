@@ -210,7 +210,7 @@ function diminuirQuantidade(produto, idCarrinho)
     const idProduto = produto.produto.id;
     let novaQuantidade = produto.quantidade;
 
-    if(novaQuantidade > 0)
+    if(novaQuantidade > 1)
         {
             novaQuantidade = produto.quantidade - 1;
 

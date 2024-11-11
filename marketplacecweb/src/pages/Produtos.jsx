@@ -275,7 +275,7 @@ function Produto() {
   function adicionarCarrinho(data) {
     const item = {
       produtoId: data.target.id,
-      carrinhoid: carrinho.id,
+      carrinhoid: carrinho[0].id,
       quantidade: 1,
     };
 
