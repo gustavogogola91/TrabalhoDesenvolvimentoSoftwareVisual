@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import History from "./History.jsx"
 import userLogo from "../../imgs/icon-user.png"
 import Dashboard from './Dashboard.jsx';
+import UserOptions from "./UserOptions.jsx";
 
 
 
@@ -28,6 +29,10 @@ function Usuario() {
                     onClick={() => handleButtonClick('history')}>
                     Histórico de compras
                 </button>
+                <button className={`shadow-md text-left font-bold p-5 m-5 rounded-[3px] transition duration-300 ease-in ${selectedButton === 'userOptions' ? 'bg-very-light-purple text-light-purple' : 'bg-purple text-white'}`} 
+                    onClick={() => handleButtonClick('userOptions')}>
+                    Opções de Conta
+                </button>
             </div>
         );
     }
@@ -41,6 +46,8 @@ function Usuario() {
             return <History />;
         } else if (currentComponent === 'dashboard') {
             return <Dashboard />;
+        } else if (currentComponent === 'userOptions') {
+            return <UserOptions />;
         } else {
             return <h1>ERRO</h1>;
         }
