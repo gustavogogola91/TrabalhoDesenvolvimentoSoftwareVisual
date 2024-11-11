@@ -42,7 +42,7 @@ function Carrinho() {
 
         if(cupons.lengh < 1)
         {
-            console.log("Lista de cupons vazia");
+            alert("Lista de cupons vazia");
             return;
         }
         else
@@ -50,7 +50,7 @@ function Carrinho() {
             for(let i = 0; i < cupons.length; i++)
                 {
                     var cupom = cupons[i];
-                    if(cupomDigitado == cupom.codigo)
+                    if(cupomDigitado === cupom.codigo)
                     {
                         const desconto = cupom.desconto;
                         localStorage.removeItem('desconto');
