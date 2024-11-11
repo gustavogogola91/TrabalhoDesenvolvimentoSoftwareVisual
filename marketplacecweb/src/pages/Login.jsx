@@ -111,8 +111,8 @@ function FormRegister() {
                 console.log("Enviar dados para criar") // continuar cadastro
                 console.log(dataToSend)
                 await axios.post('http://localhost:' + port + '/usuarios/', dataToSend)
-                //console.log(new_response.data.message)
-                // window.location.href = '/' /*redirecionamento de página*/
+                console.log(localStorage.getItem("usuarioId"))
+                window.location.href = '/produtos'
                 return
             }
 
