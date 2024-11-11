@@ -95,7 +95,7 @@ function Produto() {
 
   useEffect(() => {
     listarProdutos();
-    buscarCarrinho(2);
+    // buscarCarrinho();
   }, []);
 
   function Lista(produtos) {
