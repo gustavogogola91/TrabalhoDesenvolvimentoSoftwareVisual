@@ -373,7 +373,7 @@ Content-Type: application/json
   ]
 }
 
-### Post carrinho
+### POST /carrinho
 POST http://localhost:5262/carrinho
 Content-Type: application/json
 
