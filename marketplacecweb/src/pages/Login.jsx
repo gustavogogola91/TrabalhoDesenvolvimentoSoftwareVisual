@@ -45,6 +45,7 @@ function FormLogin() {
             if (response.data.usuario) {
                 console.log(response.data.message)
                 console.log("Bem vindo novamente " + response.data.usuario.nome)
+                localStorage.setItem("logado", JSON.stringify(true));
                 // window.location.href = '/' /*redirecionamento de página*/
                 return
             }
@@ -99,7 +100,6 @@ function FormRegister() {
         try {
             console.log("Register Data:", registerData);
             const response = await axios.post('http://localhost:' + port + '/usuarios/register', registerData)
-            console.log("Saiu da verificação")
 
             if (response.data.message === "Ok") {
                 console.log("Enviar dados para criar") // continuar cadastro
