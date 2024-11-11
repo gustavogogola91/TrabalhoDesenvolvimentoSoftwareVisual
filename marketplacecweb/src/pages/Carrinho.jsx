@@ -66,7 +66,7 @@ function Carrinho() {
                     else
                     {
                         console.log("Cupom inválido!");
-                        return;
+                        continue;
                     }
                 }
         }
