@@ -15,7 +15,6 @@ public static class CarrinhoAPI
             return await db.Carrinhos
                 .Include(c => c.Itens)
                 .ThenInclude(i => i.Produto)
-
                 .ToListAsync();
         });
 
@@ -32,7 +31,8 @@ public static class CarrinhoAPI
             return await db.Carrinhos
                         .Where(c => c.UsuarioId == id)
                         .Include(c => c.Itens)
-                        .FirstOrDefaultAsync();
+                        .ThenInclude(i => i.Produto)
+                        .ToListAsync();
         });
 
         group.MapPost("/", async (Carrinho carrinho, AppDbContext db) =>

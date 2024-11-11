@@ -5,6 +5,7 @@ function Produto() {
   const [produto, setProduto] = useState(null);
   const [produtos, setProdutos] = useState([]);
   const [carrinho, setCarrinho] = useState({});
+  const userId = localStorage.getItem("usuarioId");
 
   async function salvarProduto(produto) {
     try {
@@ -95,7 +96,7 @@ function Produto() {
 
   useEffect(() => {
     listarProdutos();
-    buscarCarrinho(2);
+    buscarCarrinho(userId);
   }, []);
 
   function Lista(produtos) {
@@ -274,7 +275,7 @@ function Produto() {
   function adicionarCarrinho(data) {
     const item = {
       produtoId: data.target.id,
-      carrinhoid: carrinho.id,
+      carrinhoid: carrinho[0].id,
       quantidade: 1,
     };
 

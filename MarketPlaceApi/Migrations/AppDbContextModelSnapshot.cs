@@ -181,12 +181,12 @@ namespace MarketPlaceApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Email")
                         .HasColumnType("longtext");
+
+                    b.Property<int>("IdCarrinho")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .HasColumnType("longtext");
@@ -196,11 +196,7 @@ namespace MarketPlaceApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuario");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Usuario");
-
-                    b.UseTphMappingStrategy();
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("Venda", b =>
@@ -224,42 +220,6 @@ namespace MarketPlaceApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Vendas");
-                });
-
-            modelBuilder.Entity("Administrador", b =>
-                {
-                    b.HasBaseType("Usuario");
-
-                    b.Property<int>("PinAcesso")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("Administrador");
-                });
-
-            modelBuilder.Entity("Cliente", b =>
-                {
-                    b.HasBaseType("Usuario");
-
-                    b.Property<int>("IdCarrinho")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdComprasHist")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("Cliente");
-                });
-
-            modelBuilder.Entity("Vendedor", b =>
-                {
-                    b.HasBaseType("Usuario");
-
-                    b.Property<int>("IdVenda")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdVendaHist")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("Vendedor");
                 });
 
             modelBuilder.Entity("Carrinho", b =>
