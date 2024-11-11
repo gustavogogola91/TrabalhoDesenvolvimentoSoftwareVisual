@@ -232,7 +232,7 @@ function Produto() {
         <td className="h-16 text-center">{produto.tag}</td>
         <td className="flex flex-row justify-center gap-7">
           <button
-            className="rounded-[3px] p-2 bg-light-purple text-white font-bold shadow-md hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out"
+            className="rounded-[3px] mt-5 p-2 bg-light-purple text-white font-bold shadow-md hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out"
             id={produto.id}
             onClick={() => {
               editarProduto(produto);
@@ -241,7 +241,7 @@ function Produto() {
           </button>
 
           <button
-            className="rounded-[3px] p-2 bg-light-purple text-white font-bold shadow-md hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out"
+            className="rounded-[3px] mt-5 p-2 bg-light-purple text-white font-bold shadow-md hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out"
             id={produto.id}
             onClick={() => {
               excluirProduto(produto);
