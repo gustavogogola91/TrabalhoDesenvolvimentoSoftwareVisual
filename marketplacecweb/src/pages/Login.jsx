@@ -63,7 +63,7 @@ function FormLogin() {
         <>  
             <h2 className="mb-5 text-xl p-3">SignIn</h2>  
             <form className="login-form w-full" onSubmit={handleLoginSubmit}>
-                <label className="text-lg mb-1" htmlFor="emailL">EmailL:</label>
+                <label className="text-lg mb-1" htmlFor="emailL">Email:</label>
                 <input type="emailL" id="emailL" name="emailL" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={loginData.emailL} onChange={handleChange}/>
                 
                 <label className="text-lg mb-1" htmlFor="password">Password:</label>
