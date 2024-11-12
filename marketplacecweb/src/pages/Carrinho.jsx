@@ -239,6 +239,10 @@ function finalizarCompra(idCarrinho, precoTotal, idCupom)
 {
     let userId = localStorage.getItem("usuarioId")
 
+    if(idCupom == null) {
+        idCupom = 0;
+    }
+
     try {
         axios.post(`http://localhost:5262/vendas/${idCarrinho}/${userId}/finalizar-venda/${precoTotal}/${idCupom}`)
         alert("Compra Finalizada com sucesso!");

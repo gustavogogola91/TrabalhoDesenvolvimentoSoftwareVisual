@@ -230,7 +230,7 @@ public static class VendaAPI
             // }
 
             // Cria a Venda a partir do Carrinho
-            var venda = new Venda
+            Venda venda = new Venda
             {
                 IdCliente = carrinho.UsuarioId,    // Define o cliente a partir do UsuarioId do Carrinho
                 IdEndereco = endereco.Id,
