@@ -9,9 +9,9 @@ function UserOptions() {
     function getUserData() {
 
         axios.get("http://localhost:" + port + "/usuarios/" + userId).then((response) => {
-            document.getElementById("username").placeholder = response.data.nome;
+            document.getElementById("nome").placeholder = response.data.nome;
             document.getElementById("email").placeholder = response.data.email;
-            document.getElementById("password").placeholder = response.data.senha;
+            document.getElementById("senha").placeholder = response.data.senha;
           });
     }
 
@@ -24,9 +24,9 @@ function UserOptions() {
     }, []);
 
     const [userData, setUserData] = useState({
-        username: '',
+        nome: '',
         email: '',
-        password: '',
+        senha: '',
     });
 
     const handleChange = (e) => {
@@ -40,8 +40,20 @@ function UserOptions() {
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         console.log(userData);
+        const dadosUsuario = await axios.get("http://localhost:" + port + "/usuarios/" + userId)
+
+        if(userData.nome === '') {
+            userData.nome = dadosUsuario.data.nome;
+        }
+        if(userData.email === '') {
+            userData.email = dadosUsuario.data.email;
+        }
+        if(userData.senha === '') {
+            userData.senha = dadosUsuario.data.senha;
+        }
+
         const response = await axios.put("http://localhost:" + port + "/usuarios/" + userId, userData)
-        
+        console.log(response.data.message)
         // create put to change user data
     };
 
@@ -50,14 +62,14 @@ function UserOptions() {
             <div className="w-1/2 p-5 bg-very-light-purple flex flex-col items-center rounded-xl">
             <h2 className="w-1/2 text-xl text-purple font-bold pb-5">Alterações de Conta</h2>
             <form className="login-form w-full" onSubmit={handleLoginSubmit}>
-                <label className="text-lg mb-1" htmlFor="username">Username:</label>
-                <input type="username" id="username" name="username" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={userData.username} onChange={handleChange}/>
+                <label className="text-lg mb-1" htmlFor="nome">Username:</label>
+                <input type="nome" id="nome" name="nome" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={userData.nome} onChange={handleChange}/>
                 
                 <label className="text-lg mb-1" htmlFor="email">Email:</label>
                 <input type="email" id="email" name="email" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={userData.email} onChange={handleChange}/>
 
-                <label className="text-lg mb-1" htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={userData.password} onChange={handleChange}/>
+                <label className="text-lg mb-1" htmlFor="senha">Password:</label>
+                <input type="password" id="senha" name="senha" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={userData.senha} onChange={handleChange}/>
                 
                 <button className="w-full p-2 rounded-full bg-purple text-white font-bold cursor-pointer">Salvar Alterações</button>
             </form>
