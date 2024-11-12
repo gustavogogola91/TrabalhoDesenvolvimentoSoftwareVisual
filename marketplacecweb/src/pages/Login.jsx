@@ -45,6 +45,7 @@ function FormLogin() {
             if (response.data.usuario) {
                 console.log(response.data.message)
                 console.log("Bem vindo novamente " + response.data.usuario.nome)
+                localStorage.setItem("usuarioNome", response.data.usuario.nome);
                 localStorage.setItem("usuarioId", response.data.usuario.id);
                 console.log(localStorage.getItem("usuarioId"))
                 window.location.href = '/produtos'
