@@ -40,18 +40,45 @@ function FormLogin() {
         try {
             console.log("Login Data:", loginData);
             const response = await axios.post('http://localhost:' + port + '/usuarios/login', loginData)
-
-
+            
             if (response.data.usuario) {
                 console.log(response.data.message)
                 console.log("Bem vindo novamente " + response.data.usuario.nome)
                 localStorage.setItem("usuarioId", response.data.usuario.id);
-                console.log(localStorage.getItem("usuarioId"))
-                window.location.href = '/produtos'
+                var userId = localStorage.getItem("usuarioId")
+                console.log(userId)
+                
+                axios.get("http://localhost:5262/carrinho/user/" + userId).then((resposta) => {
+                    //console.log(resposta.data)
+                    if(resposta.data.length <= 0){
+                        const novoCarrinho = {
+                            usuarioId: userId,
+                            itens: [],
+                        }
+
+                        axios.post("http://localhost:" + port + "/carrinho/", novoCarrinho)
+                        
+                    } 
+                });
+                axios.get("http://localhost:" + port + "/carrinho/user/" + userId).then((respostaCarrinho) => {
+                    console.log(respostaCarrinho.data[0].id)
+
+                    var userData = {
+                        nome: response.data.usuario.nome,
+                        email: response.data.usuario.email,
+                        senha: response.data.usuario.senha,
+                        idCarrinho:respostaCarrinho.data[0].id,
+                    }
+                    axios.put("http://localhost:" + port + "/usuarios/" + userId, userData)
+
+                });
+
+                //window.location.href = '/produtos'
                 return
             }
 
             console.log(response.data.message) /*mensagem do erro (sem cadastro ou senha invalida)*/
+            
 
         }
         catch (error) {
@@ -114,10 +141,13 @@ function FormRegister() {
 
             if (response.data.message === "Ok") {
                 console.log(dataToSend)
+                console.log("dataToSend")
                 await axios.post('http://localhost:' + port + '/usuarios/', dataToSend)
-                console.log(localStorage.getItem("usuarioId"))
+
                 alert("Usuário cadastrado com sucesso, faça login para prosseguir")
                 //window.location.href = '/produtos'
+                // Criando carrinho automaticamente:
+                //const dadosCarrinho = [];
                 return
             }
 
