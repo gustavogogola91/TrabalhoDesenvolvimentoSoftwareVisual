@@ -14,7 +14,16 @@ public static class EnderecoAPI
 
         group.MapGet("/{id}", async (int id, AppDbContext db) =>
         {
-            return await db.Enderecos.FindAsync(id) is Endereco endereco ? Results.Ok(endereco) : Results.NotFound();
+            var endereco = await db.Enderecos.FindAsync(id);
+
+            return Results.Ok(endereco);
+        });
+
+        group.MapGet("/cliente/{idCliente}", async (int idCliente, AppDbContext db) =>
+        {
+            var endereco = await db.Enderecos.FirstOrDefaultAsync(e => e.IdCliente == idCliente);
+
+            return Results.Ok(endereco);
         });
 
         group.MapPost("/", async (Endereco endereco, AppDbContext db) =>

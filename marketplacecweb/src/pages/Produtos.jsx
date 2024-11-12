@@ -79,7 +79,7 @@ function Produto() {
     axios
       .get("http://localhost:5262/carrinho/user/" + userId)
       .then((resposta) => {
-        if (resposta.data != null) {
+        if (resposta.data.length > 0) {
           setCarrinho(resposta.data[0]);
         } else {
           const novoCarrinho = {

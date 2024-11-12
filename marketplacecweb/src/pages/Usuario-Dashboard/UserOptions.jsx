@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Endereco from "../Endereco";
 
 var port = 5262; /*Porta para comunicação da API*/
 var userId = localStorage.getItem("usuarioId")
@@ -65,6 +66,7 @@ function UserOptions() {
 
     return(
         <>
+        <div>
             <div className="w-1/2 p-5 bg-very-light-purple flex flex-col items-center rounded-xl">
             <h2 className="w-1/2 text-xl text-purple font-bold pb-5">Alterações de Conta</h2>
             <form className="login-form w-full" onSubmit={handleLoginSubmit}>
@@ -82,6 +84,10 @@ function UserOptions() {
             <br />
             <button className="w-1/2 p-2 rounded-full bg-red-700 text-white font-bold cursor-pointer" onClick={deletarUsuario}>Excluir Conta</button>
             </div>
+        </div>
+        <div>
+            <Endereco/>
+        </div>
 
         </>
     )

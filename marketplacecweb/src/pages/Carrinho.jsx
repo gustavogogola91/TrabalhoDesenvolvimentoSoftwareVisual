@@ -40,7 +40,7 @@ function Carrinho() {
     function aplicarCupom(cupomDigitado)
     {
 
-        if(cupons.lengh < 1)
+        if(cupons.length < 1)
         {
             alert("Lista de cupons vazia");
             return;
@@ -49,9 +49,15 @@ function Carrinho() {
         {
             for(let i = 0; i < cupons.length; i++)
                 {
+                    console.log("CUPINS");
+                    
                     var cupom = cupons[i];
-                    if(cupomDigitado === cupom.codigo)
+                    if(cupomDigitado == cupom.codigo)
                     {
+                        var idCupom = cupom.id;
+                        console.log("id do upoms  aser usado" + idCupom);
+                        
+                        localStorage.setItem('idCupom', JSON.stringify(idCupom));
                         const desconto = cupom.desconto;
                         localStorage.removeItem('desconto');
                         localStorage.setItem('desconto', JSON.stringify(desconto));
@@ -60,7 +66,7 @@ function Carrinho() {
                         localStorage.removeItem('flagCupomUsado');
                         localStorage.setItem('flagCupomUsado', JSON.stringify(flagCupomUsado));
 
-                        window.location.reload();
+                        //window.location.reload();
                         return;
                     }
                     else
@@ -90,7 +96,7 @@ function Carrinho() {
                     }
         
                     console.log(total);
-                return total;
+                return parseFloat(total.toFixed(2));
             }
         else
             {
@@ -112,7 +118,7 @@ function Carrinho() {
                         
                         total = (total - (total * desconto ));
                         console.log(total);
-                    return total;
+                    return parseFloat(total.toFixed(2));
                 }
                 
             }
@@ -143,7 +149,7 @@ function Carrinho() {
                     <span className="text-lg font-semibold">${calcularTotal(produtos)}</span>
                 </div>
                 <button className="mt-4 w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600"
-                onClick={() => finalizarCompra(idCarrinho)}>
+                onClick={() => finalizarCompra(idCarrinho, calcularTotal(produtos), localStorage.getItem('idCupom'))}>
                     Finalizar compra
                 </button>
 
@@ -229,8 +235,24 @@ function diminuirQuantidade(produto, idCarrinho)
         }
 }
 
-function finalizarCompra(idCarrinho)
+function finalizarCompra(idCarrinho, precoTotal, idCupom)
 {
+
+    let userId = localStorage.getItem("usuarioId")
+
+    console.log("DI CARRINGHO " + idCarrinho);
+    console.log("repcotal" + precoTotal);
+    console.log("DI cupom " + idCupom);
+    console.log("DI usuarer " + userId);
+    
+
+    try {
+        axios.post(`http://localhost:5262/vendas/${idCarrinho}/${userId}/finalizar-venda/${precoTotal}/${idCupom}`)
+        alert("Pcarrinhoo adicionado ao vendas");
+    } catch (error) {
+        alert("ERRO");
+    }
+
     axios.delete(`http://localhost:5262/carrinho/${idCarrinho}`)
     .then((response) => {
 
