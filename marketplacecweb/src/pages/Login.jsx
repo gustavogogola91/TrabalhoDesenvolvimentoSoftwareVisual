@@ -74,7 +74,7 @@ function FormLogin() {
 
                 });
 
-                //window.location.href = '/produtos'
+                window.location.href = '/'
                 return
             }
 
