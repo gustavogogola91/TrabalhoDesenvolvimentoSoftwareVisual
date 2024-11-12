@@ -15,8 +15,14 @@ function UserOptions() {
           });
     }
 
-    function deletarUsuario() {
+    function deletarUsuario(){
         // create delete user request
+        console.log("Deleta o usuario")
+        localStorage.clear()
+        axios.delete("http://localhost:" + port + "/usuarios/" + userId)
+        console.log(userId)
+        console.log(localStorage.getItem("usuarioId"))
+        window.location.href = '/home'
     }
 
     useEffect(() => {
