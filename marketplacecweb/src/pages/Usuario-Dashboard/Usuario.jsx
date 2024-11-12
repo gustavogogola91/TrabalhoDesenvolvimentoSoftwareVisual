@@ -10,7 +10,9 @@ function Usuario() {
 
     //função para sair
     function SairConta() {
-        localStorage.removeItem("usuarioId")
+        localStorage.removeItem("usuarioId");
+        localStorage.removeItem("usuarioNome");
+        localStorage.removeItem("flagCupom");
         window.location.href = '/login'
     }
 
