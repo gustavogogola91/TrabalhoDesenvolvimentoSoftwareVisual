@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import History from "./History.jsx"
 import userLogo from "../../imgs/icon-user.png"
 import Dashboard from './Dashboard.jsx';
