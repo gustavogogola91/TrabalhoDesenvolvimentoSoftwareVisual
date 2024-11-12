@@ -39,7 +39,11 @@ function App() {
           }
         />
         <Route path="/login" element={<Layout> <Login/> </Layout>} />
-        <Route path="/carrinho" element={<Layout><Carrinho /></Layout>}/>
+        <Route path="/carrinho" element={
+            <ProtectedRoute>
+            <Layout><Carrinho/></Layout>
+            </ProtectedRoute>
+          }/>
       </Routes>
     </>
   );
