@@ -80,7 +80,7 @@ function Produto() {
       .get("http://localhost:5262/carrinho/user/" + userId)
       .then((resposta) => {
         if (resposta.data != null) {
-          setCarrinho(resposta.data);
+          setCarrinho(resposta.data[0]);
         } else {
           const novoCarrinho = {
             usuarioId: userId,
@@ -255,7 +255,7 @@ function Produto() {
             id={produto.id}
             onClick={ () => {
               if(localStorage.getItem("usuarioId") != null){
-                adicionarCarrinho()
+                adicionarCarrinho(produto)
               }else{
                 window.location.href = '/login'
               }
@@ -280,10 +280,10 @@ function Produto() {
     }
   }
 
-  function adicionarCarrinho(data) {
+  function adicionarCarrinho(produto) {
     const item = {
-      produtoId: data.target.id,
-      carrinhoid: carrinho[0].id,
+      produtoId: produto.id,
+      carrinhoid: carrinho.id,
       quantidade: 1,
     };
 
