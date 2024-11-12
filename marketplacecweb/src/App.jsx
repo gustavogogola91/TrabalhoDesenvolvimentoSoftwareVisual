@@ -28,7 +28,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout></Layout>} />
+        <Route path="/" element={<ProtectedRoute />} />
         <Route
           path="/produtos"
           element={
