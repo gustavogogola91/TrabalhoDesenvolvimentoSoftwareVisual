@@ -7,6 +7,13 @@ import UserOptions from "./UserOptions.jsx";
 
 
 function Usuario() {
+
+    //função para sair
+    function SairConta() {
+        localStorage.removeItem("usuarioId")
+        window.location.href = '/login'
+    }
+
     // Componente do SidePanel
     function SidePanel({ setCurrentComponent }) {
         const [selectedButton, setSelectedButton] = useState(localStorage.getItem("page") || 'dashboard');
@@ -16,7 +23,6 @@ function Usuario() {
             setSelectedButton(buttonId);
             setCurrentComponent(buttonId);
         };
-    
         return (
             <div className="shadow-md bg-purple h-full w-1/8 flex flex-col items-center gap-2 text-center p-5 m-5 rounded-[3px]">
                 <h1 className="text-white p-2 font-bold text-[20px]">Marketplace</h1>
@@ -33,6 +39,12 @@ function Usuario() {
                     onClick={() => handleButtonClick('userOptions')}>
                     Opções de Conta
                 </button>
+
+                <button className={`shadow-md text-left font-bold px-8 py-3 m-5 rounded-[3px] transition duration-300 ease-in bg-red-700 text-white`} 
+                    onClick={() => SairConta()}>
+                    SAIR
+                </button>
+
             </div>
         );
     }

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const IDCLIENTE = 1
+const IDCLIENTE = localStorage.getItem("usuarioId");
 
 function TotalSpendComponent(vendas) {
 
