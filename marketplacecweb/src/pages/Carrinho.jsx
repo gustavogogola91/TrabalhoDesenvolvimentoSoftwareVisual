@@ -49,13 +49,12 @@ function Carrinho() {
         {
             for(let i = 0; i < cupons.length; i++)
                 {
-                    console.log("CUPINS");
                     
                     var cupom = cupons[i];
                     if(cupomDigitado == cupom.codigo)
                     {
                         var idCupom = cupom.id;
-                        console.log("id do upoms  aser usado" + idCupom);
+                        console.log("id do cupom a ser usado:" + idCupom);
                         
                         localStorage.setItem('idCupom', JSON.stringify(idCupom));
                         const desconto = cupom.desconto;
