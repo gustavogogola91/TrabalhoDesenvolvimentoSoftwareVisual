@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import History from "./History.jsx"
 import userLogo from "../../imgs/icon-user.png"
 import Dashboard from './Dashboard.jsx';
 import UserOptions from "./UserOptions.jsx";
 
-
+const username = localStorage.getItem("usuarioNome");
 
 function Usuario() {
 
     //função para sair
     function SairConta() {
-        localStorage.removeItem("usuarioId")
+        localStorage.removeItem("usuarioId");
+        localStorage.removeItem("usuarioNome");
+        localStorage.removeItem("flagCupom");
         window.location.href = '/login'
     }
 
@@ -69,7 +71,7 @@ function Usuario() {
         <div className="bg-very-light-cream min-h-screen flex flex-row justify-around">
             <SidePanel setCurrentComponent={setCurrentComponent} />
             <div className="w-3/4 pl-6 pr-10 py-5">
-                <h2 className="text-purple text-[30px] font-bold pb-10">Olá, Usuário!</h2>
+                <h2 className="text-purple text-[30px] font-bold pb-10">Olá, {username}!</h2>
                 { getCurrentComponent() }
             </div>
         </div>
