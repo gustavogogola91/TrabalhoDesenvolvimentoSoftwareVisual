@@ -9,7 +9,7 @@ POST http://localhost:5262/vendas
 Content-Type: application/json
 
 {
-  "IdCliente": 1,
+  "IdCliente": 2,
   "IdEndereco": 1,
   "IdCupom": 0,
   "Itens": [
@@ -26,7 +26,7 @@ Content-Type: application/json
       "Quantidade": 2
     }
   ],
-    "precoTotal": 3345
+    "precoTotal": 32222
 }
 
 ### Post produto 1

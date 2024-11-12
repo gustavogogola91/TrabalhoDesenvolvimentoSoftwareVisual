@@ -80,7 +80,7 @@ function Produto() {
       .get("http://localhost:5262/carrinho/user/" + userId)
       .then((resposta) => {
         if (resposta.data != null) {
-          setCarrinho(resposta.data);
+          setCarrinho(resposta.data[0]);
         } else {
           const novoCarrinho = {
             usuarioId: userId,
@@ -253,7 +253,15 @@ function Produto() {
           <button
             className="rounded-[3px] p-2 bg-light-purple text-white font-bold shadow-md hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out"
             id={produto.id}
-            onClick={adicionarCarrinho}
+            onClick={ () => {
+              if(localStorage.getItem("usuarioId") != null){
+                adicionarCarrinho(produto)
+              }else{
+                window.location.href = '/login'
+              }
+
+            }
+            }
             disabled={!possuiDisponibilidade(produto)}>
             {possuiDisponibilidade(produto)
               ? "Adicionar ao carrinho"
@@ -272,10 +280,10 @@ function Produto() {
     }
   }
 
-  function adicionarCarrinho(data) {
+  function adicionarCarrinho(produto) {
     const item = {
-      produtoId: data.target.id,
-      carrinhoid: carrinho[0].id,
+      produtoId: produto.id,
+      carrinhoid: carrinho.id,
       quantidade: 1,
     };
 
