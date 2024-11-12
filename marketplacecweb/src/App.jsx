@@ -30,7 +30,9 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <Produtos />
+              <Layout>
+                <Produtos />
+              </Layout>
             </ProtectedRoute>
           }
         />
