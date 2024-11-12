@@ -129,7 +129,11 @@ function Produto() {
 
   const conteudoPrincipal = () => {
     if (produto == null) {
-      return <div className="bg-very-light-cream min-h-screen pt-[30px]">{Lista(produtos)}</div>;
+      return (
+        <div className="bg-very-light-cream min-h-screen pt-[30px]">
+          {Lista(produtos)}
+        </div>
+      );
     } else {
       return Formulario();
     }
@@ -138,7 +142,11 @@ function Produto() {
   function Formulario() {
     return (
       <form className="m-auto mt-10 h-auto flex flex-col gap-1 w-96 bg-light-purple py-6 px-10 rounded-[3px] mb-24 text-center">
-        <label htmlFor="nome" className="text-[20px] font-bold text-very-light-cream">Nome</label>
+        <label
+          htmlFor="nome"
+          className="text-[20px] font-bold text-very-light-cream">
+          Nome
+        </label>
         <input
           type="text"
           id="nome"
@@ -147,7 +155,11 @@ function Produto() {
           value={produto.nome}
           onChange={(e) => onChangeProduto(e.target.name, e.target.value)}
         />
-        <label htmlFor="descricao" className="text-[20px] font-bold text-very-light-cream">Descrição</label>
+        <label
+          htmlFor="descricao"
+          className="text-[20px] font-bold text-very-light-cream">
+          Descrição
+        </label>
         <input
           type="text"
           id="descricao"
@@ -156,7 +168,11 @@ function Produto() {
           value={produto.descricao}
           onChange={(e) => onChangeProduto(e.target.name, e.target.value)}
         />
-        <label htmlFor="quantidade" className="text-[20px] font-bold text-very-light-cream">Quantidade</label>
+        <label
+          htmlFor="quantidade"
+          className="text-[20px] font-bold text-very-light-cream">
+          Quantidade
+        </label>
         <input
           type="number"
           id="quantidade"
@@ -167,7 +183,11 @@ function Produto() {
             onChangeProduto(e.target.name, Number(e.target.value))
           }
         />
-        <label htmlFor="valor" className="text-[20px] font-bold text-very-light-cream">Valor</label>
+        <label
+          htmlFor="valor"
+          className="text-[20px] font-bold text-very-light-cream">
+          Valor
+        </label>
         <input
           type="number"
           id="valor"
@@ -178,7 +198,11 @@ function Produto() {
             onChangeProduto(e.target.name, Number(e.target.value))
           }
         />
-        <label htmlFor="tag" className="text-[20px] font-bold text-very-light-cream">Tag</label>
+        <label
+          htmlFor="tag"
+          className="text-[20px] font-bold text-very-light-cream">
+          Tag
+        </label>
         <input
           type="text"
           id="tag"
@@ -221,10 +245,14 @@ function Produto() {
   function Linha(produto) {
     return (
       <tr key={produto.id} className="border-b">
-        <td className="h-16 text-purple px-3 py-6 text-center text-[20px] font-bold">{produto.id}</td>
+        <td className="h-16 text-purple px-3 py-6 text-center text-[20px] font-bold">
+          {produto.id}
+        </td>
         <td className="h-16 px-3 py-6 text-center">{produto.nome}</td>
         <td className="h-16 px-3 py-6 text-center">{produto.descricao}</td>
-        <td className="h-16 px-3 py-6 text-center text-[20px] font-bold">{produto.quantidade}</td>
+        <td className="h-16 px-3 py-6 text-center text-[20px] font-bold">
+          {produto.quantidade}
+        </td>
         <td className="h-16 px-3 py-6 text-center">
           R${" "}
           {(Math.round(produto.valor * 100) / 100).toFixed(2).replace(".", ",")}
@@ -253,15 +281,13 @@ function Produto() {
           <button
             className="rounded-[3px] p-2 bg-light-purple text-white font-bold shadow-md hover:bg-very-light-purple hover:text-purple transition duration-300 ease-in-out"
             id={produto.id}
-            onClick={ () => {
-              if(localStorage.getItem("usuarioId") != null){
-                adicionarCarrinho(produto)
-              }else{
-                window.location.href = '/login'
+            onClick={() => {
+              if (localStorage.getItem("usuarioId") != null) {
+                adicionarCarrinho(produto);
+              } else {
+                window.location.href = "/login";
               }
-
-            }
-            }
+            }}
             disabled={!possuiDisponibilidade(produto)}>
             {possuiDisponibilidade(produto)
               ? "Adicionar ao carrinho"
@@ -281,24 +307,41 @@ function Produto() {
   }
 
   function adicionarCarrinho(produto) {
-    const item = {
-      produtoId: produto.id,
-      carrinhoid: carrinho.id,
-      quantidade: 1,
-    };
+    console.log(carrinho.itens);
+    console.log(produto);
+    var presente = false;
+    carrinho.itens.map((item) => {
+      console.log(item)
+      if (item.produtoId == produto.id) {
+        presente = true;
+      }
+    });
 
-    try {
-      axios.post("http://localhost:5262/carrinho/adicionarItem/", item);
-      alert("Produto adicionado ao carrinho");
-    } catch (error) {
-      alert("Produto adicionado ao carrinho");
-      console.error(error);
+    if (presente) {
+      alert("Produto já está no carrinho");
+    } else {
+      const item = {
+        produtoId: produto.id,
+        carrinhoid: carrinho.id,
+        quantidade: 1,
+      };
+
+      try {
+        axios.post("http://localhost:5262/carrinho/adicionarItem/", item);
+        alert("Produto adicionado ao carrinho");
+        buscarCarrinho(userId);
+      } catch (error) {
+        alert("Erro");
+        console.error(error);
+      }
     }
   }
 
   return (
     <>
-      <h1 className="text-center w-full text-[25px] font-bold text-white py-2 bg-purple">Cadastro de produtos</h1>
+      <h1 className="text-center w-full text-[25px] font-bold text-white py-2 bg-purple">
+        Cadastro de produtos
+      </h1>
       {conteudoPrincipal()}
     </>
   );
