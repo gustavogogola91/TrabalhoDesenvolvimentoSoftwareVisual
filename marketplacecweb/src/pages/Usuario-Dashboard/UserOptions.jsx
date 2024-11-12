@@ -23,7 +23,7 @@ function UserOptions() {
         axios.delete("http://localhost:" + port + "/usuarios/" + userId)
         console.log(userId)
         console.log(localStorage.getItem("usuarioId"))
-        window.location.href = '/home'
+        window.location.href = '/login'
     }
 
     useEffect(() => {

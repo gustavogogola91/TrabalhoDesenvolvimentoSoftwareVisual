@@ -1,16 +1,14 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./index.css";
 import { useEffect } from "react";
 
 import Layout from "./components/Layout";
 import Usuario from "./pages/Usuario-Dashboard/Usuario";
 import Produtos from "./pages/Produtos";
-import Carrinho from "./pages/Carrinho"
-import Login from "./pages/Login"
-
+import Carrinho from "./pages/Carrinho";
+import Login from "./pages/Login";
 
 function App() {
-
   const navigate = useNavigate();
 
   const ProtectedRoute = ({ children }) => {
@@ -28,12 +26,21 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<ProtectedRoute />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Produtos />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/produtos"
           element={
             <ProtectedRoute>
-              <Layout><Produtos /></Layout>
+              <Layout>
+                <Produtos />
+              </Layout>
             </ProtectedRoute>
           }
         />
@@ -41,16 +48,31 @@ function App() {
           path="/usuario"
           element={
             <ProtectedRoute>
-              <Layout><Usuario /></Layout>
+              <Layout>
+                <Usuario />
+              </Layout>
             </ProtectedRoute>
           }
         />
-        <Route path="/login" element={<Layout> <Login /> </Layout>} />
-        <Route path="/carrinho" element={
-          <ProtectedRoute>
-            <Layout><Carrinho /></Layout>
-          </ProtectedRoute>
-        } />
+        <Route
+          path="/login"
+          element={
+            <Layout>
+              {" "}
+              <Login />{" "}
+            </Layout>
+          }
+        />
+        <Route
+          path="/carrinho"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Carrinho />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );
