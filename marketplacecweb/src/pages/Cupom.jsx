@@ -24,8 +24,7 @@ function CriarCupom() {
         e.preventDefault();
         const cupomData = {
             Codigo: formData.cupomCodigo,
-            TipoDesconto: formData.discountType,
-            Desconto: formData.discountValue,
+            Desconto: formData.discountValue / 100,
             DataAtivacao: formData.dataAtivacao,
             DataExpiracao: formData.dataExpiracao,
         };
@@ -50,26 +49,12 @@ function CriarCupom() {
                     <label htmlFor="couponName" className="font-semibold text-white mt-2">Código do Cupom:</label>
                     <input type="text" id="couponName" name="cupomCodigo" value={formData.cupomCodigo} onChange={handleChange} required className="p-2 border border-gray-300 rounded mt-1" />
 
-                    <label htmlFor="discountType" className="font-semibold text-white mt-2">Tipo de Desconto:</label>
-                    <select id="discountType" name="discountType" value={formData.discountType} onChange={handleChange} required className="p-2 border border-gray-300 rounded mt-1">
-                        <option value="">Selecione o tipo</option>
-                        <option value="percentage">Porcentagem</option>
-                        <option value="fixed">Valor Fixo</option>
-                    </select>
-
-                    {formData.discountType === 'percentage' && (
                         <div id="percentageField" className="mt-2">
                             <label htmlFor="discountValue" className="font-semibold text-white">Valor do Desconto (%):</label>
                             <input type="number" id="discountValue" name="discountValue" min="0" max="100" value={formData.discountValue} onChange={handleChange} className="p-2 border border-gray-300 rounded mt-1" />
                         </div>
-                    )}
 
-                    {formData.discountType === 'fixed' && (
-                        <div id="fixedValueField" className="mt-2">
-                            <label htmlFor="discountValue" className="font-semibold text-white">Valor Fixo do Desconto (R$):</label>
-                            <input type="number" id="discountValue" name="discountValue" min="0" value={formData.discountValue} onChange={handleChange} className="p-2 border border-gray-300 rounded mt-1" />
-                        </div>
-                    )}
+
 
                     <label htmlFor="activationDate" className="font-semibold text-white mt-2">Data de Ativação:</label>
                     <input type="date" id="activationDate" name="dataAtivacao" value={formData.dataAtivacao} onChange={handleChange} required className="p-2 border border-gray-300 rounded mt-1" />

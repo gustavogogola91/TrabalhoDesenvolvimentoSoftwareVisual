@@ -51,6 +51,8 @@ function UserOptions() {
 
         if(userData.nome === '') {
             userData.nome = dadosUsuario.data.nome;
+        } else {
+            localStorage.setItem("usuarioNome", userData.nome)
         }
         if(userData.email === '') {
             userData.email = dadosUsuario.data.email;
@@ -58,6 +60,8 @@ function UserOptions() {
         if(userData.senha === '') {
             userData.senha = dadosUsuario.data.senha;
         }
+
+        
 
         const response = await axios.put("http://localhost:" + port + "/usuarios/" + userId, userData)
         console.log(response.data.message)
