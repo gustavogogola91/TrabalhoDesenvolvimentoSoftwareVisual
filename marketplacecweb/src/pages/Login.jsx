@@ -113,11 +113,11 @@ function FormRegister() {
             const response = await axios.post('http://localhost:' + port + '/usuarios/register', registerData)
 
             if (response.data.message === "Ok") {
-                console.log("Enviar dados para criar") // continuar cadastro
                 console.log(dataToSend)
                 await axios.post('http://localhost:' + port + '/usuarios/', dataToSend)
                 console.log(localStorage.getItem("usuarioId"))
-                window.location.href = '/produtos'
+                alert("Usuário cadastrado com sucesso, faça login para prosseguir")
+                //window.location.href = '/produtos'
                 return
             }
 
