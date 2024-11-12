@@ -66,7 +66,7 @@ function Carrinho() {
                         localStorage.removeItem('flagCupomUsado');
                         localStorage.setItem('flagCupomUsado', JSON.stringify(flagCupomUsado));
 
-                        //window.location.reload();
+                        window.location.reload();
                         return;
                     }
                     else
