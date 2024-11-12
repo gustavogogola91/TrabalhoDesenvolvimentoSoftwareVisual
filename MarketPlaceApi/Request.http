@@ -290,7 +290,7 @@ Content-Type: application/json
 2
 
 ### DELETE /carrinho/{id}
-DELETE http://localhost:5262/carrinho/11
+DELETE http://localhost:5262/carrinho/1
 
 
 ### DELETE /carrinho/produto/idCarrinho/idProduto
@@ -406,3 +406,6 @@ Content-Type: application/json
   "cep": "01001-000",
   "complemento": "Apto 201"
 }
+
+### post
+POST http://localhost:3000/vendas/1/1/finalizar-venda/1200/1

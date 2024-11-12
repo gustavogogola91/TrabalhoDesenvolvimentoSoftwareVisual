@@ -9,7 +9,7 @@ POST http://localhost:5262/vendas
 Content-Type: application/json
 
 {
-  "IdCliente": 2,
+  "IdCliente": 1,
   "IdEndereco": 1,
   "IdCupom": 0,
   "Itens": [

@@ -201,6 +201,57 @@ public static class VendaAPI
             return Results.NotFound();
 
         });
+
+        // Define o endpoint para converter o Carrinho em Venda
+        group.MapPost("/{id}/{idUsuario}/finalizar-venda/{precoTotal}/{idCupom}", async (int id, int idUsuario,double precoTotal, int idCupom, AppDbContext db) =>
+        {
+            // Busca o carrinho pelo ID
+            var carrinho = await db.Carrinhos
+                        .Where(c => c.Id == id)
+                        .Include(c => c.Itens)
+                        .ThenInclude(i => i.Produto)
+                        .FirstOrDefaultAsync();
+
+            
+
+            // Verifica se o carrinho foi encontrado
+            // if (carrinho == null)
+            // {
+            //     return Results.NotFound("Carrinho não encontrado.");
+            // }
+
+            var endereco = await db.Enderecos
+            .Where(e => e.IdCliente == idUsuario) // Comparação direta com o Id
+            .SingleOrDefaultAsync();
+
+            // if (endereco == null)
+            // {
+            //     return Results.NotFound("Endereco não encontrado.");
+            // }
+
+            // Cria a Venda a partir do Carrinho
+            var venda = new Venda
+            {
+                IdCliente = carrinho.UsuarioId,    // Define o cliente a partir do UsuarioId do Carrinho
+                IdEndereco = endereco.Id,
+                IdCupom = idCupom,
+                precoTotal = precoTotal, // Calcula o preço total
+                Itens = carrinho.Itens.Select(item => new ItemVenda
+                {
+                    ProdutoId = item.ProdutoId,
+                    Quantidade = item.Quantidade
+                }).ToList()
+            };
+
+            // Adiciona a venda no banco de dados
+            db.Vendas.Add(venda);
+
+            // Salva a venda e os itens no banco
+            await db.SaveChangesAsync();
+
+            return Results.Created($"/venda/{venda.Id}", venda);
+        });
+
     }
 
 }
