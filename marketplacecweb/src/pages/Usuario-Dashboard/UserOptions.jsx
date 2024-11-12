@@ -66,23 +66,23 @@ function UserOptions() {
 
     return(
         <>
-        <div>
-            <div className="w-1/2 p-5 bg-very-light-purple flex flex-col items-center rounded-xl">
-            <h2 className="w-1/2 text-xl text-purple font-bold pb-5">Alterações de Conta</h2>
+        <div className="w-full flex flex-col items-center gap-20">
+            <div className="w-1/2 p-5 rounded-[3px] mb-6 bg-very-light-purple flex flex-col items-center">
+            <h2 className="w-1/2 text-[25px] text-purple text-center font-bold pb-5">Alterações de Conta</h2>
             <form className="login-form w-full" onSubmit={handleLoginSubmit}>
                 <label className="text-lg mb-1" htmlFor="nome">Username:</label>
-                <input type="nome" id="nome" name="nome" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={userData.nome} onChange={handleChange}/>
+                <input type="nome" id="nome" name="nome" className="w-full p-2 mb-2 rounded-[3px] border-none bg-[#D7CDE2] text-black" value={userData.nome} onChange={handleChange}/>
                 
                 <label className="text-lg mb-1" htmlFor="email">Email:</label>
-                <input type="email" id="email" name="email" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={userData.email} onChange={handleChange}/>
+                <input type="email" id="email" name="email" className="w-full p-2 mb-2 rounded-[3px] border-none bg-[#D7CDE2] text-black" value={userData.email} onChange={handleChange}/>
 
                 <label className="text-lg mb-1" htmlFor="senha">Password:</label>
-                <input type="password" id="senha" name="senha" className="w-full p-2 mb-2 rounded-md border-none bg-[#D7CDE2] text-black" value={userData.senha} onChange={handleChange}/>
+                <input type="password" id="senha" name="senha" className="w-full p-2 mb-2 rounded-[3px] border-none bg-[#D7CDE2] text-black" value={userData.senha} onChange={handleChange}/>
                 
-                <button className="w-full p-2 rounded-full bg-purple text-white font-bold cursor-pointer">Salvar Alterações</button>
+                <button className="w-full p-2 shadow-md rounded-[3px] bg-purple text-white font-bold cursor-pointer">Salvar Alterações</button>
             </form>
             <br />
-            <button className="w-1/2 p-2 rounded-full bg-red-700 text-white font-bold cursor-pointer" onClick={deletarUsuario}>Excluir Conta</button>
+            <button className="w-1/2 p-2 shadow-md rounded-[3px] bg-red-700 text-white font-bold cursor-pointer" onClick={deletarUsuario}>Excluir Conta</button>
             </div>
         </div>
         <div>

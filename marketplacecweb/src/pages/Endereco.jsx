@@ -130,13 +130,6 @@ function Endereco() {
             <th className="border-b w-[3px] text-center">Estado</th>
             <th className="border-b w-32 text-center">CEP</th>
             <th className="border-b w-48 text-center">Ações</th>
-            <th className="border-b w-48 text-center">
-              <button
-                className="border border-black rounded-xl p-2"
-                onClick={editarEndereco}>
-                Adicionar
-              </button>
-            </th>
           </tr>
         </thead>
         <tbody>{Linhas(enderecos)}</tbody>
@@ -241,7 +234,7 @@ function Endereco() {
         <td className="h-16 text-center">{endereco.cep}</td>
         <td className="flex justify-around">
           <button
-            className="w-1/2 p-2 shadow-md rounded-[3px] bg-red-700 text-white font-bold mt-2 cursor-pointer"
+            className="w-[70px] p-2 shadow-md rounded-[3px] bg-red-700 text-white font-bold mt-2 cursor-pointer"
             onClick={() => excluirEndereco(endereco)}>
             Excluir
           </button>
@@ -251,7 +244,7 @@ function Endereco() {
   }
   return (
     <>
-      <h1 className="text-center py-3 text-white font-bold text-[20px] w-full bg-purple">Cadastro de Endereços</h1>
+      <h1 className="text-center py-3 text-white font-bold text-[20px] w-full bg-purple">Endereço</h1>
       {enderecos != [] ? Lista(enderecos) : Formulario()}
     </>
   );

@@ -237,18 +237,11 @@ function diminuirQuantidade(produto, idCarrinho)
 
 function finalizarCompra(idCarrinho, precoTotal, idCupom)
 {
-
     let userId = localStorage.getItem("usuarioId")
-
-    console.log("DI CARRINGHO " + idCarrinho);
-    console.log("repcotal" + precoTotal);
-    console.log("DI cupom " + idCupom);
-    console.log("DI usuarer " + userId);
-    
 
     try {
         axios.post(`http://localhost:5262/vendas/${idCarrinho}/${userId}/finalizar-venda/${precoTotal}/${idCupom}`)
-        alert("Pcarrinhoo adicionado ao vendas");
+        alert("Compra Finalizada com sucesso!");
     } catch (error) {
         alert("ERRO");
     }
