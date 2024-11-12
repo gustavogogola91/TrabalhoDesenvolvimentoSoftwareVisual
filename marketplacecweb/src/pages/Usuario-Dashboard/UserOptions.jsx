@@ -16,7 +16,7 @@ function UserOptions() {
     }
 
     function deletarUsuario(){
-        // create delete user request
+
         console.log("Deleta o usuario")
         localStorage.clear()
         axios.delete("http://localhost:" + port + "/usuarios/" + userId)
@@ -60,7 +60,7 @@ function UserOptions() {
 
         const response = await axios.put("http://localhost:" + port + "/usuarios/" + userId, userData)
         console.log(response.data.message)
-        // create put to change user data
+        window.location.href = '/usuario'
     };
 
     return(
