@@ -7,7 +7,7 @@ class AppDbContext : DbContext {
     {
         var com = "server=localhost;port=3306;database=marketplace;user=root;password=root";
 
-        builder.UseMySQL(com);
+        builder.UseMySQL(com).EnableSensitiveDataLogging();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -18,12 +18,8 @@ class AppDbContext : DbContext {
             .OnDelete(DeleteBehavior.Cascade); // Configura exclusão em cascata
     }   
 
-    public DbSet<Cliente> Clientes => Set<Cliente>();
-
-    public DbSet<Vendedor> Vendedores => Set<Vendedor>();
-
-    public DbSet<Administrador> Administradores => Set<Administrador>();
-
+    public DbSet<Usuario> Usuarios => Set<Usuario>();
+    
     public DbSet<Venda> Vendas => Set<Venda>();
 
     public DbSet<Cupom> Cupons => Set<Cupom>();

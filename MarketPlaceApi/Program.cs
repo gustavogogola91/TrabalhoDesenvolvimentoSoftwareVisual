@@ -23,8 +23,5 @@ app.MapVendasAPI();
 app.MapCarrinhosAPI();
 app.MapEnderecosAPI();
 app.MapCuponsAPI();
-app.MapAdministradoresAPI();
-app.MapVendedoresAPI();
-app.MapClientesAPI();
-
+app.MapUsuariosAPI();
 app.Run();

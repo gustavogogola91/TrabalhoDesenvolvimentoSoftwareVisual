@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketPlaceApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240924193758_FinalMigration")]
-    partial class FinalMigration
+    [Migration("20241106003534_VersaoAlterada09042024")]
+    partial class VersaoAlterada09042024
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
