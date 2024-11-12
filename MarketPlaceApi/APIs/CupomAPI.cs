@@ -32,7 +32,6 @@ public static class CupomAPI
         
             cupom.Codigo = cupomAlterado.Codigo;
             cupom.Desconto = cupomAlterado.Desconto;
-            cupom.Usado = cupomAlterado.Usado;
             cupom.ValorMin = cupomAlterado.ValorMin;
         
             await db.SaveChangesAsync();
