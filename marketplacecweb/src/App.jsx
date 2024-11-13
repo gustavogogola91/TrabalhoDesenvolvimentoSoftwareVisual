@@ -6,7 +6,9 @@ import Layout from "./components/Layout";
 import Usuario from "./pages/Usuario-Dashboard/Usuario";
 import Produtos from "./pages/Produtos";
 import Carrinho from "./pages/Carrinho";
+import Cupom from "./pages/Cupom"
 import Login from "./pages/Login";
+
 
 function App() {
   const navigate = useNavigate();
@@ -26,6 +28,9 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="/cupom" element={<Layout>
+                <Cupom />
+              </Layout>} />
         <Route
           path="/"
           element={

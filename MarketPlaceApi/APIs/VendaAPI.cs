@@ -112,9 +112,7 @@ public static class VendaAPI
                 .Where(e => enderecosIds.Contains(e.Id))
                 .SingleOrDefaultAsync();
 
-            var cupom = await db.Cupons
-                .Where(c => cupomId.Contains(c.Id))
-                .SingleOrDefaultAsync();
+
 
             //tratar se nao tiver cupom a compra
 
@@ -130,12 +128,6 @@ public static class VendaAPI
                     endereco?.Rua,
                     endereco?.Numero,
                     endereco?.Cidade,
-                },
-                Cupon = new
-                {
-                    cupom?.Id,
-                    cupom?.Codigo,
-                    cupom?.Desconto,
                 },
                 Itens = venda.Itens.Select(item => new
                 {
