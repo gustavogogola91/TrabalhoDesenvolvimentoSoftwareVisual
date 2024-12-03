@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketPlaceApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241110233702_NomeDaMigration")]
+    partial class NomeDaMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,11 +184,12 @@ namespace MarketPlaceApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("IdCarrinho")
-                        .HasColumnType("int");
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Nome")
                         .HasColumnType("longtext");
@@ -195,7 +199,11 @@ namespace MarketPlaceApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuario");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Usuario");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Venda", b =>
@@ -219,6 +227,42 @@ namespace MarketPlaceApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Vendas");
+                });
+
+            modelBuilder.Entity("Administrador", b =>
+                {
+                    b.HasBaseType("Usuario");
+
+                    b.Property<int>("PinAcesso")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Administrador");
+                });
+
+            modelBuilder.Entity("Cliente", b =>
+                {
+                    b.HasBaseType("Usuario");
+
+                    b.Property<int>("IdCarrinho")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdComprasHist")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Cliente");
+                });
+
+            modelBuilder.Entity("Vendedor", b =>
+                {
+                    b.HasBaseType("Usuario");
+
+                    b.Property<int>("IdVenda")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdVendaHist")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Vendedor");
                 });
 
             modelBuilder.Entity("Carrinho", b =>
